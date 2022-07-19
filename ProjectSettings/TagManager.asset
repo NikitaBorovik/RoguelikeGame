@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Invincible
+  - First Camera
+  - Second Camera
+  - Player
+  - Minimap
+  - Dungeon
+  - Wall
+  - PlayerAmmo
+  - Enemy
+  - EnemyAmmo
+  - Environment
+  - PlayerWeapon
+  - EnemyWeapon
+  - ThirdCamera
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 1915917147
+    locked: 0
+  - name: Decoration Type 1
+    uniqueID: 446344089
+    locked: 0
+  - name: Decoration Type 2
+    uniqueID: 2176539721
+    locked: 0
+  - name: Instance
+    uniqueID: 3528936607
+    locked: 0
+  - name: Front
+    uniqueID: 3417580005
+    locked: 0
+  - name: Collision
+    uniqueID: 3394637625
+    locked: 0
+  - name: Minimap
+    uniqueID: 1699505343
+    locked: 0
