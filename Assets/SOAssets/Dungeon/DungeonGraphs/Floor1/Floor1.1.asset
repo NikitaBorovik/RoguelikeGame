@@ -25,8 +25,8 @@ MonoBehaviour:
   isDragging: 1
   rect:
     serializedVersion: 2
-    x: 779
-    y: 336
+    x: 768
+    y: 285
     width: 180
     height: 90
 --- !u!114 &-8374549377528406977
@@ -52,8 +52,34 @@ MonoBehaviour:
   isDragging: 1
   rect:
     serializedVersion: 2
-    x: 804
-    y: 1091
+    x: 758
+    y: 1036
+    width: 180
+    height: 90
+--- !u!114 &-7085097659345806140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7dceee386149964ea57ff06e16d579c, type: 3}
+  m_Name: RoomNode
+  m_EditorClassIdentifier: 
+  id: 7d94a9c4-71a6-45b0-9e35-75ce084ba33f
+  parentId: 
+  children: []
+  dungeonStructureGraph: {fileID: 11400000}
+  roomType: {fileID: 11400000, guid: 5c440ad00f7d77e428cafbe9bda09f87, type: 2}
+  roomNodeTypes: {fileID: 11400000, guid: fb5ed7eab3e060c45af020e8b391f9cd, type: 2}
+  isActive: 0
+  isDragging: 0
+  rect:
+    serializedVersion: 2
+    x: 2874
+    y: 182
     width: 180
     height: 90
 --- !u!114 &-6491213995510966324
@@ -79,8 +105,8 @@ MonoBehaviour:
   isDragging: 1
   rect:
     serializedVersion: 2
-    x: 1128
-    y: 775
+    x: 1116
+    y: 776
     width: 180
     height: 90
 --- !u!114 &-6194745760846782714
@@ -105,8 +131,8 @@ MonoBehaviour:
   isDragging: 1
   rect:
     serializedVersion: 2
-    x: 2213
-    y: 775
+    x: 2202
+    y: 724
     width: 180
     height: 90
 --- !u!114 &-5925178841964744200
@@ -133,8 +159,34 @@ MonoBehaviour:
   isDragging: 1
   rect:
     serializedVersion: 2
-    x: 772
-    y: 789
+    x: 761
+    y: 777
+    width: 180
+    height: 90
+--- !u!114 &-5230856264546358883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7dceee386149964ea57ff06e16d579c, type: 3}
+  m_Name: RoomNode
+  m_EditorClassIdentifier: 
+  id: 2a2bba10-c29d-4410-9e5f-5f91374b2933
+  parentId: 
+  children: []
+  dungeonStructureGraph: {fileID: 11400000}
+  roomType: {fileID: 11400000, guid: 17216ace0c944bb4bb88cddf093124d5, type: 2}
+  roomNodeTypes: {fileID: 11400000, guid: fb5ed7eab3e060c45af020e8b391f9cd, type: 2}
+  isActive: 1
+  isDragging: 0
+  rect:
+    serializedVersion: 2
+    x: 2247
+    y: 394
     width: 180
     height: 90
 --- !u!114 &-3996008024389900683
@@ -159,8 +211,8 @@ MonoBehaviour:
   isDragging: 1
   rect:
     serializedVersion: 2
-    x: 1695
-    y: 325
+    x: 1684
+    y: 274
     width: 180
     height: 90
 --- !u!114 &-3831661275872784108
@@ -186,8 +238,8 @@ MonoBehaviour:
   isDragging: 1
   rect:
     serializedVersion: 2
-    x: 1942
-    y: 772
+    x: 1931
+    y: 721
     width: 180
     height: 90
 --- !u!114 &-1930866050709636137
@@ -213,8 +265,8 @@ MonoBehaviour:
   isDragging: 1
   rect:
     serializedVersion: 2
-    x: 453
-    y: 334
+    x: 442
+    y: 283
     width: 180
     height: 90
 --- !u!114 &-1543995882581619846
@@ -240,8 +292,8 @@ MonoBehaviour:
   isDragging: 1
   rect:
     serializedVersion: 2
-    x: 1385
-    y: 330
+    x: 1374
+    y: 279
     width: 180
     height: 90
 --- !u!114 &11400000
@@ -276,6 +328,10 @@ MonoBehaviour:
   - {fileID: -3831661275872784108}
   - {fileID: 5340400347029151836}
   - {fileID: 8238660042659589543}
+  - {fileID: -5230856264546358883}
+  - {fileID: 8474685360810862939}
+  - {fileID: 1480224043283165875}
+  - {fileID: -7085097659345806140}
   startingNode: {fileID: 0}
   end: {fileID: 0}
   lineCoordinates: {x: 0, y: 0}
@@ -302,8 +358,8 @@ MonoBehaviour:
   isDragging: 1
   rect:
     serializedVersion: 2
-    x: 782
-    y: 95
+    x: 771
+    y: 44
     width: 180
     height: 90
 --- !u!114 &1177195201193827295
@@ -329,8 +385,34 @@ MonoBehaviour:
   isDragging: 1
   rect:
     serializedVersion: 2
-    x: 1666
-    y: 763
+    x: 1655
+    y: 712
+    width: 180
+    height: 90
+--- !u!114 &1480224043283165875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7dceee386149964ea57ff06e16d579c, type: 3}
+  m_Name: RoomNode
+  m_EditorClassIdentifier: 
+  id: 14f59d28-d6b0-47b3-b15e-d0faaf3e4de6
+  parentId: 
+  children: []
+  dungeonStructureGraph: {fileID: 11400000}
+  roomType: {fileID: 11400000, guid: 5c440ad00f7d77e428cafbe9bda09f87, type: 2}
+  roomNodeTypes: {fileID: 11400000, guid: fb5ed7eab3e060c45af020e8b391f9cd, type: 2}
+  isActive: 1
+  isDragging: 0
+  rect:
+    serializedVersion: 2
+    x: 2470
+    y: 213
     width: 180
     height: 90
 --- !u!114 &1604907801388191102
@@ -356,8 +438,8 @@ MonoBehaviour:
   isDragging: 1
   rect:
     serializedVersion: 2
-    x: 774
-    y: 587
+    x: 763
+    y: 536
     width: 180
     height: 90
 --- !u!114 &3894409393694380697
@@ -383,8 +465,8 @@ MonoBehaviour:
   isDragging: 1
   rect:
     serializedVersion: 2
-    x: 1107
-    y: 333
+    x: 1096
+    y: 282
     width: 180
     height: 90
 --- !u!114 &5218666094189971496
@@ -410,8 +492,8 @@ MonoBehaviour:
   isDragging: 1
   rect:
     serializedVersion: 2
-    x: 1085
-    y: 89
+    x: 1074
+    y: 38
     width: 180
     height: 90
 --- !u!114 &5340400347029151836
@@ -437,8 +519,8 @@ MonoBehaviour:
   isDragging: 1
   rect:
     serializedVersion: 2
-    x: 1663
-    y: 1092
+    x: 1652
+    y: 1041
     width: 180
     height: 90
 --- !u!114 &6419351840444447240
@@ -463,8 +545,8 @@ MonoBehaviour:
   isDragging: 1
   rect:
     serializedVersion: 2
-    x: 1360
-    y: 87
+    x: 1349
+    y: 36
     width: 180
     height: 90
 --- !u!114 &8238660042659589543
@@ -489,8 +571,34 @@ MonoBehaviour:
   isDragging: 1
   rect:
     serializedVersion: 2
-    x: 1445
-    y: 603
+    x: 1434
+    y: 552
+    width: 180
+    height: 90
+--- !u!114 &8474685360810862939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7dceee386149964ea57ff06e16d579c, type: 3}
+  m_Name: RoomNode
+  m_EditorClassIdentifier: 
+  id: 841d1792-f381-48c5-bd0d-cbc1ff552eac
+  parentId: 
+  children: []
+  dungeonStructureGraph: {fileID: 11400000}
+  roomType: {fileID: 11400000, guid: 17216ace0c944bb4bb88cddf093124d5, type: 2}
+  roomNodeTypes: {fileID: 11400000, guid: fb5ed7eab3e060c45af020e8b391f9cd, type: 2}
+  isActive: 0
+  isDragging: 0
+  rect:
+    serializedVersion: 2
+    x: 2649
+    y: 389
     width: 180
     height: 90
 --- !u!114 &8760381222613332234
@@ -516,7 +624,7 @@ MonoBehaviour:
   isDragging: 1
   rect:
     serializedVersion: 2
-    x: 1125
-    y: 603
+    x: 1111
+    y: 554
     width: 180
     height: 90

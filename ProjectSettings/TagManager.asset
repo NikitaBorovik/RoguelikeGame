@@ -23,7 +23,7 @@ TagManager:
   - EnemyAmmo
   - Environment
   - PlayerWeapon
-  - EnemyWeapon
+  - 
   - ThirdCamera
   - 
   - 
@@ -41,7 +41,7 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Ground
+  - name: Floor
     uniqueID: 1915917147
     locked: 0
   - name: Decoration Type 1
@@ -50,7 +50,7 @@ TagManager:
   - name: Decoration Type 2
     uniqueID: 2176539721
     locked: 0
-  - name: Instance
+  - name: Entities
     uniqueID: 3528936607
     locked: 0
   - name: Front
