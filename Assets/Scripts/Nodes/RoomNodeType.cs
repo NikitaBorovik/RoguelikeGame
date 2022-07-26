@@ -15,6 +15,22 @@ public class RoomNodeType : ScriptableObject
 
     public bool isRightLeftCorridor;
 
+    public bool isTopLeftCorridor;
+
+    public bool isTopRightCorridor;
+
+    public bool isBottomLeftCorridor;
+
+    public bool isBottomRightCorridor;
+
+    public bool isRightTopCorridor;
+
+    public bool isRightBottomCorridor;
+
+    public bool isLeftTopCorridor;
+
+    public bool isLeftBottomCorridor;
+
     public bool isEntrance;
 
     public bool isBoss;

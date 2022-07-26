@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd4c07164ecb71944a9ef3fbb586a4a4, type: 3}
+  m_Name: RoomNodeTypeRightTopCorridor
+  m_EditorClassIdentifier: 
+  typeName: RT Corridor
+  displayInCreator: 0
+  isCorridor: 0
+  isTopBottomCorridor: 0
+  isRightLeftCorridor: 0
+  isTopLeftCorridor: 0
+  isTopRightCorridor: 0
+  isBottomLeftCorridor: 0
+  isBottomRightCorridor: 0
+  isRightTopCorridor: 1
+  isRightBottomCorridor: 0
+  isLeftTopCorridor: 0
+  isLeftBottomCorridor: 0
+  isEntrance: 0
+  isBoss: 0
+  isNone: 0
