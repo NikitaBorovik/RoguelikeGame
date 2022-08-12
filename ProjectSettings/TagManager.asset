@@ -41,7 +41,10 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Floor
+  - name: BackgroundFloor
+    uniqueID: 2289699587
+    locked: 0
+  - name: Wall
     uniqueID: 1915917147
     locked: 0
   - name: Decoration Type 1
