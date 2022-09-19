@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4146505669286611029}
   m_Layer: 0
   m_Name: BackgroundFloor
-  m_TagString: Untagged
+  m_TagString: floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 2983211606462047266}
   m_Layer: 0
   m_Name: Decoration
-  m_TagString: Untagged
+  m_TagString: decoration1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 2915193868648490664}
   m_Layer: 12
   m_Name: Collisions
-  m_TagString: Untagged
+  m_TagString: collisions
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -528,7 +528,7 @@ GameObject:
   - component: {fileID: 8216171859422398042}
   m_Layer: 0
   m_Name: Decoration (1)
-  m_TagString: Untagged
+  m_TagString: decoration2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -648,7 +648,7 @@ GameObject:
   - component: {fileID: 2860609275844379416}
   m_Layer: 10
   m_Name: Minimap
-  m_TagString: Untagged
+  m_TagString: minimap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -819,7 +819,7 @@ GameObject:
   - component: {fileID: 822554664755920192}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -939,7 +939,7 @@ GameObject:
   - component: {fileID: 240026901199103275}
   m_Layer: 0
   m_Name: Front
-  m_TagString: Untagged
+  m_TagString: front
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

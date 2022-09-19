@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4146505669286611029}
   m_Layer: 0
   m_Name: BackgroundFloor
-  m_TagString: Untagged
+  m_TagString: floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -753,16 +753,6 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
   - first: {x: -1, y: 0, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 6
-      m_TileSpriteIndex: 6
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: 0, y: 0, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 6
@@ -11516,7 +11506,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 7aad5c431151ee94b88e80f56449aa54, type: 2}
   - m_RefCount: 3
     m_Data: {fileID: 11400000, guid: b3762c30d8d3bff4385b70d3e1344373, type: 2}
-  - m_RefCount: 861
+  - m_RefCount: 860
     m_Data: {fileID: 11400000, guid: 03c09bb66a3623543a5e15b6f9fc7b8e, type: 2}
   - m_RefCount: 6
     m_Data: {fileID: 11400000, guid: c6b2eaa9f0c31824a923272292aed9fa, type: 2}
@@ -11533,12 +11523,12 @@ Tilemap:
     m_Data: {fileID: 725146769, guid: dec0cbb4812ce76479807da46b5d34e5, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: 805017100, guid: dec0cbb4812ce76479807da46b5d34e5, type: 3}
-  - m_RefCount: 861
+  - m_RefCount: 860
     m_Data: {fileID: -1107073559, guid: dec0cbb4812ce76479807da46b5d34e5, type: 3}
   - m_RefCount: 6
     m_Data: {fileID: 644062088, guid: dec0cbb4812ce76479807da46b5d34e5, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 1068
+  - m_RefCount: 1067
     m_Data:
       e00: 1
       e01: 0
@@ -11593,7 +11583,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 1146
+  - m_RefCount: 1145
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -11712,7 +11702,7 @@ GameObject:
   - component: {fileID: 2983211606462047266}
   m_Layer: 0
   m_Name: Decoration
-  m_TagString: Untagged
+  m_TagString: decoration1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13777,7 +13767,7 @@ GameObject:
   - component: {fileID: 2915193868648490664}
   m_Layer: 12
   m_Name: Collisions
-  m_TagString: Untagged
+  m_TagString: collisions
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32883,6 +32873,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2446754938642633346}
   - component: {fileID: 586514320487084674}
+  - component: {fileID: 6851680913576436543}
   m_Layer: 11
   m_Name: DungeonLargeRoom4
   m_TagString: Untagged
@@ -32933,6 +32924,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 48.97814, y: 35.004787}
   m_EdgeRadius: 0
+--- !u!114 &6851680913576436543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3702022006039285852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24d85ff771301a94e9972b06f88939ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 0}
+  backgroundFloor: {fileID: 0}
+  decoration1: {fileID: 0}
+  decoration2: {fileID: 0}
+  wall: {fileID: 0}
+  front: {fileID: 0}
+  collisions: {fileID: 0}
+  minimap: {fileID: 0}
+  roomCollider:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!1 &3980424810088285168
 GameObject:
   m_ObjectHideFlags: 0
@@ -32946,7 +32960,7 @@ GameObject:
   - component: {fileID: 8216171859422398042}
   m_Layer: 0
   m_Name: Decoration (1)
-  m_TagString: Untagged
+  m_TagString: decoration2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33066,7 +33080,7 @@ GameObject:
   - component: {fileID: 2860609275844379416}
   m_Layer: 10
   m_Name: Minimap
-  m_TagString: Untagged
+  m_TagString: minimap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47165,7 +47179,7 @@ GameObject:
   - component: {fileID: 822554664755920192}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51143,7 +51157,7 @@ GameObject:
   - component: {fileID: 240026901199103275}
   m_Layer: 0
   m_Name: Front
-  m_TagString: Untagged
+  m_TagString: front
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

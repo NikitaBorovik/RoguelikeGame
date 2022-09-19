@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MyResources : MonoBehaviour
 {
     private static MyResources instance;
@@ -19,4 +20,5 @@ public class MyResources : MonoBehaviour
 
     //populate with RoomNodeType objects
     public RoomNodeTypes roomNodeTypes;
+    public Material myMaterial;
 }

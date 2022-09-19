@@ -34,7 +34,14 @@ public class RoomNode : ScriptableObject
         this.roomType = roomNodeType;
         roomNodeTypes = MyResources.Instance.roomNodeTypes;
     }
-
+    public void Initialise(DungeonStructureGraph graph, RoomNodeType roomNodeType)
+    {
+        this.id = Guid.NewGuid().ToString();
+        this.name = "RoomNode";
+        this.dungeonStructureGraph = graph;
+        this.roomType = roomNodeType;
+        roomNodeTypes = MyResources.Instance.roomNodeTypes;
+    }
     public void Draw(GUIStyle style)
     {
         GUILayout.BeginArea(rect, style);
@@ -138,34 +145,34 @@ public class RoomNode : ScriptableObject
 
     private bool ValidateChildRoom(string id)
     {
-        bool bossConnected = false;
-        foreach (RoomNode room in dungeonStructureGraph.roomNodes)
-        {
-            if (room.roomType.isBoss && room.parentId != null)
-            {
-                bossConnected = true;
-            }
-        }
-        if(dungeonStructureGraph.GetNode(id).roomType.isNone)
-            return false;
-        if (children.Contains(id)|| this.id == id)
-            return false;
-        if (dungeonStructureGraph.GetNode(id).roomType.isBoss && bossConnected)
-            return false;
-        if (parentId == id)
-            return false;
-        if(dungeonStructureGraph.GetNode(id).roomType.isCorridor && this.roomType.isCorridor)
-            return false;
-        if (!dungeonStructureGraph.GetNode(id).roomType.isCorridor && !this.roomType.isCorridor)
-            return false;
-        if (dungeonStructureGraph.GetNode(id).roomType.isCorridor && children.Count == Settings.maxChildrenCorridors)
-            return false;
-        if (dungeonStructureGraph.GetNode(id).roomType.isEntrance)
-            return false;
-        if (dungeonStructureGraph.GetNode(id).parentId != null)
-            return false;
-        if(dungeonStructureGraph.GetNode(id).roomType.isCorridor && dungeonStructureGraph.GetNode(id).children.Count > 0)
-            return false;
+        //bool bossConnected = false;
+        //foreach (RoomNode room in dungeonStructureGraph.roomNodes)
+        //{
+        //    if (room.roomType.isBoss && room.parentId != null)
+        //    {
+        //        bossConnected = true;
+        //    }
+        //}
+        //if(dungeonStructureGraph.GetNode(id).roomType.isNone)
+        //    return false;
+        //if (children.Contains(id)|| this.id == id)
+        //    return false;
+        //if (dungeonStructureGraph.GetNode(id).roomType.isBoss && bossConnected)
+        //    return false;
+        //if (parentId == id)
+        //    return false;
+        //if(dungeonStructureGraph.GetNode(id).roomType.isCorridor && this.roomType.isCorridor)
+        //    return false;
+        //if (!dungeonStructureGraph.GetNode(id).roomType.isCorridor && !this.roomType.isCorridor)
+        //    return false;
+        //if (dungeonStructureGraph.GetNode(id).roomType.isCorridor && children.Count == Settings.maxChildrenCorridors)
+        //    return false;
+        //if (dungeonStructureGraph.GetNode(id).roomType.isEntrance)
+        //    return false;
+        //if (dungeonStructureGraph.GetNode(id).parentId != null)
+        //    return false;
+        //if(dungeonStructureGraph.GetNode(id).roomType.isCorridor && dungeonStructureGraph.GetNode(id).children.Count > 0)
+        //    return false;
         return true;
     }
 

@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - floor
+  - wall
+  - decoration1
+  - decoration2
+  - front
+  - collisions
+  - minimap
   layers:
   - Default
   - TransparentFX

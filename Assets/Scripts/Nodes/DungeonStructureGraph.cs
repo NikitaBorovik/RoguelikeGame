@@ -48,6 +48,36 @@ public class DungeonStructureGraph : ScriptableObject
         if(roomNodeDictionary.TryGetValue(id,out RoomNode room))
             return room;
         return null;
-    }    
+    }   
+    public RoomNode GetNode(RoomNodeType type)
+    {
+        //for (int i = 0; i < roomNodes.Count; i++)
+        //{
+        //    if(roomNodes[i] == type)
+        //    {
+        //        Debug.Log(roomNodes[i].ToString());
+        //        return roomNodes[i];
+        //    }
+                
+        //}
+        foreach(KeyValuePair<string,RoomNode> pair in roomNodeDictionary)
+        {
+            if(pair.Value.roomType == type)
+            {
+                Debug.Log(pair.Value.roomType.ToString());
+                return pair.Value;
+            }
+        }
+        return null;
+    }
+    public List<RoomNode> GetChildrenNodes(RoomNode parent)
+    {
+        List<RoomNode> childrenList = new List<RoomNode>();
+        for(int i = 0;i < parent.children.Count;i++)
+        {
+            childrenList.Add(GetNode(parent.children[i]));
+        }
+        return childrenList;
+    }
 #endif
 }

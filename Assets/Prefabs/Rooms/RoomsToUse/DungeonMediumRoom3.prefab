@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2983211606462047266}
   m_Layer: 0
   m_Name: Decoration
-  m_TagString: Untagged
+  m_TagString: decoration1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1807,7 +1807,7 @@ GameObject:
   - component: {fileID: 2915193868648490664}
   m_Layer: 12
   m_Name: Collisions
-  m_TagString: Untagged
+  m_TagString: collisions
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12024,7 +12024,7 @@ GameObject:
   - component: {fileID: 924800919016072391}
   m_Layer: 0
   m_Name: BackgroundFloor
-  m_TagString: Untagged
+  m_TagString: floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18036,9 +18036,9 @@ Tilemap:
   - first: {x: -4, y: 19, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 8
-      m_TileSpriteIndex: 8
-      m_TileMatrixIndex: 1
+      m_TileIndex: 9
+      m_TileSpriteIndex: 9
+      m_TileMatrixIndex: 2
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
@@ -18046,9 +18046,9 @@ Tilemap:
   - first: {x: -3, y: 19, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 9
-      m_TileSpriteIndex: 9
-      m_TileMatrixIndex: 2
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
+      m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
@@ -18407,7 +18407,7 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 30
     m_Data: {fileID: 11400000, guid: f10884a851d6ea144ab70c8dd3b949f7, type: 2}
-  - m_RefCount: 361
+  - m_RefCount: 362
     m_Data: {fileID: 11400000, guid: de16cb2301c2c4a44a0aedeec9eec5ff, type: 2}
   - m_RefCount: 52
     m_Data: {fileID: 11400000, guid: 9f90a39c8c80be846b5eea36c7d62529, type: 2}
@@ -18421,7 +18421,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 3e84ae81e79cb4442aacba67318ab957, type: 2}
   - m_RefCount: 11
     m_Data: {fileID: 11400000, guid: e4ae78804b4050d4fb27e3c651581c76, type: 2}
-  - m_RefCount: 26
+  - m_RefCount: 25
     m_Data: {fileID: 11400000, guid: 8f7539dad79f8b34bb2466d30cf764fc, type: 2}
   - m_RefCount: 6
     m_Data: {fileID: 11400000, guid: c6c13460a4c8cc2469ea10e48c19f34d, type: 2}
@@ -18434,7 +18434,7 @@ Tilemap:
   m_TileSpriteArray:
   - m_RefCount: 30
     m_Data: {fileID: 1058751130, guid: dec0cbb4812ce76479807da46b5d34e5, type: 3}
-  - m_RefCount: 361
+  - m_RefCount: 362
     m_Data: {fileID: -1167655513, guid: dec0cbb4812ce76479807da46b5d34e5, type: 3}
   - m_RefCount: 52
     m_Data: {fileID: 469218935, guid: dec0cbb4812ce76479807da46b5d34e5, type: 3}
@@ -18448,7 +18448,7 @@ Tilemap:
     m_Data: {fileID: 219311237, guid: dec0cbb4812ce76479807da46b5d34e5, type: 3}
   - m_RefCount: 11
     m_Data: {fileID: 1111012070, guid: dec0cbb4812ce76479807da46b5d34e5, type: 3}
-  - m_RefCount: 26
+  - m_RefCount: 25
     m_Data: {fileID: 564297491, guid: 2d0a15581a5a0c647a71264760eada7c, type: 3}
   - m_RefCount: 6
     m_Data: {fileID: 1174270048, guid: 2d0a15581a5a0c647a71264760eada7c, type: 3}
@@ -18459,7 +18459,7 @@ Tilemap:
   - m_RefCount: 4
     m_Data: {fileID: -748240166, guid: dec0cbb4812ce76479807da46b5d34e5, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 400
+  - m_RefCount: 401
     m_Data:
       e00: 1
       e01: 0
@@ -18477,7 +18477,7 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
-  - m_RefCount: 169
+  - m_RefCount: 168
     m_Data:
       e00: 0
       e01: 1
@@ -18671,6 +18671,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2446754938642633346}
   - component: {fileID: 586514320487084674}
+  - component: {fileID: -4362043200423763066}
   m_Layer: 11
   m_Name: DungeonMediumRoom3
   m_TagString: Untagged
@@ -18721,6 +18722,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 35.002373, y: 29.036173}
   m_EdgeRadius: 0
+--- !u!114 &-4362043200423763066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3702022006039285852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24d85ff771301a94e9972b06f88939ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 0}
+  backgroundFloor: {fileID: 0}
+  decoration1: {fileID: 0}
+  decoration2: {fileID: 0}
+  wall: {fileID: 0}
+  front: {fileID: 0}
+  collisions: {fileID: 0}
+  minimap: {fileID: 0}
+  roomCollider:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!1 &3980424810088285168
 GameObject:
   m_ObjectHideFlags: 0
@@ -18734,7 +18758,7 @@ GameObject:
   - component: {fileID: 8216171859422398042}
   m_Layer: 0
   m_Name: Decoration (1)
-  m_TagString: Untagged
+  m_TagString: decoration2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18854,7 +18878,7 @@ GameObject:
   - component: {fileID: 2860609275844379416}
   m_Layer: 10
   m_Name: Minimap
-  m_TagString: Untagged
+  m_TagString: minimap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27103,7 +27127,7 @@ GameObject:
   - component: {fileID: 822554664755920192}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29913,7 +29937,7 @@ GameObject:
   - component: {fileID: 240026901199103275}
   m_Layer: 0
   m_Name: Front
-  m_TagString: Untagged
+  m_TagString: front
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

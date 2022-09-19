@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 795537cef4d4503448398ee0f4ac4567, type: 3}
+  m_Name: MediumRoomL1.1
+  m_EditorClassIdentifier: 
+  id: 959f6230898052e43b27a02bcbf2fb2c
+  prefab: {fileID: 3702022006039285852, guid: 6a9caaa84e572b5499b0fe60657ba0da, type: 3}
+  lastPrefab: {fileID: 3702022006039285852, guid: 6a9caaa84e572b5499b0fe60657ba0da, type: 3}
+  roomType: {fileID: 11400000, guid: 5c440ad00f7d77e428cafbe9bda09f87, type: 2}
+  leftBottomPoint: {x: -15, y: -6}
+  rightTopPoint: {x: 21, y: 30}
+  doors:
+  - pos: {x: -15, y: 2}
+    orientation: 2
+    prefab: {fileID: 0}
+    wallToBuildPosition: {x: -15, y: 8}
+    wallBuildingWidthInTiles: 6
+    wallBuildingHeigthInTiles: 8
+    isConnected: 0
+    isAvailable: 0
+  - pos: {x: 3, y: 30}
+    orientation: 0
+    prefab: {fileID: 0}
+    wallToBuildPosition: {x: 0, y: 30}
+    wallBuildingWidthInTiles: 5
+    wallBuildingHeigthInTiles: 6
+    isConnected: 0
+    isAvailable: 0
+  - pos: {x: 21, y: 2}
+    orientation: 3
+    prefab: {fileID: 0}
+    wallToBuildPosition: {x: 16, y: 8}
+    wallBuildingWidthInTiles: 6
+    wallBuildingHeigthInTiles: 8
+    isConnected: 0
+    isAvailable: 0
+  - pos: {x: 3, y: -6}
+    orientation: 1
+    prefab: {fileID: 0}
+    wallToBuildPosition: {x: 0, y: -1}
+    wallBuildingWidthInTiles: 5
+    wallBuildingHeigthInTiles: 6
+    isConnected: 0
+    isAvailable: 0
+  enemySpawns:
+  - {x: -6, y: 4}
+  - {x: 12, y: 4}
+  - {x: 3, y: 2}
+  - {x: 3, y: 22}
+  - {x: -6, y: 19}
+  - {x: 12, y: 23}
+  rewardSpawns:
+  - {x: 3, y: 4}
+  playerSpawn: {x: 0, y: 0}
+  teleporter: {x: 3, y: 19}

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 795537cef4d4503448398ee0f4ac4567, type: 3}
+  m_Name: CorridorBR
+  m_EditorClassIdentifier: 
+  id: fedbaab0d4e209442ad49b0db0313923
+  prefab: {fileID: 3702022006039285852, guid: bd154d4b3cdbc424bbe8e32103cb3b41, type: 3}
+  lastPrefab: {fileID: 3702022006039285852, guid: bd154d4b3cdbc424bbe8e32103cb3b41, type: 3}
+  roomType: {fileID: 11400000, guid: f0cbfe3664f87e7459bfcfd54a9e2e33, type: 2}
+  leftBottomPoint: {x: 0, y: -2}
+  rightTopPoint: {x: 16, y: 14}
+  doors:
+  - pos: {x: 2, y: -2}
+    orientation: 1
+    prefab: {fileID: 0}
+    wallToBuildPosition: {x: 0, y: 0}
+    wallBuildingWidthInTiles: 0
+    wallBuildingHeigthInTiles: 0
+    isConnected: 0
+    isAvailable: 0
+  - pos: {x: 16, y: 9}
+    orientation: 3
+    prefab: {fileID: 0}
+    wallToBuildPosition: {x: 0, y: 0}
+    wallBuildingWidthInTiles: 0
+    wallBuildingHeigthInTiles: 0
+    isConnected: 0
+    isAvailable: 0
+  enemySpawns: []
+  rewardSpawns: []
+  playerSpawn: {x: 0, y: 0}
+  teleporter: {x: 0, y: 0}

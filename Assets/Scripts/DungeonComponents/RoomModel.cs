@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -19,9 +20,9 @@ public class RoomModel : ScriptableObject
     public List<Door> doors;
     public Vector2Int[] enemySpawns;
     public Vector2Int[] rewardSpawns;
-    public Vector2Int[] playerSpawns;
-    public Vector2Int[] teleporters;
-
+    public Vector2Int playerSpawn;
+    public Vector2Int teleporter;
+    
 #if UNITY_EDITOR
     public void OnValidate()
     {
