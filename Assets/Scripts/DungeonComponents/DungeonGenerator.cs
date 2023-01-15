@@ -27,7 +27,6 @@ public class DungeonGenerator : MonoBehaviour
         int replaceAttempts = 0;
         while(!buildSuccessfull && replaceAttempts < Settings.maxReplaceAttempts)
         {
-            Debug.Log("Attempts:"+replaceAttempts);
             if (curLevel.dungeonStructures.Count > 0)
             {
                 Clear();
@@ -35,10 +34,7 @@ public class DungeonGenerator : MonoBehaviour
                 buildSuccessfull = TryToBuildDungeon(dungeonStructureGraph);
                 replaceAttempts++;
             }
-            else
-            {
-                Debug.Log("No structure graphs found in the list!");
-            }      
+              
         }
         if (buildSuccessfull)
         {
@@ -82,7 +78,7 @@ public class DungeonGenerator : MonoBehaviour
         RoomNode entrance = dungeonStructureGraph.GetNode(roomNodeTypes.list.Find(x => x.isEntrance));
         if (entrance == null)
         {
-            Debug.Log("No Entrance Found!");
+    
             return false;
         }
         roomsToPlace.Enqueue(entrance);
@@ -126,7 +122,7 @@ public class DungeonGenerator : MonoBehaviour
         while (room == null && tryCount < 1)
         {
             tryCount++;
-            //Debug.Log(parent.roomNodeType.ToString());
+            
             List<Door> AvailableDoorsOnParentRoom = FindAvailableDoor(parent.doors);
             if (AvailableDoorsOnParentRoom.Count == 0)
             {
@@ -163,7 +159,7 @@ public class DungeonGenerator : MonoBehaviour
             tryCount++;
             if (parent == null)
                 continue;
-            //Debug.Log(parent.roomNodeType.ToString());
+            
             List<Door> AvailableDoorsOnParentRoom = FindAvailableDoor(parent.doors);
             if (AvailableDoorsOnParentRoom.Count == 0)
             {
@@ -232,10 +228,7 @@ public class DungeonGenerator : MonoBehaviour
                 continue;
             if (RoomsOverlapping(roomToPlace, room))
             {
-             //   Debug.Log("LB " + roomToPlace.roomLowerBound);
-             //   Debug.Log("UB " + roomToPlace.roomUpperBound);
-             //   Debug.Log("PLB " + room.roomLowerBound);
-             //   Debug.Log("PUB " + room.roomUpperBound);
+             
                 overlapFound = true;
                 break;
             }
@@ -257,8 +250,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         bool isOnXOverlapping = CheckIntervalForOverlaps(firstRoom.roomLowerBound.x, firstRoom.roomUpperBound.x, secondRoom.roomLowerBound.x, secondRoom.roomUpperBound.x);
         bool isOnYOverlapping = CheckIntervalForOverlaps(firstRoom.roomLowerBound.y, firstRoom.roomUpperBound.y, secondRoom.roomLowerBound.y, secondRoom.roomUpperBound.y);
-        if (isOnXOverlapping && isOnYOverlapping)
-            Debug.Log("Cannot place");
+        
         return isOnXOverlapping && isOnYOverlapping;
     }
 
@@ -351,11 +343,8 @@ public class DungeonGenerator : MonoBehaviour
     private List<Door> FindAvailableDoor(List<Door> doors)
     {
         List<Door> result = new List<Door>();
-       // Debug.Log();
         foreach (Door door in doors)
         {
-            //Debug.Log("A "+door.isAvailable.ToString());
-            //Debug.Log("C "+door.isConnected.ToString());
             if(door.isAvailable && !door.isConnected)
                 result.Add(door);
         }
@@ -368,10 +357,6 @@ public class DungeonGenerator : MonoBehaviour
         Room finalRoom = GenerateRoomUsingModel(roomModel, roomNode);
         finalRoom.isPlaced = true;
         List<Door> doors = finalRoom.doors;
-        foreach (Door door in doors)
-        {
-            //Debug.Log("Is Available "+ door.isAvailable.ToString()+"=== Is Connected "+door.isConnected.ToString());
-        }
         roomDictionary.Add(finalRoom.roomId, finalRoom);
     }
 
@@ -421,8 +406,7 @@ public class DungeonGenerator : MonoBehaviour
                 roomModelsOfType.Add(roomModel);
         }
         if(roomModelsOfType.Count == 0)
-        {
-            Debug.Log("For type "+ roomType.ToString()+" there are no rooms!");
+        {    
             return null;
         }
         return roomModelsOfType[Random.Range(0,roomModelsOfType.Count)];
@@ -435,8 +419,6 @@ public class DungeonGenerator : MonoBehaviour
         {
             if (!roomModelsDictionary.ContainsKey(roomModelsList[i].id))
                 roomModelsDictionary.Add(roomModelsList[i].id, roomModelsList[i]);
-            else
-                Debug.Log("Duplicated Key Found!");
         }
     }
 }

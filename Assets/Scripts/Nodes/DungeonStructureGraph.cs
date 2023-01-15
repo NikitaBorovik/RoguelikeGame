@@ -64,7 +64,6 @@ public class DungeonStructureGraph : ScriptableObject
         {
             if(pair.Value.roomType == type)
             {
-                Debug.Log(pair.Value.roomType.ToString());
                 return pair.Value;
             }
         }
