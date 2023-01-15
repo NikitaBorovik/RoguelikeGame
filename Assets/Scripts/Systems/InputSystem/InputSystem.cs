@@ -84,7 +84,11 @@ namespace App.Systems.Input
         {
             if (UnityEngine.Input.GetMouseButton(0))
             {
-                player.Staff.ShootEvent.CallShootEvent();
+                player.Staff.WeakShootEvent.CallWeakShootEvent();
+            }
+            if (UnityEngine.Input.GetMouseButton(1))
+            {
+                player.Staff.StrongShootEvent.CallStrongShootEvent();
             }
         }
     }

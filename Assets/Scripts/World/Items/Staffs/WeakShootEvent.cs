@@ -6,7 +6,7 @@ namespace App.World.Items.Staffs
     {
         public event Action<WeakShootEvent> OnShoot;
 
-        public void CallShootEvent()
+        public void CallWeakShootEvent()
         {
             OnShoot?.Invoke(this);
         }

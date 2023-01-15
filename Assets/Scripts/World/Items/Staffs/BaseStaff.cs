@@ -11,7 +11,9 @@ namespace App.World.Items.Staffs
         protected ObjectPool objectPool;
         #region Serialized Fields
         [SerializeField]
-        private WeakShootEvent shootEvent;
+        private WeakShootEvent weakShootEvent;
+        [SerializeField]
+        private StrongShootEvent strongShootEvent;
         [SerializeField]
         private Transform shootPosition;
         [SerializeField]
@@ -24,24 +26,34 @@ namespace App.World.Items.Staffs
         #endregion
 
         #region Properties
-        public WeakShootEvent ShootEvent { get => shootEvent; }
+        public WeakShootEvent WeakShootEvent { get => weakShootEvent; }
+
+        public StrongShootEvent StrongShootEvent { get => strongShootEvent; }
         public Transform ShootPosition { get => shootPosition; set => shootPosition = value; }
         public StaffSO Data { get => data; set => data = value; }
         #endregion
         private void OnEnable()
         {
-            ShootEvent.OnShoot += Shoot;
+            WeakShootEvent.OnShoot += ShootWeak;
+            StrongShootEvent.OnShoot += ShootStrong;
         }
 
         private void OnDisable()
         {
-            ShootEvent.OnShoot -= Shoot;
+            WeakShootEvent.OnShoot -= ShootWeak;
+            StrongShootEvent.OnShoot -= ShootStrong;
         }
-        public void Shoot(WeakShootEvent ev)
+        public void ShootWeak(WeakShootEvent ev)
         {
-            Shoot();
+            ShootWeak();
         }
-        public abstract void Shoot();
+        public void ShootStrong(StrongShootEvent ev)
+        {
+            ShootStrong();
+        }
+        public abstract void ShootWeak();
+        public abstract void ShootStrong();
+
         protected virtual void Awake()
         {
             //audioSource = GetComponent<AudioSource>();

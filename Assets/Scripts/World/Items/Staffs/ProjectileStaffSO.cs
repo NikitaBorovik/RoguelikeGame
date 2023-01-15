@@ -8,11 +8,18 @@ namespace App.World.Items.Staffs
     public class ProjectileStaffSO : StaffSO
     {
         public float coolDown;
-        public float projectileFlySpeed;
-        public float projectileSpread;
-        public int pearcingCount;
-        public GameObject projectilePrefab;
-        public int projectileCount;
+        public float weakProjectileFlySpeed;
+        public float weakProjectileSpread;
+        public int weakPearcingCount;
+        public GameObject weakProjectilePrefab;
+        public GameObject strongProjectilePrefab;
+        public float strongProjectileFlySpeed;
+        public float strongProjectileSpread;
+        public int strongPearcingCount;
+        public int strongProjectileCount;
+        public int weakProjectileCount;
+        public float weakProjectileDamage;
+        public float strongProjectileDamage;
     }
 
 }

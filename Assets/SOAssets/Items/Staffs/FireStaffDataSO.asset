@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faaea9371ed0efe448dc628b6b240dd2, type: 3}
   m_Name: FireStaffDataSO
   m_EditorClassIdentifier: 
-  damage: 0
   shootSound: {fileID: 0}
   staffPrefab: {fileID: 8239669309457607963, guid: 995d7981c56575d44baff7d439dd9ce8, type: 3}
   staffSprite: {fileID: 0}
   coolDown: 1
-  projectileFlySpeed: 16
-  projectileSpread: 10
-  pearcingCount: 0
-  projectilePrefab: {fileID: 4619419389253851097, guid: a1a07d58f4ed5b34491e1c15827be49e, type: 3}
-  projectileCount: 1
+  weakProjectileFlySpeed: 16
+  weakProjectileSpread: 10
+  weakPearcingCount: 1
+  weakProjectilePrefab: {fileID: 4619419389253851097, guid: a1a07d58f4ed5b34491e1c15827be49e, type: 3}
+  strongProjectilePrefab: {fileID: 4619419389253851097, guid: 41c743f036481de41b544b1f3d11d00d, type: 3}
+  strongProjectileFlySpeed: 10
+  strongProjectileSpread: 16
+  strongPearcingCount: 2
+  strongProjectileCount: 1
+  weakProjectileCount: 1
+  weakProjectileDamage: 11
+  strongProjectileDamage: 22

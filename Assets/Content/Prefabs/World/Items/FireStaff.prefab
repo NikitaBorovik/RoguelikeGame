@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 8681273737272525721}
   - component: {fileID: 7765536110703785566}
   - component: {fileID: 7066657474714311157}
+  - component: {fileID: 2114770385723453644}
   m_Layer: 0
   m_Name: FireStaff
   m_TagString: Untagged
@@ -162,7 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea13ef60a5fa8943bbf946a717b60f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootEvent: {fileID: 7066657474714311157}
+  weakShootEvent: {fileID: 7066657474714311157}
+  strongShootEvent: {fileID: 2114770385723453644}
   shootPosition: {fileID: 4677868296045557767}
   data: {fileID: 11400000, guid: 9a038641eb3e584479cfced3ca618838, type: 2}
 --- !u!114 &7066657474714311157
@@ -175,5 +177,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab92f9dd89e1ff24e897f2746824d1ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2114770385723453644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8239669309457607963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acec2ed180000734589b2b071384d975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
