@@ -8,7 +8,10 @@ namespace App.World
     {
         [SerializeField]
         private GameObject player;
+        [SerializeField]
+        private DungeonGenerator dungeonGenerator;
         public GameObject Player { get => player; }
+        public DungeonGenerator DungeonGenerator { get => dungeonGenerator; set => dungeonGenerator = value; }
     }
 }
 

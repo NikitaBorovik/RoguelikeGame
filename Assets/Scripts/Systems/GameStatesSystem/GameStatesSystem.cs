@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
-public class GameStatesSystem : MonoBehaviour
+namespace App.Systems.GameStates
 {
-    // Start is called before the first frame update
-    void Start()
+    public class GameStatesSystem : MonoBehaviour
     {
-        
-    }
+        private StateMachine gameStateMachine;
+        private DungeonGenerator dungeonBuilder;
+        private DungeonBuildingState dungeonBuildingState;
+        [SerializeField]
+        private List<LevelModel> levels;
+        [SerializeField]
+        private int curLevel = 0;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+
+        public void Init(DungeonGenerator dungeonGenerator)
+        {
+            dungeonBuilder = dungeonGenerator;
+            gameStateMachine = new StateMachine();
+            dungeonBuildingState = new DungeonBuildingState(this, dungeonBuilder, levels[curLevel]);
+            gameStateMachine.Initialize(dungeonBuildingState);
+        }
+        private void Update()
+        {
+           // gameStateMachine.CurrentState.Update();
+        }
     }
 }
+

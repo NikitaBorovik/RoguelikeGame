@@ -28,11 +28,50 @@ public class DrawnRoom : MonoBehaviour
     public Tilemap minimap;
     [HideInInspector]
     public Bounds roomCollider;
+    TilemapRenderer[] tileRenderers;
+    [SerializeField]
+    private bool isEntrance ;
+    private bool isVisited = false;
+    
 
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
         roomCollider = boxCollider.bounds;
+        tileRenderers = GetComponentsInChildren<TilemapRenderer>();
+        if (!isEntrance)
+        {
+            foreach (var tileRenderer in tileRenderers)
+            {
+                tileRenderer.material.SetFloat("_AlphaValue", 0f);
+            }
+        }
+        
+    }
+    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!isVisited && !isEntrance) 
+        {
+            foreach (var tileRenderer in tileRenderers)
+            {
+                StartCoroutine(Reveal(tileRenderer));
+            }
+            isVisited = true;
+        }
+        
+
+    }
+
+    private IEnumerator Reveal(TilemapRenderer tileRenderer)
+    {
+        float alpha = 0f;
+        while (alpha < 1f)
+        {
+            alpha += 0.1f;
+            tileRenderer.material.SetFloat("_AlphaValue", alpha);
+            yield return new WaitForSeconds(0.02f);
+        }
     }
 
     public void DrawRoom(GameObject roomObject)

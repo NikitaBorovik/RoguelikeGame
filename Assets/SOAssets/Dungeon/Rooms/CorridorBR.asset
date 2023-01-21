@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795537cef4d4503448398ee0f4ac4567, type: 3}
   m_Name: CorridorBR
   m_EditorClassIdentifier: 
-  id: 43fe9d01f92fb1540a6aef5741647835
+  id: eac08a1becf45ad4c9cca90721029491
   prefab: {fileID: 3702022006039285852, guid: bd154d4b3cdbc424bbe8e32103cb3b41, type: 3}
   lastPrefab: {fileID: 3702022006039285852, guid: bd154d4b3cdbc424bbe8e32103cb3b41, type: 3}
   roomType: {fileID: 11400000, guid: f0cbfe3664f87e7459bfcfd54a9e2e33, type: 2}

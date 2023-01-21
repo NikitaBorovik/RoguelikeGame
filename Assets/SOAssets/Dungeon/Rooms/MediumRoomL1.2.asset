@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795537cef4d4503448398ee0f4ac4567, type: 3}
   m_Name: MediumRoomL1.2
   m_EditorClassIdentifier: 
-  id: 8d154526f9ce9734093a84e8814b815b
+  id: 2fb3eaaa4d9f90d42b0c8ce1134fd466
   prefab: {fileID: 3702022006039285852, guid: 870009467555a5a4bba0c6ac8959ebb0, type: 3}
   lastPrefab: {fileID: 3702022006039285852, guid: 870009467555a5a4bba0c6ac8959ebb0, type: 3}
   roomType: {fileID: 11400000, guid: 5c440ad00f7d77e428cafbe9bda09f87, type: 2}

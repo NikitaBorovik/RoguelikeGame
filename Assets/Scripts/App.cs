@@ -1,8 +1,7 @@
+using App.Systems.GameStates;
 using App.Systems.Input;
 using App.World;
 using App.World.Creatures.PlayerScripts.Components;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace App
@@ -15,10 +14,13 @@ namespace App
         private InputSystem inputSystem;
         [SerializeField]
         private Camera mainCamera;
-        
+        [SerializeField]
+        private GameStatesSystem gameStatesSystem;
+
         void Start()
         {
             inputSystem.Init(mainCamera, objectsContainer.Player.GetComponent<Player>());
+            gameStatesSystem.Init(objectsContainer.DungeonGenerator);
         }
 
         
