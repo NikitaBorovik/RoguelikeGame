@@ -50,8 +50,8 @@ public class DungeonGenerator : MonoBehaviour
             foreach(KeyValuePair<string,Room> pair in roomDictionary)
             {
                 Room room = pair.Value;
-                if(room.drawnRoom!=null)
-                    Destroy(room.drawnRoom.gameObject);
+                if(room.DrawnRoom!=null)
+                    Destroy(room.DrawnRoom.gameObject);
             }
             roomDictionary.Clear();
         }
@@ -62,13 +62,13 @@ public class DungeonGenerator : MonoBehaviour
         foreach(KeyValuePair<string,Room> pair in roomDictionary)
         {
             Room room = pair.Value;
-            Vector3 positionOfTheRoom = new Vector3(room.roomLowerBound.x - room.roomModelLowerBound.x,
-                room.roomLowerBound.y - room.roomModelLowerBound.y, 0f);
-            GameObject roomGameObject = Instantiate(room.prefab,positionOfTheRoom,Quaternion.identity,transform);
+            Vector3 positionOfTheRoom = new Vector3(room.RoomLowerBound.x - room.RoomModelLowerBound.x,
+                room.RoomLowerBound.y - room.RoomModelLowerBound.y, 0f);
+            GameObject roomGameObject = Instantiate(room.Prefab,positionOfTheRoom,Quaternion.identity,transform);
             DrawnRoom drawnRoom = roomGameObject.GetComponentInChildren<DrawnRoom>();
             drawnRoom.room = room;
             drawnRoom.DrawRoom(roomGameObject);
-            room.drawnRoom = drawnRoom;
+            room.DrawnRoom = drawnRoom;
         }
     }
 
@@ -123,7 +123,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             tryCount++;
             
-            List<Door> AvailableDoorsOnParentRoom = FindAvailableDoor(parent.doors);
+            List<Door> AvailableDoorsOnParentRoom = FindAvailableDoor(parent.Doors);
             if (AvailableDoorsOnParentRoom.Count == 0)
             {
                 continue;
@@ -137,7 +137,7 @@ public class DungeonGenerator : MonoBehaviour
             room = GenerateRoomUsingModel(roomModel, roomNode);
             if (ChechIfRoomCanBePlaced(parent, room, doorOfParentToConnect))
             {
-                room.isPlaced = true;
+                room.IsPlaced = true;
                // roomDictionary.Add(room.roomId, room);
             }
             else
@@ -160,7 +160,7 @@ public class DungeonGenerator : MonoBehaviour
             if (parent == null)
                 continue;
             
-            List<Door> AvailableDoorsOnParentRoom = FindAvailableDoor(parent.doors);
+            List<Door> AvailableDoorsOnParentRoom = FindAvailableDoor(parent.Doors);
             if (AvailableDoorsOnParentRoom.Count == 0)
             {
                 return false;
@@ -171,9 +171,9 @@ public class DungeonGenerator : MonoBehaviour
             if (ChechIfRoomCanBePlaced(parent, roomToPlace, doorOfParentToConnect))
             {
                 isOverlaping = false;
-                roomToPlace.isPlaced = true;
-                roomDictionary.Add(parent.roomId, parent);
-                roomDictionary.Add(roomToPlace.roomId, roomToPlace);
+                roomToPlace.IsPlaced = true;
+                roomDictionary.Add(parent.RoomId, parent);
+                roomDictionary.Add(roomToPlace.RoomId, roomToPlace);
             }
             else
             {
@@ -187,13 +187,13 @@ public class DungeonGenerator : MonoBehaviour
     {
         Door roomDoorToConnect = null;
         if (doorOfParentToConnect.orientation == DoorOrientation.left)
-            roomDoorToConnect = roomToPlace.doors.Find(x => x.orientation == DoorOrientation.right);
+            roomDoorToConnect = roomToPlace.Doors.Find(x => x.orientation == DoorOrientation.right);
         if (doorOfParentToConnect.orientation == DoorOrientation.right)
-            roomDoorToConnect = roomToPlace.doors.Find(x => x.orientation == DoorOrientation.left);
+            roomDoorToConnect = roomToPlace.Doors.Find(x => x.orientation == DoorOrientation.left);
         if (doorOfParentToConnect.orientation == DoorOrientation.top)
-            roomDoorToConnect = roomToPlace.doors.Find(x => x.orientation == DoorOrientation.bottom);
+            roomDoorToConnect = roomToPlace.Doors.Find(x => x.orientation == DoorOrientation.bottom);
         if (doorOfParentToConnect.orientation == DoorOrientation.bottom)
-            roomDoorToConnect = roomToPlace.doors.Find(x => x.orientation == DoorOrientation.top);
+            roomDoorToConnect = roomToPlace.Doors.Find(x => x.orientation == DoorOrientation.top);
         if (roomDoorToConnect == null)
         {
             doorOfParentToConnect.isAvailable = false;
@@ -216,15 +216,15 @@ public class DungeonGenerator : MonoBehaviour
         {
             adj = new Vector2Int(0, 1);
         }
-        Vector2Int doorOfParentRealPosition = parent.roomLowerBound - parent.roomModelLowerBound + doorOfParentToConnect.pos;
-        roomToPlace.roomLowerBound = roomToPlace.roomModelLowerBound + doorOfParentRealPosition + adj - roomDoorToConnect.pos;
-        roomToPlace.roomUpperBound = roomToPlace.roomLowerBound + roomToPlace.roomModelUpperBound - roomToPlace.roomModelLowerBound;
+        Vector2Int doorOfParentRealPosition = parent.RoomLowerBound - parent.RoomModelLowerBound + doorOfParentToConnect.pos;
+        roomToPlace.RoomLowerBound = roomToPlace.RoomModelLowerBound + doorOfParentRealPosition + adj - roomDoorToConnect.pos;
+        roomToPlace.RoomUpperBound = roomToPlace.RoomLowerBound + roomToPlace.RoomModelUpperBound - roomToPlace.RoomModelLowerBound;
         
         bool overlapFound = false;
         foreach(KeyValuePair<string,Room> pair in roomDictionary)
         {
             Room room = pair.Value;
-            if(!room.isPlaced || room.roomId == roomToPlace.roomId)
+            if(!room.IsPlaced || room.RoomId == roomToPlace.RoomId)
                 continue;
             if (RoomsOverlapping(roomToPlace, room))
             {
@@ -248,8 +248,8 @@ public class DungeonGenerator : MonoBehaviour
 
     private bool RoomsOverlapping(Room firstRoom, Room secondRoom)
     {
-        bool isOnXOverlapping = CheckIntervalForOverlaps(firstRoom.roomLowerBound.x, firstRoom.roomUpperBound.x, secondRoom.roomLowerBound.x, secondRoom.roomUpperBound.x);
-        bool isOnYOverlapping = CheckIntervalForOverlaps(firstRoom.roomLowerBound.y, firstRoom.roomUpperBound.y, secondRoom.roomLowerBound.y, secondRoom.roomUpperBound.y);
+        bool isOnXOverlapping = CheckIntervalForOverlaps(firstRoom.RoomLowerBound.x, firstRoom.RoomUpperBound.x, secondRoom.RoomLowerBound.x, secondRoom.RoomUpperBound.x);
+        bool isOnYOverlapping = CheckIntervalForOverlaps(firstRoom.RoomLowerBound.y, firstRoom.RoomUpperBound.y, secondRoom.RoomLowerBound.y, secondRoom.RoomUpperBound.y);
         
         return isOnXOverlapping && isOnYOverlapping;
     }
@@ -355,24 +355,24 @@ public class DungeonGenerator : MonoBehaviour
     {
         RoomModel roomModel = ChooseRandomModelForType(roomNode.roomType);
         Room finalRoom = GenerateRoomUsingModel(roomModel, roomNode);
-        finalRoom.isPlaced = true;
-        List<Door> doors = finalRoom.doors;
-        roomDictionary.Add(finalRoom.roomId, finalRoom);
+        finalRoom.IsPlaced = true;
+        List<Door> doors = finalRoom.Doors;
+        roomDictionary.Add(finalRoom.RoomId, finalRoom);
     }
 
     private Room GenerateRoomUsingModel(RoomModel roomModel, RoomNode roomNode)
     {
         Room room = new Room(roomNode.id,roomModel.id,roomModel.prefab,roomModel.roomType,roomModel.leftBottomPoint,roomModel.rightTopPoint,roomModel.leftBottomPoint,roomModel.rightTopPoint,
-            roomModel.enemySpawns,roomModel.rewardSpawns,roomModel.teleporter,roomModel.playerSpawn);
-        room.childrenRooms = CopyListOfStrings(roomNode.children);
-        room.doors = CopyListOfDoors(roomModel.doors);
+            roomModel.enemySpawns,roomModel.rewardSpawns,roomModel.teleporter,roomModel.playerSpawn,roomModel.enemies);
+        room.ChildrenRooms = CopyListOfStrings(roomNode.children);
+        room.Doors = CopyListOfDoors(roomModel.doors);
         if(roomNode.parentId == null)
         {
-            room.parentId = "";
-            room.isPrev = true;
+            room.ParentId = "";
+            room.IsPrev = true;
         }
         else
-            room.parentId = roomNode.parentId;
+            room.ParentId = roomNode.parentId;
         return room;
     }
 
@@ -396,6 +396,7 @@ public class DungeonGenerator : MonoBehaviour
         }
         return result;
     }
+    
 
     private RoomModel ChooseRandomModelForType(RoomNodeType roomType)
     {

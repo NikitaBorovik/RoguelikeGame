@@ -1,3 +1,4 @@
+using App.Systems.GameStates;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ public class DrawnRoom : MonoBehaviour
     [HideInInspector]
     public Room room;
     [HideInInspector]
-    public Grid grid;
+    private Grid grid;
     [HideInInspector]
     public Tilemap backgroundFloor;
     [HideInInspector]
@@ -32,7 +33,9 @@ public class DrawnRoom : MonoBehaviour
     [SerializeField]
     private bool isEntrance ;
     private bool isVisited = false;
-    
+    private GameStatesSystem gameStates;
+
+    public Grid Grid { get => grid; set => grid = value; }
 
     private void Awake()
     {
@@ -46,7 +49,8 @@ public class DrawnRoom : MonoBehaviour
                 tileRenderer.material.SetFloat("_AlphaValue", 0f);
             }
         }
-        
+        gameStates = FindObjectOfType<GameStatesSystem>();
+
     }
     
     private void OnTriggerEnter2D(Collider2D collision)
@@ -58,6 +62,11 @@ public class DrawnRoom : MonoBehaviour
                 StartCoroutine(Reveal(tileRenderer));
             }
             isVisited = true;
+        }
+        gameStates.CurRoom = room;
+        if (!room.RoomNodeType.isCorridor && !room.RoomNodeType.isEntrance)
+        {
+            gameStates.EnteringRoom();
         }
         
 
@@ -84,7 +93,7 @@ public class DrawnRoom : MonoBehaviour
 
     private void BlockRedundantDoors()
     {
-        foreach(Door door in room.doors)
+        foreach(Door door in room.Doors)
         {
             if(!door.isConnected)
             {
@@ -143,7 +152,7 @@ public class DrawnRoom : MonoBehaviour
 
     private void AddMemberVariablesToTilemap(GameObject roomObject)
     {
-        grid = roomObject.GetComponentInChildren<Grid>();
+        Grid = roomObject.GetComponentInChildren<Grid>();
         Tilemap[] tilemaps = roomObject.GetComponentsInChildren<Tilemap>();
         FillTilemaps(tilemaps);
     }

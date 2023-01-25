@@ -34,16 +34,16 @@ namespace App.World.Creatures.Enemies.States
 
         private void SetMoveAnimationParams(float vx)
         {
-            if (vx < 0)
-            {
-                baseEnemy.Animator.SetBool("MovingRight", false);
-                baseEnemy.Animator.SetBool("MovingLeft", true);
-            }
-            else
-            {
-                baseEnemy.Animator.SetBool("MovingRight", true);
-                baseEnemy.Animator.SetBool("MovingLeft", false);
-            }
+            //if (vx < 0)
+            //{
+            //    baseEnemy.Animator.SetBool("MovingRight", false);
+            //    baseEnemy.Animator.SetBool("MovingLeft", true);
+            //}
+            //else
+            //{
+            //    baseEnemy.Animator.SetBool("MovingRight", true);
+            //    baseEnemy.Animator.SetBool("MovingLeft", false);
+            //}
         }
     }
 }

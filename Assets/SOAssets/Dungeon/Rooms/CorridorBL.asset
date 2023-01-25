@@ -39,3 +39,4 @@ MonoBehaviour:
   rewardSpawns: []
   playerSpawn: {x: 0, y: 0}
   teleporter: {x: 0, y: 0}
+  enemies: []

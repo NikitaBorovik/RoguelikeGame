@@ -65,3 +65,5 @@ MonoBehaviour:
   - {x: 19, y: 7}
   playerSpawn: {x: 0, y: 0}
   teleporter: {x: 0, y: 0}
+  enemies:
+  - {fileID: 2236608071258931606, guid: c8ea459dc7a136a49889b7e8f9f88d1e, type: 3}

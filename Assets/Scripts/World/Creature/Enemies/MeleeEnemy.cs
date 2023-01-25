@@ -12,7 +12,7 @@ namespace Assets.Scripts.World.Creature.Enemies
         public override void Awake()
         {
             base.Awake();
-            Init(transform.position,transform,1);//TODO remove
+            //Init(transform.position,transform,1);//TODO remove
         }
 
         public override void Init(Vector3 position, Transform target, float hpMultiplier)

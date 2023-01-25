@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeName: BR Corridor
   displayInCreator: 0
-  isCorridor: 0
+  isCorridor: 1
   isTopBottomCorridor: 0
   isRightLeftCorridor: 0
   isTopLeftCorridor: 0

@@ -1,5 +1,6 @@
 using App.Systems.GameStates;
 using App.Systems.Input;
+using App.Systems.Spawning;
 using App.World;
 using App.World.Creatures.PlayerScripts.Components;
 using UnityEngine;
@@ -16,11 +17,14 @@ namespace App
         private Camera mainCamera;
         [SerializeField]
         private GameStatesSystem gameStatesSystem;
+        [SerializeField]
+        private SpawningSystem spawningSystem;
 
         void Start()
         {
             inputSystem.Init(mainCamera, objectsContainer.Player.GetComponent<Player>());
-            gameStatesSystem.Init(objectsContainer.DungeonGenerator);
+            spawningSystem.Init(objectsContainer.ObjectPool);
+            gameStatesSystem.Init(objectsContainer.DungeonGenerator,spawningSystem);
         }
 
         

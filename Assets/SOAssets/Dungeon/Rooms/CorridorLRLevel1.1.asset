@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795537cef4d4503448398ee0f4ac4567, type: 3}
   m_Name: CorridorLRLevel1.1
   m_EditorClassIdentifier: 
-  id: 5aa14a012eda6234c9bab537d07ed378
+  id: b5c61f41398973c41a43d0f401531249
   prefab: {fileID: 3702022006039285852, guid: f2b4666548f9e1b45ae2b4c0ea3b90fc, type: 3}
   lastPrefab: {fileID: 3702022006039285852, guid: f2b4666548f9e1b45ae2b4c0ea3b90fc, type: 3}
   roomType: {fileID: 11400000, guid: 5f0a193581d30364184f9be6bdde8e7a, type: 2}
@@ -39,3 +39,4 @@ MonoBehaviour:
   rewardSpawns: []
   playerSpawn: {x: 0, y: 0}
   teleporter: {x: 0, y: 0}
+  enemies: []

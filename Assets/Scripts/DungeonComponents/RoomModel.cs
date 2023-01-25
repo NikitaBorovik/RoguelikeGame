@@ -1,3 +1,4 @@
+using App.World.Creatures.Enemies;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ public class RoomModel : ScriptableObject
     public Vector2Int[] rewardSpawns;
     public Vector2Int playerSpawn;
     public Vector2Int teleporter;
+    public List<BaseEnemy> enemies;
     
 #if UNITY_EDITOR
     public void OnValidate()
