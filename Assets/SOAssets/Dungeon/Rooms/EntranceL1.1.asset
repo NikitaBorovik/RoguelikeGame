@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795537cef4d4503448398ee0f4ac4567, type: 3}
   m_Name: EntranceL1.1
   m_EditorClassIdentifier: 
-  id: 3f883a48407a9cb4c877fda4fd7cf1a8
+  id: b97692896120a364baeee2f552cda35d
   prefab: {fileID: 3702022006039285852, guid: 659186690b7274b40a0473a7b7db201c, type: 3}
   lastPrefab: {fileID: 3702022006039285852, guid: 659186690b7274b40a0473a7b7db201c, type: 3}
   roomType: {fileID: 11400000, guid: af681d0591304294fb08fe6be59ab9db, type: 2}
@@ -55,4 +55,6 @@ MonoBehaviour:
   rewardSpawns: []
   playerSpawn: {x: -2, y: 1}
   teleporter: {x: -2, y: 1}
-  enemies: []
+  enemiesWave1: []
+  enemiesWave2: []
+  enemiesWave3: []

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4338783571015435671}
   - component: {fileID: 4994457368346505146}
   - component: {fileID: 3834102721473874977}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

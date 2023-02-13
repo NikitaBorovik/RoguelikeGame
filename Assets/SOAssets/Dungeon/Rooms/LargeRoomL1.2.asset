@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795537cef4d4503448398ee0f4ac4567, type: 3}
   m_Name: LargeRoomL1.2
   m_EditorClassIdentifier: 
-  id: 7f32f9641b74f2c41a81b73298e90209
+  id: 4d6e7d4c6c1a70d43aed8fa166927fe9
   prefab: {fileID: 3702022006039285852, guid: 8e22d9ef9e75c5f4189d979e4d0aa0a5, type: 3}
   lastPrefab: {fileID: 3702022006039285852, guid: 8e22d9ef9e75c5f4189d979e4d0aa0a5, type: 3}
   roomType: {fileID: 11400000, guid: cd90e425b0b36e1448c7bb59dfa40e83, type: 2}
@@ -68,5 +68,6 @@ MonoBehaviour:
   - {x: 9, y: 6}
   playerSpawn: {x: 0, y: 0}
   teleporter: {x: 0, y: 5}
-  enemies:
-  - {fileID: 2236608071258931606, guid: c8ea459dc7a136a49889b7e8f9f88d1e, type: 3}
+  enemiesWave1: []
+  enemiesWave2: []
+  enemiesWave3: []

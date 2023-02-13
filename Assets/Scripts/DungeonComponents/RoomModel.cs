@@ -23,8 +23,13 @@ public class RoomModel : ScriptableObject
     public Vector2Int[] rewardSpawns;
     public Vector2Int playerSpawn;
     public Vector2Int teleporter;
-    public List<BaseEnemy> enemies;
-    
+    [SerializeField]
+    public List<BaseEnemy> enemiesWave1;
+    [SerializeField]
+    public List<BaseEnemy> enemiesWave2;
+    [SerializeField]
+    public List<BaseEnemy> enemiesWave3;
+
 #if UNITY_EDITOR
     public void OnValidate()
     {

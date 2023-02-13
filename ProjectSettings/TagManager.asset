@@ -25,9 +25,9 @@ TagManager:
   - Minimap
   - Dungeon
   - Wall
-  - PlayerAmmo
+  - PlayerProjectile
   - Enemy
-  - EnemyAmmo
+  - EnemyProjectile
   - Environment
   - PlayerWeapon
   - 

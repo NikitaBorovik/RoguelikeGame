@@ -11,37 +11,45 @@ public class DrawnRoom : MonoBehaviour
     private BoxCollider2D boxCollider;
     [HideInInspector]
     public Room room;
-    [HideInInspector]
     private Grid grid;
-    [HideInInspector]
-    public Tilemap backgroundFloor;
-    [HideInInspector]
-    public Tilemap decoration1;
-    [HideInInspector]
-    public Tilemap decoration2;
-    [HideInInspector]
-    public Tilemap wall;
-    [HideInInspector]
-    public Tilemap front;
-    [HideInInspector]
-    public Tilemap collisions;
-    [HideInInspector]
-    public Tilemap minimap;
-    [HideInInspector]
-    public Bounds roomCollider;
-    TilemapRenderer[] tileRenderers;
+    private Tilemap backgroundFloor;
+    private Tilemap decoration1;
+    private Tilemap decoration2;
+    private Tilemap wall;
+    private Tilemap front;
+    private Tilemap collisions;
+    private Tilemap minimap;
+    private Bounds roomCollider;
+    private int[,] gridTilesPriorityWeigths;
     [SerializeField]
-    private bool isEntrance ;
+    private Tile[] collisionTileVariants;
+    [SerializeField]
+    private Tile preferedTile;
+
+    TilemapRenderer[] tileRenderers;
     private bool isVisited = false;
     private GameStatesSystem gameStates;
+    [SerializeField]
+    private bool isEntrance = false;
 
     public Grid Grid { get => grid; set => grid = value; }
+    public int[,] GridTilesPriorityWeigths { get => gridTilesPriorityWeigths; set => gridTilesPriorityWeigths = value; }
+    public Tilemap BackgroundFloor { get => backgroundFloor; set => backgroundFloor = value; }
+    public Tilemap Decoration1 { get => decoration1; set => decoration1 = value; }
+    public Tilemap Decoration2 { get => decoration2; set => decoration2 = value; }
+    public Tilemap Wall { get => wall; set => wall = value; }
+    public Tilemap Front { get => front; set => front = value; }
+    public Tilemap Collisions { get => collisions; set => collisions = value; }
+    public Tilemap Minimap { get => minimap; set => minimap = value; }
+    public Bounds RoomCollider { get => roomCollider; set => roomCollider = value; }
 
     private void Awake()
     {
+        //Debug.Log(room != null);
         boxCollider = GetComponent<BoxCollider2D>();
-        roomCollider = boxCollider.bounds;
+        RoomCollider = boxCollider.bounds;
         tileRenderers = GetComponentsInChildren<TilemapRenderer>();
+        
         if (!isEntrance)
         {
             foreach (var tileRenderer in tileRenderers)
@@ -55,20 +63,21 @@ public class DrawnRoom : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!isVisited && !isEntrance) 
+        if (!isVisited && !room.RoomNodeType.isEntrance) 
         {
             foreach (var tileRenderer in tileRenderers)
             {
                 StartCoroutine(Reveal(tileRenderer));
             }
-            isVisited = true;
+            
         }
         gameStates.CurRoom = room;
-        if (!room.RoomNodeType.isCorridor && !room.RoomNodeType.isEntrance)
+        if (!room.RoomNodeType.isCorridor && !room.RoomNodeType.isEntrance && !isVisited)
         {
             gameStates.EnteringRoom();
         }
-        
+        isVisited = true;
+
 
     }
 
@@ -87,8 +96,33 @@ public class DrawnRoom : MonoBehaviour
     {
         AddMemberVariablesToTilemap(roomObject);
         BlockRedundantDoors();
-        if(collisions != null)
-        collisions.gameObject.GetComponent<TilemapRenderer>().enabled = false;
+        if(Collisions != null)
+        Collisions.gameObject.GetComponent<TilemapRenderer>().enabled = false;
+        AddRoomObstacles();
+    }
+
+    private void AddRoomObstacles()
+    {
+        gridTilesPriorityWeigths = new int[room.RoomModel.rightTopPoint.x - room.RoomModel.leftBottomPoint.x + 1, room.RoomModel.rightTopPoint.y - room.RoomModel.leftBottomPoint.y + 1];
+        for (int i = 0; i < gridTilesPriorityWeigths.GetLength(0); i++)
+        {
+            for (int j = 0; j < gridTilesPriorityWeigths.GetLength(1); j++)
+            {
+                
+                gridTilesPriorityWeigths[i, j] = 50;
+                if (Collisions == null)
+                    return;
+                TileBase tile = Collisions.GetTile(new Vector3Int(i + room.RoomModel.leftBottomPoint.x, j + room.RoomModel.leftBottomPoint.y, 0));
+                if (tile == preferedTile)
+                    gridTilesPriorityWeigths[i, j] = 1;
+                foreach (TileBase t in collisionTileVariants)
+                {
+                    if (tile == t)
+                        gridTilesPriorityWeigths[i, j] = 0;    
+                }
+                
+            }
+        }
     }
 
     private void BlockRedundantDoors()
@@ -97,13 +131,13 @@ public class DrawnRoom : MonoBehaviour
         {
             if(!door.isConnected)
             {
-                BlockRedundantDoorsForTilemap(door, backgroundFloor);
-                BlockRedundantDoorsForTilemap(door, wall);
-                BlockRedundantDoorsForTilemap(door, decoration1);
-                BlockRedundantDoorsForTilemap(door, decoration2);
-                BlockRedundantDoorsForTilemap(door, front);
-                BlockRedundantDoorsForTilemap(door, collisions);
-                BlockRedundantDoorsForTilemap(door, minimap);
+                BlockRedundantDoorsForTilemap(door, BackgroundFloor);
+                BlockRedundantDoorsForTilemap(door, Wall);
+                BlockRedundantDoorsForTilemap(door, Decoration1);
+                BlockRedundantDoorsForTilemap(door, Decoration2);
+                BlockRedundantDoorsForTilemap(door, Front);
+                BlockRedundantDoorsForTilemap(door, Collisions);
+                BlockRedundantDoorsForTilemap(door, Minimap);
             }
         }
     }
@@ -162,19 +196,19 @@ public class DrawnRoom : MonoBehaviour
         foreach (Tilemap tilemap in tilemaps)
         {
             if(tilemap.gameObject.tag == "floor")
-                backgroundFloor = tilemap;
+                BackgroundFloor = tilemap;
             else if(tilemap.gameObject.tag == "wall")
-                wall = tilemap;
+                Wall = tilemap;
             else if(tilemap.gameObject.tag == "decoration1")
-                decoration1 = tilemap;
+                Decoration1 = tilemap;
             else if(tilemap.gameObject.tag == "decoration2")
-                decoration2 = tilemap;
+                Decoration2 = tilemap;
             else if(tilemap.gameObject.tag == "front")
-                front = tilemap;
+                Front = tilemap;
             else if(tilemap.gameObject.tag == "collisions")
-                collisions = tilemap;
+                Collisions = tilemap;
             else if(tilemap.gameObject.tag == "minimap")
-                minimap = tilemap;
+                Minimap = tilemap;
         }
     }
 }

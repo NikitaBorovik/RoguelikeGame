@@ -62,8 +62,8 @@ public class DungeonGenerator : MonoBehaviour
         foreach(KeyValuePair<string,Room> pair in roomDictionary)
         {
             Room room = pair.Value;
-            Vector3 positionOfTheRoom = new Vector3(room.RoomLowerBound.x - room.RoomModelLowerBound.x,
-                room.RoomLowerBound.y - room.RoomModelLowerBound.y, 0f);
+            Vector3 positionOfTheRoom = new Vector3(room.RoomLowerBound.x - room.RoomModel.leftBottomPoint.x,
+                room.RoomLowerBound.y - room.RoomModel.leftBottomPoint.y, 0f);
             GameObject roomGameObject = Instantiate(room.Prefab,positionOfTheRoom,Quaternion.identity,transform);
             DrawnRoom drawnRoom = roomGameObject.GetComponentInChildren<DrawnRoom>();
             drawnRoom.room = room;
@@ -216,9 +216,9 @@ public class DungeonGenerator : MonoBehaviour
         {
             adj = new Vector2Int(0, 1);
         }
-        Vector2Int doorOfParentRealPosition = parent.RoomLowerBound - parent.RoomModelLowerBound + doorOfParentToConnect.pos;
-        roomToPlace.RoomLowerBound = roomToPlace.RoomModelLowerBound + doorOfParentRealPosition + adj - roomDoorToConnect.pos;
-        roomToPlace.RoomUpperBound = roomToPlace.RoomLowerBound + roomToPlace.RoomModelUpperBound - roomToPlace.RoomModelLowerBound;
+        Vector2Int doorOfParentRealPosition = parent.RoomLowerBound - parent.RoomModel.leftBottomPoint + doorOfParentToConnect.pos;
+        roomToPlace.RoomLowerBound = roomToPlace.RoomModel.leftBottomPoint + doorOfParentRealPosition + adj - roomDoorToConnect.pos;
+        roomToPlace.RoomUpperBound = roomToPlace.RoomLowerBound + roomToPlace.RoomModel.rightTopPoint - roomToPlace.RoomModel.leftBottomPoint;
         
         bool overlapFound = false;
         foreach(KeyValuePair<string,Room> pair in roomDictionary)
@@ -362,9 +362,8 @@ public class DungeonGenerator : MonoBehaviour
 
     private Room GenerateRoomUsingModel(RoomModel roomModel, RoomNode roomNode)
     {
-        Room room = new Room(roomNode.id,roomModel.id,roomModel.prefab,roomModel.roomType,roomModel.leftBottomPoint,roomModel.rightTopPoint,roomModel.leftBottomPoint,roomModel.rightTopPoint,
-            roomModel.enemySpawns,roomModel.rewardSpawns,roomModel.teleporter,roomModel.playerSpawn,roomModel.enemies);
-        room.ChildrenRooms = CopyListOfStrings(roomNode.children);
+        Room room = new Room(roomNode.id, roomModel.id, roomModel.prefab, roomModel.roomType, roomModel.leftBottomPoint, roomModel.rightTopPoint, roomModel.leftBottomPoint, roomModel.rightTopPoint, roomModel);
+        room.ChildrenRooms = roomNode.children;
         room.Doors = CopyListOfDoors(roomModel.doors);
         if(roomNode.parentId == null)
         {
@@ -387,15 +386,15 @@ public class DungeonGenerator : MonoBehaviour
         return result;
     }
 
-    private List<string> CopyListOfStrings(List<string> toCopy)
-    {
-        List<string> result = new List<string>();
-        foreach(string str in toCopy)
-        {
-            result.Add(str);
-        }
-        return result;
-    }
+    //private List<string> CopyListOfStrings(List<string> toCopy)
+    //{
+    //    List<string> result = new List<string>();
+    //    foreach(string str in toCopy)
+    //    {
+    //        result.Add(str);
+    //    }
+    //    return result;
+    //}
     
 
     private RoomModel ChooseRandomModelForType(RoomNodeType roomType)

@@ -17,15 +17,10 @@ namespace App.World.Creatures.Enemies.States
 
         public override void Update()
         {
-            //if ((baseEnemy.Target.position - baseEnemy.transform.position).magnitude <= baseEnemy.EnemyData.attackRange)
-            //{
-            //   // stateMachine.ChangeState(baseEnemy.AttackState);
-            //}
-            //else
-            //{
-                baseEnemy.MyRigidbody.velocity = (baseEnemy.Target.position - baseEnemy.transform.position).normalized * baseEnemy.EnemyData.speed;
-                SetMoveAnimationParams(baseEnemy.MyRigidbody.velocity.x);
-           // }
+          
+            baseEnemy.MyRigidbody.velocity = (baseEnemy.Target.position - baseEnemy.transform.position).normalized * baseEnemy.EnemyData.speed;
+            SetMoveAnimationParams(baseEnemy.MyRigidbody.velocity.x);
+           
         }
         public override void Exit()
         {
@@ -34,16 +29,16 @@ namespace App.World.Creatures.Enemies.States
 
         private void SetMoveAnimationParams(float vx)
         {
-            //if (vx < 0)
-            //{
-            //    baseEnemy.Animator.SetBool("MovingRight", false);
-            //    baseEnemy.Animator.SetBool("MovingLeft", true);
-            //}
-            //else
-            //{
-            //    baseEnemy.Animator.SetBool("MovingRight", true);
-            //    baseEnemy.Animator.SetBool("MovingLeft", false);
-            //}
+            if (vx < 0)
+            {
+                baseEnemy.Animator.SetBool("MovingRight", false);
+                baseEnemy.Animator.SetBool("MovingLeft", true);
+            }
+            else
+            {
+                baseEnemy.Animator.SetBool("MovingRight", true);
+                baseEnemy.Animator.SetBool("MovingLeft", false);
+            }
         }
     }
 }

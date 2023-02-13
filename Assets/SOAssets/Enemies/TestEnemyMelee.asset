@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: TestEnemyMelee
   m_EditorClassIdentifier: 
   type: Melee
-  maxHealth: 100
+  maxHealth: 50
   dangerLevel: 1
-  speed: 10
+  speed: 5
   damage: 1
   timeBetweenAttacks: 1
   moneyDropChance: 1

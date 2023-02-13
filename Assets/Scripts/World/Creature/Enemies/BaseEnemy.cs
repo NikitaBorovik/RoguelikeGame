@@ -26,6 +26,8 @@ namespace App.World.Creatures.Enemies
         protected EnemyData enemyData;
         [SerializeField]
         protected List<Collider2D> myColliders;
+        [SerializeField]
+        private HealthStatus health;
 
         protected StateMachine stateMachine;
         protected EnemyBaseState attackState;
@@ -65,6 +67,8 @@ namespace App.World.Creatures.Enemies
         {
             this.target = target;
             transform.position = position;
+            health.MaxHealth = enemyData.maxHealth * hpMultiplier;
+            health.HealToMax();
             initialised = true;
             if (stateMachine.CurrentState == null)
             {

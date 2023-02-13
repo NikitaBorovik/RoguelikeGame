@@ -14628,19 +14628,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24d85ff771301a94e9972b06f88939ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 0}
-  backgroundFloor: {fileID: 0}
-  decoration1: {fileID: 0}
-  decoration2: {fileID: 0}
-  wall: {fileID: 0}
-  front: {fileID: 0}
-  collisions: {fileID: 0}
-  minimap: {fileID: 0}
-  roomCollider:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  renderer: {fileID: 0}
-  roomMaterial: {fileID: 0}
+  collisionTileVariants:
+  - {fileID: 11400000, guid: 6d5a7058ab5cc734a98c9f2f42e87684, type: 2}
+  - {fileID: 11400000, guid: c021ec8fc90a38444871af13b7b3c0f8, type: 2}
+  preferedTile: {fileID: 11400000, guid: 552f8abafc81fdb41a626d3237f5dbef, type: 2}
   isEntrance: 0
 --- !u!1 &3980424810088285168
 GameObject:

@@ -144,12 +144,46 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3110742354979053885, guid: 74ce0ff5f95aac346ba52db60527c5f6, type: 3}
   m_PrefabInstance: {fileID: 9063624368346397269}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 437946265}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f3f500c61042004991ca5d663272a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &437946265 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3254167122489200323, guid: 74ce0ff5f95aac346ba52db60527c5f6, type: 3}
+  m_PrefabInstance: {fileID: 9063624368346397269}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &437946267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437946265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fac3d836716ca940800ffe085f767b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &437946268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437946265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1898a72b61e2f043982130456e6005f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathPoint: {fileID: 1849922787961452726, guid: 5025e59f4c676ef41b5553f3ca277b13, type: 3}
+  startPos: {x: 0, y: 0, z: 0}
+  endPos: {x: 0, y: 0, z: 0}
+  grid: {fileID: 0}
+  aStarPathfinding: {fileID: 437946267}
 --- !u!114 &668836640 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 813899286619397269, guid: 74ce0ff5f95aac346ba52db60527c5f6, type: 3}
@@ -522,6 +556,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Systems
       objectReference: {fileID: 0}
+    - target: {fileID: 3110742354979053885, guid: 74ce0ff5f95aac346ba52db60527c5f6, type: 3}
+      propertyPath: aStarTest
+      value: 
+      objectReference: {fileID: 437946268}
     - target: {fileID: 3110742354979053885, guid: 74ce0ff5f95aac346ba52db60527c5f6, type: 3}
       propertyPath: dungeonBuilder
       value: 

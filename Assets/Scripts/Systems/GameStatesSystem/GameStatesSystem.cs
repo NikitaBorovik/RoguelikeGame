@@ -19,8 +19,10 @@ namespace App.Systems.GameStates
         [SerializeField]
         private int curLevel = 0;
         private Room curRoom;
+        [SerializeField]
+        public AStarTest aStarTest;
 
-        public Room CurRoom { get => curRoom; set => curRoom = value; }
+        public Room CurRoom { get => curRoom; set { curRoom = value; } }
 
         public void Init(DungeonGenerator dungeonGenerator,SpawningSystem spawningSystem)
         {
@@ -38,8 +40,15 @@ namespace App.Systems.GameStates
         public void EnteringRoom()
         {
             spawningSystem.CurrentRoom = curRoom;
+            if(aStarTest == null)
+            {
+                Debug.Log("Null");
+            }
+            aStarTest.room = curRoom;//
+            aStarTest.grid = curRoom.DrawnRoom.Grid;//
             gameStateMachine.ChangeState(enteringRoomState);
         }
+        
     }
 }
 
