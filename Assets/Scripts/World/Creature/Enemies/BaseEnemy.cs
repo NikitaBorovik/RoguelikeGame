@@ -17,7 +17,11 @@ namespace App.World.Creatures.Enemies
         private DieState dieState;
         private Animator animator;
         private SpriteRenderer spriteRenderer;
-
+        
+        
+        private Room currentRoom;
+        [SerializeField]
+        private AStarPathfinding astarPathfinding;
         [SerializeField]
         private Rigidbody2D myRigidbody;
         [SerializeField]
@@ -34,6 +38,7 @@ namespace App.World.Creatures.Enemies
         protected ObjectPool objectPool;
 
         public Transform Target => target;
+        public AStarPathfinding Pathfinding => astarPathfinding;
         public Rigidbody2D MyRigidbody => myRigidbody;
         public EnemyData EnemyData => enemyData;
         public FollowState FollowState => followState;
@@ -41,9 +46,10 @@ namespace App.World.Creatures.Enemies
         public Animator Animator => animator;
         public List<Collider2D> MyColliders => myColliders;
         public SpriteRenderer SpriteRenderer => spriteRenderer;
-        public AudioSource AudioSource => audioSource;
-
+        public AudioSource AudioSource => audioSource; 
+        public Room CurrentRoom => currentRoom;
         public virtual string PoolObjectType => enemyData.type;
+        
 
         public virtual void Awake()
         {
@@ -63,10 +69,11 @@ namespace App.World.Creatures.Enemies
                 stateMachine.CurrentState.Update();
         }
 
-        public virtual void Init(Vector3 position, Transform target, float hpMultiplier)
+        public virtual void Init(Vector3 position, Transform target, float hpMultiplier, Room currentRoom)
         {
             this.target = target;
             transform.position = position;
+            this.currentRoom = currentRoom;
             health.MaxHealth = enemyData.maxHealth * hpMultiplier;
             health.HealToMax();
             initialised = true;

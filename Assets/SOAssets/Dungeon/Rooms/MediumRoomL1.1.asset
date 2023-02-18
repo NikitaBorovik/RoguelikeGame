@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795537cef4d4503448398ee0f4ac4567, type: 3}
   m_Name: MediumRoomL1.1
   m_EditorClassIdentifier: 
-  id: 4f48e1bcc573ccc4496a1ec5a23995e2
+  id: ac06a88b9ea0559469931b36fcebe4dd
   prefab: {fileID: 3702022006039285852, guid: 6a9caaa84e572b5499b0fe60657ba0da, type: 3}
   lastPrefab: {fileID: 3702022006039285852, guid: 6a9caaa84e572b5499b0fe60657ba0da, type: 3}
   roomType: {fileID: 11400000, guid: 5c440ad00f7d77e428cafbe9bda09f87, type: 2}
@@ -62,6 +62,7 @@ MonoBehaviour:
   - {x: 3, y: 4}
   playerSpawn: {x: 0, y: 0}
   teleporter: {x: 3, y: 19}
-  enemiesWave1: []
+  enemiesWave1:
+  - {fileID: 2236608071258931606, guid: c8ea459dc7a136a49889b7e8f9f88d1e, type: 3}
   enemiesWave2: []
   enemiesWave3: []

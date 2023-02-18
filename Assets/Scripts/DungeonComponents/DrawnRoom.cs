@@ -26,6 +26,7 @@ public class DrawnRoom : MonoBehaviour
     [SerializeField]
     private Tile preferedTile;
 
+
     TilemapRenderer[] tileRenderers;
     private bool isVisited = false;
     private GameStatesSystem gameStates;
@@ -63,6 +64,7 @@ public class DrawnRoom : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        room.Notifieble.NotifyOnRoomChanged(room);
         if (!isVisited && !room.RoomNodeType.isEntrance) 
         {
             foreach (var tileRenderer in tileRenderers)
@@ -71,7 +73,8 @@ public class DrawnRoom : MonoBehaviour
             }
             
         }
-        gameStates.CurRoom = room;
+        //gameStates.CurRoom = room;
+        
         if (!room.RoomNodeType.isCorridor && !room.RoomNodeType.isEntrance && !isVisited)
         {
             gameStates.EnteringRoom();

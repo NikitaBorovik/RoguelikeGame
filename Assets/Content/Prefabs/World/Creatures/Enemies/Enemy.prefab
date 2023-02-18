@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4711546995509669812}
   - component: {fileID: 1472022297482804819}
   - component: {fileID: 6358543299533635802}
+  - component: {fileID: -6234363696011733659}
   m_Layer: 14
   m_Name: Enemy
   m_TagString: Untagged
@@ -101,6 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc9cd6fe715ec374cbb8eea6d4b2bd38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  astarPathfinding: {fileID: -6234363696011733659}
   myRigidbody: {fileID: 6888057871348744322}
   audioSource: {fileID: 0}
   enemyData: {fileID: 11400000, guid: f20990e1e9203794bb4419bef687d58f, type: 2}
@@ -186,3 +188,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2479887, y: 1.8265355}
   m_EdgeRadius: 0
+--- !u!114 &-6234363696011733659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8004361702979961554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fac3d836716ca940800ffe085f767b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

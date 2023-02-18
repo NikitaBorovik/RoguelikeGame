@@ -14629,7 +14629,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisionTileVariants:
-  - {fileID: 11400000, guid: 6d5a7058ab5cc734a98c9f2f42e87684, type: 2}
   - {fileID: 11400000, guid: c021ec8fc90a38444871af13b7b3c0f8, type: 2}
   preferedTile: {fileID: 11400000, guid: 552f8abafc81fdb41a626d3237f5dbef, type: 2}
   isEntrance: 0

@@ -17,10 +17,11 @@ public class Room
     private List<Door> doors;
     private bool isPlaced = false;
     private DrawnRoom drawnRoom;
-    private bool isCleared;
-    private bool isVisible;
+    private bool isCleared = false;
+    private bool isVisible = false;
     private bool isPrev;
     private List<BaseEnemy> enemies;
+    private INotifyRoomChanged notifieble;
 
     public Room()
     {
@@ -29,7 +30,7 @@ public class Room
         Enemies = new List<BaseEnemy>();
     }
     public Room(string roomId, string roomModelId, GameObject prefab, RoomNodeType roomNodeType, Vector2Int roomLowerBound, Vector2Int roomUpperBound,
-        Vector2Int roomModelLowerBound, Vector2Int roomModelUpperBound, RoomModel roomModel)
+        Vector2Int roomModelLowerBound, Vector2Int roomModelUpperBound, RoomModel roomModel, INotifyRoomChanged notifieble)
     {
         this.RoomId = roomId;
         this.RoomModelId = roomModelId;
@@ -38,6 +39,7 @@ public class Room
         this.RoomLowerBound = roomLowerBound;
         this.RoomUpperBound = roomUpperBound;
         this.RoomModel = roomModel;
+        this.Notifieble = notifieble;
     }
 
     public DrawnRoom DrawnRoom { get => drawnRoom; set => drawnRoom = value; }
@@ -54,4 +56,5 @@ public class Room
     public bool IsPlaced { get => isPlaced; set => isPlaced = value; }
     public bool IsPrev { get => isPrev; set => isPrev = value; }
     public RoomModel RoomModel { get => roomModel; set => roomModel = value; }
+    public INotifyRoomChanged Notifieble { get => notifieble; set => notifieble = value; }
 }

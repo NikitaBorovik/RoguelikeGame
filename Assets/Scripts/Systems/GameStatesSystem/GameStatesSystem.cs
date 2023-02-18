@@ -7,7 +7,7 @@ using UnityEngine.Rendering.Universal;
 
 namespace App.Systems.GameStates
 {
-    public class GameStatesSystem : MonoBehaviour
+    public class GameStatesSystem : MonoBehaviour, INotifyRoomChanged
     {
         private StateMachine gameStateMachine;
         private DungeonGenerator dungeonBuilder;
@@ -27,6 +27,7 @@ namespace App.Systems.GameStates
         public void Init(DungeonGenerator dungeonGenerator,SpawningSystem spawningSystem)
         {
             dungeonBuilder = dungeonGenerator;
+            dungeonBuilder.NotifyRoomChanged = this;
             this.spawningSystem = spawningSystem;
             gameStateMachine = new StateMachine();
             dungeonBuildingState = new DungeonBuildingState(this, dungeonBuilder, levels[curLevel]);
@@ -39,7 +40,7 @@ namespace App.Systems.GameStates
         }
         public void EnteringRoom()
         {
-            spawningSystem.CurrentRoom = curRoom;
+           // spawningSystem.CurrentRoom = curRoom;
             if(aStarTest == null)
             {
                 Debug.Log("Null");
@@ -48,7 +49,13 @@ namespace App.Systems.GameStates
             aStarTest.grid = curRoom.DrawnRoom.Grid;//
             gameStateMachine.ChangeState(enteringRoomState);
         }
-        
+
+        public void NotifyOnRoomChanged(Room room)
+        {
+            Debug.Log(room);
+            curRoom = room;
+            spawningSystem.CurrentRoom = room;
+        }
     }
 }
 

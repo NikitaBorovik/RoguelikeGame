@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795537cef4d4503448398ee0f4ac4567, type: 3}
   m_Name: SmallRoomL1.4
   m_EditorClassIdentifier: 
-  id: 95d0065ae4a1ff2488c116bdb9dd55c3
+  id: 0dd82db8c0274ce41bdddcc64f8c4df0
   prefab: {fileID: 3702022006039285852, guid: a00ec18f6bcee8b4cba051707c76d3fc, type: 3}
   lastPrefab: {fileID: 3702022006039285852, guid: a00ec18f6bcee8b4cba051707c76d3fc, type: 3}
   roomType: {fileID: 11400000, guid: 9a1338cd3b7dfc848b1af6af7030d5f8, type: 2}
@@ -63,6 +63,7 @@ MonoBehaviour:
   - {x: 10, y: 3}
   playerSpawn: {x: 0, y: 0}
   teleporter: {x: 0, y: 0}
-  enemiesWave1: []
+  enemiesWave1:
+  - {fileID: 2236608071258931606, guid: c8ea459dc7a136a49889b7e8f9f88d1e, type: 3}
   enemiesWave2: []
   enemiesWave3: []

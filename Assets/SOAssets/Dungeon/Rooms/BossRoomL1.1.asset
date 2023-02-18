@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795537cef4d4503448398ee0f4ac4567, type: 3}
   m_Name: BossRoomL1.1
   m_EditorClassIdentifier: 
-  id: e45e06a5d2e85d44e878c93d24462c1d
+  id: 56a9bd2fd41247b418ab0a2204a4a006
   prefab: {fileID: 3702022006039285852, guid: 6995558e1ff3ba042849fba9bb5f8fe2, type: 3}
   lastPrefab: {fileID: 3702022006039285852, guid: 6995558e1ff3ba042849fba9bb5f8fe2, type: 3}
   roomType: {fileID: 11400000, guid: f9f72f21fccfa184c95b5053dc6c19a5, type: 2}

@@ -1,4 +1,5 @@
 using App.World.Creatures.Enemies;
+using App.World.Creatures.PlayerScripts.Components;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,12 +10,14 @@ namespace App.Systems.Spawning
     {
         private ObjectPool objectPool;
         private Room currentRoom;
+        private Player player;
 
         public Room CurrentRoom { get => currentRoom; set => currentRoom = value; }
 
-        public void Init(ObjectPool objectPool)
+        public void Init(ObjectPool objectPool, Player player)
         {
             this.objectPool = objectPool;
+            this.player = player;
         }
         
         public void Spawn()
@@ -39,7 +42,7 @@ namespace App.Systems.Spawning
                 return;
             }
             Debug.Log(pos);
-            baseEnemy.Init(pos, baseEnemy.transform, 1);
+            baseEnemy.Init(pos, player.transform, 1, currentRoom);
         }
     }
 

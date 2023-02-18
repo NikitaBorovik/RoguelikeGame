@@ -15,9 +15,9 @@ namespace Assets.Scripts.World.Creature.Enemies
             //Init(transform.position,transform,1);//TODO remove
         }
 
-        public override void Init(Vector3 position, Transform target, float hpMultiplier)
+        public override void Init(Vector3 position, Transform target, float hpMultiplier,Room currentRoom)
         {
-            base.Init(position,FindObjectOfType<Player>().transform, hpMultiplier);
+            base.Init(position,FindObjectOfType<Player>().transform, hpMultiplier,currentRoom);
           
         }
     }

@@ -12,6 +12,8 @@ public class DungeonGenerator : MonoBehaviour
     private RoomNodeTypes roomNodeTypes;
     private bool buildSuccessfull;
     private DungeonStructureGraph dungeonStructureGraph;
+    private INotifyRoomChanged notifyRoomChanged;
+    public INotifyRoomChanged NotifyRoomChanged { get => notifyRoomChanged; set => notifyRoomChanged = value; }
 
     private void Awake()
     {
@@ -362,7 +364,7 @@ public class DungeonGenerator : MonoBehaviour
 
     private Room GenerateRoomUsingModel(RoomModel roomModel, RoomNode roomNode)
     {
-        Room room = new Room(roomNode.id, roomModel.id, roomModel.prefab, roomModel.roomType, roomModel.leftBottomPoint, roomModel.rightTopPoint, roomModel.leftBottomPoint, roomModel.rightTopPoint, roomModel);
+        Room room = new Room(roomNode.id, roomModel.id, roomModel.prefab, roomModel.roomType, roomModel.leftBottomPoint, roomModel.rightTopPoint, roomModel.leftBottomPoint, roomModel.rightTopPoint, roomModel, NotifyRoomChanged);
         room.ChildrenRooms = roomNode.children;
         room.Doors = CopyListOfDoors(roomModel.doors);
         if(roomNode.parentId == null)
@@ -385,16 +387,6 @@ public class DungeonGenerator : MonoBehaviour
         }
         return result;
     }
-
-    //private List<string> CopyListOfStrings(List<string> toCopy)
-    //{
-    //    List<string> result = new List<string>();
-    //    foreach(string str in toCopy)
-    //    {
-    //        result.Add(str);
-    //    }
-    //    return result;
-    //}
     
 
     private RoomModel ChooseRandomModelForType(RoomNodeType roomType)
