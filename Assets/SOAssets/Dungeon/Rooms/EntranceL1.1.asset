@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795537cef4d4503448398ee0f4ac4567, type: 3}
   m_Name: EntranceL1.1
   m_EditorClassIdentifier: 
-  id: f99fc523b963d214ab1590b1bf1714cb
+  id: c20df62787ad61840a32b3af99f781fd
   prefab: {fileID: 3702022006039285852, guid: 659186690b7274b40a0473a7b7db201c, type: 3}
   lastPrefab: {fileID: 3702022006039285852, guid: 659186690b7274b40a0473a7b7db201c, type: 3}
   roomType: {fileID: 11400000, guid: af681d0591304294fb08fe6be59ab9db, type: 2}
@@ -21,7 +21,7 @@ MonoBehaviour:
   doors:
   - pos: {x: -17, y: 1}
     orientation: 2
-    prefab: {fileID: 0}
+    prefab: {fileID: 3815980458193187534, guid: b9cfaab46fb0e6f4d9a9c4df2100064e, type: 3}
     wallToBuildPosition: {x: -17, y: 7}
     wallBuildingWidthInTiles: 6
     wallBuildingHeigthInTiles: 8
@@ -29,7 +29,7 @@ MonoBehaviour:
     isAvailable: 0
   - pos: {x: -2, y: 15}
     orientation: 0
-    prefab: {fileID: 0}
+    prefab: {fileID: 8059238935604172366, guid: 9a5d384fabbe67b4b97fb3ab13468638, type: 3}
     wallToBuildPosition: {x: -5, y: 15}
     wallBuildingWidthInTiles: 5
     wallBuildingHeigthInTiles: 7
@@ -37,7 +37,7 @@ MonoBehaviour:
     isAvailable: 0
   - pos: {x: 13, y: 1}
     orientation: 3
-    prefab: {fileID: 0}
+    prefab: {fileID: 5836893268164278993, guid: 1b625967329449d4795997708fc686e0, type: 3}
     wallToBuildPosition: {x: 8, y: 7}
     wallBuildingWidthInTiles: 6
     wallBuildingHeigthInTiles: 8
@@ -45,7 +45,7 @@ MonoBehaviour:
     isAvailable: 0
   - pos: {x: -2, y: -12}
     orientation: 1
-    prefab: {fileID: 0}
+    prefab: {fileID: 860060853846549260, guid: 032d5122cb37954458e14486eda3aaff, type: 3}
     wallToBuildPosition: {x: -5, y: -7}
     wallBuildingWidthInTiles: 5
     wallBuildingHeigthInTiles: 6

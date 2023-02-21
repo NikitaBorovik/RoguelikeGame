@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795537cef4d4503448398ee0f4ac4567, type: 3}
   m_Name: BossRoomL1.1
   m_EditorClassIdentifier: 
-  id: 56a9bd2fd41247b418ab0a2204a4a006
+  id: 5bc6707fcbea8f04e9b1471d40a75fb0
   prefab: {fileID: 3702022006039285852, guid: 6995558e1ff3ba042849fba9bb5f8fe2, type: 3}
   lastPrefab: {fileID: 3702022006039285852, guid: 6995558e1ff3ba042849fba9bb5f8fe2, type: 3}
   roomType: {fileID: 11400000, guid: f9f72f21fccfa184c95b5053dc6c19a5, type: 2}
@@ -21,7 +21,7 @@ MonoBehaviour:
   doors:
   - pos: {x: -19, y: 13}
     orientation: 2
-    prefab: {fileID: 0}
+    prefab: {fileID: 3815980458193187534, guid: b9cfaab46fb0e6f4d9a9c4df2100064e, type: 3}
     wallToBuildPosition: {x: -19, y: 19}
     wallBuildingWidthInTiles: 6
     wallBuildingHeigthInTiles: 9
@@ -29,7 +29,7 @@ MonoBehaviour:
     isAvailable: 0
   - pos: {x: 7, y: 31}
     orientation: 0
-    prefab: {fileID: 0}
+    prefab: {fileID: 8059238935604172366, guid: 9a5d384fabbe67b4b97fb3ab13468638, type: 3}
     wallToBuildPosition: {x: 4, y: 31}
     wallBuildingWidthInTiles: 5
     wallBuildingHeigthInTiles: 7
@@ -37,15 +37,15 @@ MonoBehaviour:
     isAvailable: 0
   - pos: {x: 33, y: 13}
     orientation: 3
-    prefab: {fileID: 0}
+    prefab: {fileID: 5836893268164278993, guid: 1b625967329449d4795997708fc686e0, type: 3}
     wallToBuildPosition: {x: 28, y: 19}
     wallBuildingWidthInTiles: 6
     wallBuildingHeigthInTiles: 8
     isConnected: 0
     isAvailable: 0
   - pos: {x: 7, y: -6}
-    orientation: 0
-    prefab: {fileID: 0}
+    orientation: 1
+    prefab: {fileID: 860060853846549260, guid: 032d5122cb37954458e14486eda3aaff, type: 3}
     wallToBuildPosition: {x: 4, y: -1}
     wallBuildingWidthInTiles: 5
     wallBuildingHeigthInTiles: 6

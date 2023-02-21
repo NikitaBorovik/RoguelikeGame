@@ -25,6 +25,7 @@ public class DrawnRoom : MonoBehaviour
     private Tile[] collisionTileVariants;
     [SerializeField]
     private Tile preferedTile;
+    private List<InstanciatedDoor> drawnDoors;
 
 
     TilemapRenderer[] tileRenderers;
@@ -57,6 +58,7 @@ public class DrawnRoom : MonoBehaviour
             {
                 tileRenderer.material.SetFloat("_AlphaValue", 0f);
             }
+            
         }
         gameStates = FindObjectOfType<GameStatesSystem>();
 
@@ -91,6 +93,13 @@ public class DrawnRoom : MonoBehaviour
         {
             alpha += 0.1f;
             tileRenderer.material.SetFloat("_AlphaValue", alpha);
+            foreach (InstanciatedDoor door in drawnDoors)
+            {
+                foreach (SpriteRenderer renderer in door.GetComponentsInChildren<SpriteRenderer>())
+                {
+                    renderer.material.SetFloat("_AlphaValue", alpha);
+                }
+            }
             yield return new WaitForSeconds(0.02f);
         }
     }
@@ -102,6 +111,41 @@ public class DrawnRoom : MonoBehaviour
         if(Collisions != null)
         Collisions.gameObject.GetComponent<TilemapRenderer>().enabled = false;
         AddRoomObstacles();
+        AddDoors();
+    }
+
+    private void AddDoors()
+    {
+        drawnDoors = new List<InstanciatedDoor>();
+        foreach (Door door in room.Doors)
+        {
+            if(door.prefab != null && door.isConnected)
+            {
+                // GameObject.Instantiate(door.prefab, Grid.CellToWorld(new Vector3Int(door.pos.x, door.pos.y, 0)) + new Vector3(Grid.cellSize.x / 2, Grid.cellSize.y / 2, 0), Quaternion.identity);
+                if (door.orientation == DoorOrientation.top || door.orientation == DoorOrientation.bottom)
+                {
+                    Debug.Log(door.orientation);
+                    drawnDoors.Add(GameObject.Instantiate(door.prefab, Grid.CellToWorld(new Vector3Int(door.pos.x, door.pos.y, 0)) + new Vector3(Grid.cellSize.x / 2, Grid.cellSize.y / 2, 0), Quaternion.identity).GetComponent<InstanciatedDoor>());
+                }
+                    
+                if (door.orientation == DoorOrientation.left || door.orientation == DoorOrientation.right)
+                {
+                    Debug.Log(door.orientation);
+                    drawnDoors.Add(GameObject.Instantiate(door.prefab, Grid.CellToWorld(new Vector3Int(door.pos.x, door.pos.y, 0)) + new Vector3(Grid.cellSize.x / 2, Grid.cellSize.y * 3 / 2, 0), Quaternion.identity).GetComponent<InstanciatedDoor>());
+                }
+                   
+
+            }
+        }
+        foreach (InstanciatedDoor door in drawnDoors)
+        {
+            door.SetOpenAnimation();
+            
+            foreach (SpriteRenderer renderer in door.GetComponentsInChildren<SpriteRenderer>())
+            {
+                renderer.material.SetFloat("_AlphaValue", 0f);
+            }
+        }
     }
 
     private void AddRoomObstacles()
