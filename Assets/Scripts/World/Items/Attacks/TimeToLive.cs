@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace App.World.Items.Staffs
+namespace App.World.Items.Attacks
 {
     public class TimeToLive : MonoBehaviour
     {

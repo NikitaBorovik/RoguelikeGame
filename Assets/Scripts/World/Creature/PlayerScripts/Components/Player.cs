@@ -1,4 +1,5 @@
 using App.World.Creatures.PlayerScripts.Events;
+using App.World.Items.Attacks;
 using App.World.Items.Staffs;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,12 +34,8 @@ namespace App.World.Creatures.PlayerScripts.Components
         [SerializeField]
         private Transform shootPosition;
         [SerializeField]
-        private Transform weaponAnchor;
-        [SerializeField]
-        private GameObject curWeaponObj;
-        private BaseStaff staff;
-        [SerializeField]
-        private Transform weaponPoint;
+        private Projectile projectile;
+
         #endregion
 
         #region Events
@@ -50,6 +47,8 @@ namespace App.World.Creatures.PlayerScripts.Components
         private MovementEvent movementEvent;
         [SerializeField]
         private DashEvent dashEvent;
+        [SerializeField]
+        private ShootEvent shootEvent;
         #endregion
 
         #region Sounds
@@ -70,17 +69,15 @@ namespace App.World.Creatures.PlayerScripts.Components
         public Transform ShootPosition { get => shootPosition; set => shootPosition = value; }
         public Animator PAnimator { get => pAnimator; }
         public Transform PlayerTransform { get => playerTransform; }
-        public Transform WeaponAnchor { get => weaponAnchor; }
         public AimEvent AimEvent { get => aimEvent; }
         public StandEvent StandEvent { get => standEvent; }
         public MovementEvent MovementEvent { get => movementEvent; }
         public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
-        public GameObject CurWeaponObj { get => curWeaponObj; set => curWeaponObj = value; }
-        public Transform WeaponPoint { get => weaponPoint; set => weaponPoint = value; }
         public float DashDistance { get => dashDistance; set => dashDistance = value; }
         public float DashTime { get => dashTime; set => dashTime = value; }
         public DashEvent DashEvent { get => dashEvent; set => dashEvent = value; }
-        public BaseStaff Staff { get => staff; set => staff = value; }
+        public ShootEvent ShootEvent { get => shootEvent; set => shootEvent = value; }
+        public Projectile Projectile { get => projectile; set => projectile = value; }
 
         #endregion
 
@@ -93,7 +90,7 @@ namespace App.World.Creatures.PlayerScripts.Components
             playerTransform = GetComponent<Transform>();
             pAnimator = GetComponent<Animator>();
             audioSource = GetComponent<AudioSource>();
-            Staff = CurWeaponObj.GetComponent<BaseStaff>();
+            //Staff = CurWeaponObj.GetComponent<BaseStaff>();
             movementSpeed = 8;
             isDead = false;
         }

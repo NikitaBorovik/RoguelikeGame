@@ -37,6 +37,7 @@ public class Dash : MonoBehaviour
     }
     private void OnEntityDash(DashEvent ev, DashEventArgs args)
     {
+        Debug.Log("Dash");
         MakeDash(rb, args.direction, args.dashDistance, args.dashTime);
     }
     private void MakeDash(Rigidbody2D body, Vector2 direction, float distance, float time)

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4338783571015435671}
   - component: {fileID: 4994457368346505146}
   - component: {fileID: 3834102721473874977}
+  - component: {fileID: 5227268750582097472}
   m_Layer: 13
   m_Name: Fireball
   m_TagString: Untagged
@@ -101,6 +102,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolObjectType: Fireball
+  animator: {fileID: 5227268750582097472}
+  rb: {fileID: 3834102721473874977}
+  circleCollider: {fileID: 4338783571015435671}
 --- !u!58 &4338783571015435671
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -151,3 +155,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &5227268750582097472
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4619419389253851097}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2b96d59ac5190db4196b1dc476b0436e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

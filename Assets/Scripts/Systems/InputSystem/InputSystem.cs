@@ -35,14 +35,14 @@ namespace App.Systems.Input
         private float GetDirectionAngle()
         {
             Vector3 lookDirection;
-            if ((GetMousePositionInWorld() - player.WeaponAnchor.position).magnitude < (player.ShootPosition.position - player.WeaponAnchor.position).magnitude * 2.2)
-            {
-                lookDirection = GetMousePositionInWorld() - player.WeaponAnchor.position;
-            }
-            else
-            {
+            //if ((GetMousePositionInWorld() - player.WeaponAnchor.position).magnitude < (player.ShootPosition.position - player.WeaponAnchor.position).magnitude * 2.2)
+            //{
+            //    lookDirection = GetMousePositionInWorld() - player.WeaponAnchor.position;
+            //}
+            //else
+            //{
                 lookDirection = GetMousePositionInWorld() - player.ShootPosition.position;
-            }
+            //}
             float rads = Mathf.Atan2(lookDirection.y, lookDirection.x);
             float direction = rads * Mathf.Rad2Deg;
             return direction;
@@ -84,12 +84,9 @@ namespace App.Systems.Input
         {
             if (UnityEngine.Input.GetMouseButton(0))
             {
-                player.Staff.WeakShootEvent.CallWeakShootEvent();
+                player.ShootEvent.CallShootEvent();
             }
-            if (UnityEngine.Input.GetMouseButton(1))
-            {
-                player.Staff.StrongShootEvent.CallStrongShootEvent();
-            }
+            
         }
     }
 }

@@ -26,51 +26,51 @@ namespace App.World.Items.Staffs
 
         public override void ShootWeak()
         {
-            if (timeFromCoolDown > coolDown)
-            {
-                Projectile projectile = weakProjectilePrefab.GetComponent<Projectile>();
-                if (projectile == null)
-                {
-                    Debug.Log("Trying to shoot bullet that doesn't contain Bullet script");
-                    return;
-                }
-                for (int i = 0; i < weakProjectileCount; i++)
-                {
-                    float spread = Random.Range(-weakProjectileSpread, weakProjectileSpread);
-                    Quaternion rotation = Quaternion.Euler(ShootPosition.eulerAngles.x, ShootPosition.eulerAngles.y, ShootPosition.eulerAngles.z + spread);
-                    GameObject bullet = objectPool.GetObjectFromPool(projectile.PoolObjectType, weakProjectilePrefab, ShootPosition.position).GetGameObject();
-                    bullet.transform.rotation = rotation;
-                    bullet.transform.position = ShootPosition.position;
-                    bullet.GetComponent<Projectile>().Init(weakProjectileDamage, weakPearcingCount);
-                    bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.right * weakProjectileFlySpeed;
-                }
-                //audioSource.PlayOneShot(shootSound);
-                timeFromCoolDown = 0.0f;
-            }
+            //if (timeFromCoolDown > coolDown)
+            //{
+            //    Projectile projectile = weakProjectilePrefab.GetComponent<Projectile>();
+            //    if (projectile == null)
+            //    {
+            //        Debug.Log("Trying to shoot bullet that doesn't contain Bullet script");
+            //        return;
+            //    }
+            //    for (int i = 0; i < weakProjectileCount; i++)
+            //    {
+            //        float spread = Random.Range(-weakProjectileSpread, weakProjectileSpread);
+            //        Quaternion rotation = Quaternion.Euler(ShootPosition.eulerAngles.x, ShootPosition.eulerAngles.y, ShootPosition.eulerAngles.z + spread);
+            //        GameObject bullet = objectPool.GetObjectFromPool(projectile.PoolObjectType, weakProjectilePrefab, ShootPosition.position).GetGameObject();
+            //        bullet.transform.rotation = rotation;
+            //        bullet.transform.position = ShootPosition.position;
+            //        bullet.GetComponent<Projectile>().Init(weakProjectileDamage, weakPearcingCount);
+            //        bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.right * weakProjectileFlySpeed;
+            //    }
+            //    //audioSource.PlayOneShot(shootSound);
+            //    timeFromCoolDown = 0.0f;
+            //}
         }
         public override void ShootStrong()
         {
-            if (timeFromCoolDown > coolDown)
-            {
-                Projectile projectile = strongProjectilePrefab.GetComponent<Projectile>();
-                if (projectile == null)
-                {
-                    Debug.Log("Trying to shoot bullet that doesn't contain Bullet script");
-                    return;
-                }
-                for (int i = 0; i < strongProjectileCount; i++)
-                {
-                    float spread = Random.Range(-strongProjectileSpread, strongProjectileSpread);
-                    Quaternion rotation = Quaternion.Euler(ShootPosition.eulerAngles.x, ShootPosition.eulerAngles.y, ShootPosition.eulerAngles.z + spread);
-                    GameObject bullet = objectPool.GetObjectFromPool(projectile.PoolObjectType, strongProjectilePrefab, ShootPosition.position).GetGameObject();
-                    bullet.transform.rotation = rotation;
-                    bullet.transform.position = ShootPosition.position;
-                    bullet.GetComponent<Projectile>().Init(strongProjectileDamage, strongPearcingCount);
-                    bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.right * strongProjectileFlySpeed;
-                }
-                //audioSource.PlayOneShot(shootSound);
-                timeFromCoolDown = 0.0f;
-            }
+            //if (timeFromCoolDown > coolDown)
+            //{
+            //    Projectile projectile = strongProjectilePrefab.GetComponent<Projectile>();
+            //    if (projectile == null)
+            //    {
+            //        Debug.Log("Trying to shoot bullet that doesn't contain Bullet script");
+            //        return;
+            //    }
+            //    for (int i = 0; i < strongProjectileCount; i++)
+            //    {
+            //        float spread = Random.Range(-strongProjectileSpread, strongProjectileSpread);
+            //        Quaternion rotation = Quaternion.Euler(ShootPosition.eulerAngles.x, ShootPosition.eulerAngles.y, ShootPosition.eulerAngles.z + spread);
+            //        GameObject bullet = objectPool.GetObjectFromPool(projectile.PoolObjectType, strongProjectilePrefab, ShootPosition.position).GetGameObject();
+            //        bullet.transform.rotation = rotation;
+            //        bullet.transform.position = ShootPosition.position;
+            //        bullet.GetComponent<Projectile>().Init(strongProjectileDamage, strongPearcingCount);
+            //        bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.right * strongProjectileFlySpeed;
+            //    }
+            //    //audioSource.PlayOneShot(shootSound);
+            //    timeFromCoolDown = 0.0f;
+            //}
         }
         private void Update()
         {

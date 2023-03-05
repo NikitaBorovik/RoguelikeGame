@@ -124,13 +124,11 @@ public class DrawnRoom : MonoBehaviour
                 // GameObject.Instantiate(door.prefab, Grid.CellToWorld(new Vector3Int(door.pos.x, door.pos.y, 0)) + new Vector3(Grid.cellSize.x / 2, Grid.cellSize.y / 2, 0), Quaternion.identity);
                 if (door.orientation == DoorOrientation.top || door.orientation == DoorOrientation.bottom)
                 {
-                    Debug.Log(door.orientation);
                     drawnDoors.Add(GameObject.Instantiate(door.prefab, Grid.CellToWorld(new Vector3Int(door.pos.x, door.pos.y, 0)) + new Vector3(Grid.cellSize.x / 2, Grid.cellSize.y / 2, 0), Quaternion.identity).GetComponent<InstanciatedDoor>());
                 }
                     
                 if (door.orientation == DoorOrientation.left || door.orientation == DoorOrientation.right)
                 {
-                    Debug.Log(door.orientation);
                     drawnDoors.Add(GameObject.Instantiate(door.prefab, Grid.CellToWorld(new Vector3Int(door.pos.x, door.pos.y, 0)) + new Vector3(Grid.cellSize.x / 2, Grid.cellSize.y * 3 / 2, 0), Quaternion.identity).GetComponent<InstanciatedDoor>());
                 }
                    
