@@ -1,9 +1,7 @@
 using App.Systems;
+using App.Systems.Spawning;
 using App.World.Creatures.Enemies.States;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace App.World.Creatures.Enemies
@@ -32,6 +30,7 @@ namespace App.World.Creatures.Enemies
         protected List<Collider2D> myColliders;
         [SerializeField]
         private HealthStatus health;
+        private INotifyEnemyDied notifieble;
 
         protected StateMachine stateMachine;
         protected EnemyBaseState attackState;
@@ -69,7 +68,7 @@ namespace App.World.Creatures.Enemies
                 stateMachine.CurrentState.Update();
         }
 
-        public virtual void Init(Vector3 position, Transform target, float hpMultiplier, Room currentRoom)
+        public virtual void Init(Vector3 position, Transform target, float hpMultiplier, Room currentRoom, INotifyEnemyDied notifieble)
         {
             this.target = target;
             transform.position = position;
@@ -77,10 +76,10 @@ namespace App.World.Creatures.Enemies
             health.MaxHealth = enemyData.maxHealth * hpMultiplier;
             health.HealToMax();
             initialised = true;
+            this.notifieble = notifieble;
             if (stateMachine.CurrentState == null)
             {
                 stateMachine.Initialize(spawningState);
-                Debug.Log("Initialize");
             }
             else
                 stateMachine.ChangeState(spawningState);
@@ -94,6 +93,7 @@ namespace App.World.Creatures.Enemies
             {
                 StopAllCoroutines();
                 stateMachine.ChangeState(dieState);
+                notifieble.NotifyEnemyDied();
             }
         }
 

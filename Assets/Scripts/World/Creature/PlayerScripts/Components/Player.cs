@@ -59,8 +59,10 @@ namespace App.World.Creatures.PlayerScripts.Components
 
         #region Parameters
         private float movementSpeed;
-        private float dashDistance = 4;
-        private float dashTime = 0.25f;
+        private float dashDistance = 5;
+        private float dashTime;
+        private float dashCooldown = 0.3f;
+        private float dashCooldownTimer;
         private int money;
         private bool isDead; //TODO replace with more global "game stop"
         #endregion
@@ -78,21 +80,33 @@ namespace App.World.Creatures.PlayerScripts.Components
         public DashEvent DashEvent { get => dashEvent; set => dashEvent = value; }
         public ShootEvent ShootEvent { get => shootEvent; set => shootEvent = value; }
         public Projectile Projectile { get => projectile; set => projectile = value; }
+        public float DashCooldownTimer { get => dashCooldownTimer; set => dashCooldownTimer = value; }
 
         #endregion
 
         private void Awake()
         {
+            DashCooldownTimer = dashCooldown;
             Init();
+        }
+
+        private void Update()
+        {
+            if (DashCooldownTimer > 0)
+                DashCooldownTimer -= Time.deltaTime;
         }
         private void Init()
         {
             playerTransform = GetComponent<Transform>();
             pAnimator = GetComponent<Animator>();
             audioSource = GetComponent<AudioSource>();
-            //Staff = CurWeaponObj.GetComponent<BaseStaff>();
-            movementSpeed = 8;
+            movementSpeed = 10;
             isDead = false;
+            foreach (AnimationClip clip in pAnimator.runtimeAnimatorController.animationClips)
+            {
+                if (clip.name == "DashLeft")
+                    dashTime = clip.length;
+            }
         }
         public void Die()
         {
@@ -105,15 +119,21 @@ namespace App.World.Creatures.PlayerScripts.Components
         {
             GetComponent<Movement>().enabled = false;
             GetComponent<Stand>().enabled = false;
-            GetComponent<Movement>().enabled = false;
             GetComponent<Aim>().enabled = false;
+            GetComponent<Shoot>().enabled = false;
+            GetComponent<Dash>().enabled = false;
         }
         public void EnableAllInputs()
         {
             GetComponent<Movement>().enabled = true;
             GetComponent<Stand>().enabled = true;
-            GetComponent<Movement>().enabled = true;
             GetComponent<Aim>().enabled = true;
+            GetComponent<Shoot>().enabled = true;
+            GetComponent<Dash>().enabled = true;
+        }
+        public void ReloadDashTimer()
+        {
+            DashCooldownTimer = dashCooldown;
         }
     }
 }

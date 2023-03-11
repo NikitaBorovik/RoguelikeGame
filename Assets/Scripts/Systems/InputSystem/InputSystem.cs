@@ -75,7 +75,9 @@ namespace App.Systems.Input
             float horizontalMove = UnityEngine.Input.GetAxis("Horizontal");
             float verticalMove = UnityEngine.Input.GetAxis("Vertical");
             Vector2 movingDirection = new Vector2(horizontalMove, verticalMove).normalized;
-            if (UnityEngine.Input.GetKeyDown(KeyCode.Space))
+            if (movingDirection == Vector2.zero)
+                return;
+            if (UnityEngine.Input.GetKeyDown(KeyCode.Space) && player.DashCooldownTimer <= 0 && !player.PAnimator.GetBool("isAttacking"))
             {
                 player.DashEvent.CallDashEvent(movingDirection, player.DashDistance, player.DashTime);
             }

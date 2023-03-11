@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795537cef4d4503448398ee0f4ac4567, type: 3}
   m_Name: SmallRoomL1.5
   m_EditorClassIdentifier: 
-  id: fd82cd0471381514c8129949cba616be
+  id: 52b05cdda1a063d4a9313cc4ea0b6e15
   prefab: {fileID: 3702022006039285852, guid: e9c5f1e2343c43249ac429eabf5900f2, type: 3}
   lastPrefab: {fileID: 3702022006039285852, guid: e9c5f1e2343c43249ac429eabf5900f2, type: 3}
   roomType: {fileID: 11400000, guid: 9a1338cd3b7dfc848b1af6af7030d5f8, type: 2}
@@ -65,5 +65,10 @@ MonoBehaviour:
   teleporter: {x: 0, y: 0}
   enemiesWave1:
   - {fileID: 2236608071258931606, guid: c8ea459dc7a136a49889b7e8f9f88d1e, type: 3}
-  enemiesWave2: []
+  - {fileID: 2236608071258931606, guid: c8ea459dc7a136a49889b7e8f9f88d1e, type: 3}
+  - {fileID: 2236608071258931606, guid: c8ea459dc7a136a49889b7e8f9f88d1e, type: 3}
+  enemiesWave2:
+  - {fileID: 2236608071258931606, guid: c8ea459dc7a136a49889b7e8f9f88d1e, type: 3}
+  - {fileID: 2236608071258931606, guid: c8ea459dc7a136a49889b7e8f9f88d1e, type: 3}
+  - {fileID: 2236608071258931606, guid: c8ea459dc7a136a49889b7e8f9f88d1e, type: 3}
   enemiesWave3: []

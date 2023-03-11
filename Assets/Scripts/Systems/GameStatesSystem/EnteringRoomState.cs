@@ -14,16 +14,15 @@ namespace App.Systems.GameStates
         public void Enter()
         {
             spawningSystem.Spawn();
+            gameStatesSystem.CurRoom.DrawnRoom.Close();
         }
 
         public void Exit()
         {
-            
         }
 
         public void Update()
         {
-            
         }
     }
 }

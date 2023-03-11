@@ -25,6 +25,7 @@ namespace App
             inputSystem.Init(mainCamera, objectsContainer.Player.GetComponent<Player>());
             spawningSystem.Init(objectsContainer.ObjectPool, objectsContainer.Player.GetComponent<Player>());
             gameStatesSystem.Init(objectsContainer.DungeonGenerator,spawningSystem);
+            spawningSystem.Notifieble = gameStatesSystem;
         }
 
         

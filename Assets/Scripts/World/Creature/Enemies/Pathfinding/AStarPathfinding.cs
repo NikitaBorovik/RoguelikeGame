@@ -21,20 +21,10 @@ public class AStarPathfinding : MonoBehaviour
         var cellTargetPos = room.DrawnRoom.Grid.WorldToCell(targetPos);
         cellStartPos -= (Vector3Int)room.RoomModel.leftBottomPoint;
         cellTargetPos -= (Vector3Int)room.RoomModel.leftBottomPoint;
-        Debug.Log("Start:" + startPos);
-        Debug.Log("Target:" + targetPos);
 
         grid = new NodesGrid((room.RoomModel.rightTopPoint.x - room.RoomModel.leftBottomPoint.x + 1)*4, (room.RoomModel.rightTopPoint.y - room.RoomModel.leftBottomPoint.y + 1)*4);
-
-        //foreach (AStarNode node in grid.grid)
-        //{
-        //    Debug.Log(node.X + " " + node.Y);
-        //}
-        Debug.Log("Grid size:" + grid.grid.Length);
         AStarNode startNode = grid.GetNode(Mathf.RoundToInt(cellStartPos.x), Mathf.RoundToInt(cellStartPos.y));
-        Debug.Log(startNode);
         AStarNode targetNode = grid.GetNode(Mathf.RoundToInt(cellTargetPos.x), Mathf.RoundToInt(cellTargetPos.y));
-        Debug.Log(targetNode);
 
         openList.Clear();
         closedList.Clear();
@@ -44,7 +34,6 @@ public class AStarPathfinding : MonoBehaviour
         while (openList.Count > 0)
         {
             AStarNode currentNode = openList.Dequeue();
-           // Debug.Log("FCost:" + currentNode.FCost);
             if (currentNode == targetNode)
             {
                 return GetPath(startNode, targetNode,room);

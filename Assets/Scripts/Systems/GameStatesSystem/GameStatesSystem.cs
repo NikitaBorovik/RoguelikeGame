@@ -7,13 +7,14 @@ using UnityEngine.Rendering.Universal;
 
 namespace App.Systems.GameStates
 {
-    public class GameStatesSystem : MonoBehaviour, INotifyRoomChanged
+    public class GameStatesSystem : MonoBehaviour, INotifyRoomChanged , INotifyRoomCleared
     {
         private StateMachine gameStateMachine;
         private DungeonGenerator dungeonBuilder;
         private DungeonBuildingState dungeonBuildingState;
         private EnteringRoomState enteringRoomState;
         private SpawningSystem spawningSystem;
+        private RoomClearedState roomClearedState;
         [SerializeField]
         private List<LevelModel> levels;
         [SerializeField]
@@ -32,15 +33,11 @@ namespace App.Systems.GameStates
             gameStateMachine = new StateMachine();
             dungeonBuildingState = new DungeonBuildingState(this, dungeonBuilder, levels[curLevel]);
             enteringRoomState = new EnteringRoomState(this, spawningSystem);
+            roomClearedState = new RoomClearedState(this);
             gameStateMachine.Initialize(dungeonBuildingState);
-        }
-        private void Update()
-        {
-           // gameStateMachine.CurrentState.Update();
         }
         public void EnteringRoom()
         {
-           // spawningSystem.CurrentRoom = curRoom;
             if(aStarTest == null)
             {
                 Debug.Log("Null");
@@ -52,9 +49,13 @@ namespace App.Systems.GameStates
 
         public void NotifyOnRoomChanged(Room room)
         {
-            Debug.Log(room);
             curRoom = room;
             spawningSystem.CurrentRoom = room;
+        }
+
+        public void NotifyRoomCleared()
+        {
+            gameStateMachine.ChangeState(roomClearedState);
         }
     }
 }

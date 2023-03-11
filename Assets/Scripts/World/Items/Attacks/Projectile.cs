@@ -21,6 +21,7 @@ namespace App.World.Items.Attacks
         protected Player player;
         protected Shoot shoot;
         protected bool isFlying = false;
+        protected TrailRenderer trailRenderer;
         public string PoolObjectType => poolObjectType;
 
         private void Update()
@@ -30,7 +31,10 @@ namespace App.World.Items.Attacks
                 transform.position = player.ShootPosition.position;
             }
         }
-
+        private void Awake()
+        {
+            trailRenderer = GetComponent<TrailRenderer>();
+        }
         public virtual void OnTriggerEnter2D(Collider2D collision)
         {
             if (!gameObject.activeSelf)
@@ -45,15 +49,17 @@ namespace App.World.Items.Attacks
             {
                 return;
             }
-            targetHealt.TakeDamage(projectileData.damage);
-            if (projectileData.pearcingCount > 0)
-            {
-                projectileData.pearcingCount--;
-            }
-            else
-            {
-                objectPool.ReturnToPool(this);
-            }
+            
+            targetHealt.TakeDamage(80/*projectileData.damage*/);
+            //if (projectileData.pearcingCount > 0)
+            //{
+            //    projectileData.pearcingCount--;
+            //}
+            //else
+            //{
+            //    objectPool.ReturnToPool(this);
+            //}
+            objectPool.ReturnToPool(this);
 
         }
         public virtual void Init(Player player)
@@ -72,19 +78,24 @@ namespace App.World.Items.Attacks
             circleCollider.enabled = true;
             Quaternion rotation = Quaternion.Euler(player.ShootPosition.eulerAngles.x, player.ShootPosition.eulerAngles.y, player.ShootPosition.eulerAngles.z /*+ spread*/);
             transform.rotation = rotation;
-            rb.velocity = transform.right * 5;//projectileData.speed;
+            rb.velocity = transform.right * 10;//projectileData.speed;
             shoot.CanShoot = true;
+            trailRenderer.enabled = true;
+            player.PAnimator.SetBool("isAttacking", false);
         }
 
         public void GetFromPool(ObjectPool pool)
         {
             objectPool = pool;
             gameObject.SetActive(true);
+            GetComponent<TrailRenderer>()?.Clear();
         }
 
         public void ReturnToPool()
         {
+            circleCollider.enabled = false;
             gameObject.SetActive(false);
+            trailRenderer.enabled = false;
         }
 
         public GameObject GetGameObject()

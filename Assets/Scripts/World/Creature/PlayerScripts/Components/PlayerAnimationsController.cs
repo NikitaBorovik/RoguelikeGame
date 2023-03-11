@@ -1,4 +1,5 @@
 using App.World.Creatures.PlayerScripts.Events;
+using System;
 using UnityEngine;
 namespace App.World.Creatures.PlayerScripts.Components
 {
@@ -15,6 +16,7 @@ namespace App.World.Creatures.PlayerScripts.Components
             player.StandEvent.OnStand += AnimateOnStand;
             player.AimEvent.OnAim += AnimateOnAim;
             player.MovementEvent.OnMove += AnimateOnMove;
+            player.ShootEvent.OnShoot += AnimateOnShoot;
             if (player.DashEvent == null)
             {
                 Debug.Log("DashEvent is null");
@@ -25,14 +27,27 @@ namespace App.World.Creatures.PlayerScripts.Components
                 player.DashEvent.OnDash += AnimateOnDash;
             }
         }
+
+        private void Update()
+        {
+          //  if (player.PAnimator.GetBool("isDashing"))
+           // Debug.Log("Working");
+        }
+
         private void OnDisable()
         {
             player.StandEvent.OnStand -= AnimateOnStand;
             player.AimEvent.OnAim -= AnimateOnAim;
             player.MovementEvent.OnMove -= AnimateOnMove;
             player.DashEvent.OnDash -= AnimateOnDash;
+            player.ShootEvent.OnShoot -= AnimateOnShoot;
         }
-       
+        private void AnimateOnShoot(ShootEvent obj)
+        {
+            SetShootAnimationParams();
+        }
+
+        
         private void AnimateOnStand(StandEvent ev)
         {
             SetStandAnimationParams();
@@ -78,5 +93,10 @@ namespace App.World.Creatures.PlayerScripts.Components
         {
             player.PAnimator.SetBool("isDashing",true);
         }
+        private void SetShootAnimationParams()
+        {
+            player.PAnimator.SetBool("isAttacking", true);
+        }
+
     }
 }

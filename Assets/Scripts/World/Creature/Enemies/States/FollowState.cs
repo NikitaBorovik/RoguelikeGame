@@ -18,11 +18,7 @@ namespace App.World.Creatures.Enemies.States
         public override void Enter()
         {
             path = baseEnemy.Pathfinding.FindPath(baseEnemy.transform.position, baseEnemy.Target.position, baseEnemy.CurrentRoom);
-            Debug.Log("Path " + path.Count);
-            Debug.Log("Starting pos " + baseEnemy.transform.position);
-            Debug.Log("Target" + baseEnemy.Target.position);
             currentTarget = path.Pop();
-            Debug.Log(currentTarget);
         }
 
         public override void Update()

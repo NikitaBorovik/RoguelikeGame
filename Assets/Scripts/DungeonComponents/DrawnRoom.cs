@@ -75,8 +75,9 @@ public class DrawnRoom : MonoBehaviour
             }
             
         }
-        //gameStates.CurRoom = room;
         
+        //gameStates.CurRoom = room;
+
         if (!room.RoomNodeType.isCorridor && !room.RoomNodeType.isEntrance && !isVisited)
         {
             gameStates.EnteringRoom();
@@ -84,6 +85,22 @@ public class DrawnRoom : MonoBehaviour
         isVisited = true;
 
 
+    }
+    
+    public void Open()
+    {
+        foreach (InstanciatedDoor door in drawnDoors)
+        {
+            door.SetOpenAnimation();
+        }
+    }
+    
+    public void Close()
+    {
+        foreach (InstanciatedDoor door in drawnDoors)
+        {
+            door.SetCloseAnimation();
+        }
     }
 
     private IEnumerator Reveal(TilemapRenderer tileRenderer)
