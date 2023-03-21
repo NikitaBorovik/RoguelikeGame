@@ -2,18 +2,18 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace App.World.Creatures.Enemies
 {
-    [CreateAssetMenu(fileName = "EnemyData", menuName = "Scriptable Objects/Enemies/ Enemy Data")]
+    [CreateAssetMenu(fileName = "EnemyDataSO", menuName = "Scriptable Objects/Enemies/ Enemy Data")]
     public class EnemyData : ScriptableObject
     {
-        public string type;
+        public string attackType;
+        public string poolObjectType;
         public int maxHealth;
-        public int dangerLevel;
         public float speed;
+        public float projectileSpeed;
+        public int projectileCount;
         public float damage;
         public float timeBetweenAttacks;
-        public float moneyDropChance;
         public float healingDropChance;
         public float attackRange;
-        public float spawnAnimationDuration;
     }
 }

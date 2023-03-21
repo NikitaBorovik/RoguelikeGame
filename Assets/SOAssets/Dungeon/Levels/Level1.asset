@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581ec0f1bfba1f04a9bde046c1ec8b21, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  levelName: FirstTestLevel
+  levelName: FirstLevel
   roomModels:
   - {fileID: 11400000, guid: 58486dff7f2c8e04d849067cd4e0eaed, type: 2}
   - {fileID: 11400000, guid: 6713df334eb26cf44b0a16d0927fbd20, type: 2}

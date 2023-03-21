@@ -365,7 +365,7 @@ PrefabInstance:
     - target: {fileID: 6525482048776744913, guid: 05d919de8431cc9429a6cfe279f3bea6, type: 3}
       propertyPath: weaponAnchorTransform
       value: 
-      objectReference: {fileID: 6515870332955014562}
+      objectReference: {fileID: 0}
     - target: {fileID: 7878043739031538611, guid: 05d919de8431cc9429a6cfe279f3bea6, type: 3}
       propertyPath: dashEvent
       value: 
@@ -408,8 +408,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9472e129c08a46e4fa347ff29c77bcd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &6515870332955014562 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2742779675602075462, guid: 05d919de8431cc9429a6cfe279f3bea6, type: 3}
-  m_PrefabInstance: {fileID: 8970407529043856100}
-  m_PrefabAsset: {fileID: 0}

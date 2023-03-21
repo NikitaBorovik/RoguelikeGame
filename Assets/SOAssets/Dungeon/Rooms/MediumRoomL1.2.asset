@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795537cef4d4503448398ee0f4ac4567, type: 3}
   m_Name: MediumRoomL1.2
   m_EditorClassIdentifier: 
-  id: a64d4a82a7ffaa1498f32a83875a2fad
+  id: 2f9a9bf68cbf36e4793419b9c6d48591
   prefab: {fileID: 3702022006039285852, guid: 870009467555a5a4bba0c6ac8959ebb0, type: 3}
   lastPrefab: {fileID: 3702022006039285852, guid: 870009467555a5a4bba0c6ac8959ebb0, type: 3}
   roomType: {fileID: 11400000, guid: 5c440ad00f7d77e428cafbe9bda09f87, type: 2}
@@ -66,14 +66,8 @@ MonoBehaviour:
   playerSpawn: {x: 0, y: 0}
   teleporter: {x: 0, y: 7}
   enemiesWave1:
-  - {fileID: 2236608071258931606, guid: c8ea459dc7a136a49889b7e8f9f88d1e, type: 3}
-  - {fileID: 2236608071258931606, guid: c8ea459dc7a136a49889b7e8f9f88d1e, type: 3}
-  - {fileID: 2236608071258931606, guid: c8ea459dc7a136a49889b7e8f9f88d1e, type: 3}
+  - {fileID: 4314578069547031956, guid: 3594148e8353de84cb26add3ef817323, type: 3}
   enemiesWave2:
-  - {fileID: 2236608071258931606, guid: c8ea459dc7a136a49889b7e8f9f88d1e, type: 3}
-  - {fileID: 2236608071258931606, guid: c8ea459dc7a136a49889b7e8f9f88d1e, type: 3}
-  - {fileID: 2236608071258931606, guid: c8ea459dc7a136a49889b7e8f9f88d1e, type: 3}
+  - {fileID: 4730828233132738427, guid: d5483c720003edb4ebf361f2a4c51d37, type: 3}
   enemiesWave3:
-  - {fileID: 2236608071258931606, guid: c8ea459dc7a136a49889b7e8f9f88d1e, type: 3}
-  - {fileID: 2236608071258931606, guid: c8ea459dc7a136a49889b7e8f9f88d1e, type: 3}
-  - {fileID: 2236608071258931606, guid: c8ea459dc7a136a49889b7e8f9f88d1e, type: 3}
+  - {fileID: 4730828233132738427, guid: d5483c720003edb4ebf361f2a4c51d37, type: 3}

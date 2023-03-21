@@ -32,6 +32,7 @@ public class Shoot : MonoBehaviour
     {
         if (canShoot)
         {
+
             GameObject projectile = objectPool.GetObjectFromPool(player.Projectile.PoolObjectType, player.Projectile.gameObject, player.ShootPosition.position).GetGameObject();
             projectile.transform.position = player.ShootPosition.position;
             projectile.GetComponent<Projectile>().Init(player);

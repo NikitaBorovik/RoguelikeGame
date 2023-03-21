@@ -5,15 +5,21 @@ namespace App.Systems.GameStates
     {
         private GameStatesSystem gameStatesSystem;
         private SpawningSystem spawningSystem;
+        private int curLevel;
+        public int CurLevel { get => curLevel; set => curLevel = value; }
 
-        public EnteringRoomState(GameStatesSystem gameStatesSystem, SpawningSystem spawningSystem)
+        public EnteringRoomState(GameStatesSystem gameStatesSystem, SpawningSystem spawningSystem, int curLevel)
         {
             this.gameStatesSystem = gameStatesSystem;
             this.spawningSystem = spawningSystem;
+            this.CurLevel = curLevel;
         }
+
+        
+
         public void Enter()
         {
-            spawningSystem.Spawn();
+            spawningSystem.Spawn(CurLevel);
             gameStatesSystem.CurRoom.DrawnRoom.Close();
         }
 

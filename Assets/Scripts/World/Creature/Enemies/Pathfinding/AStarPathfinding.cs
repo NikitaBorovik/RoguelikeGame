@@ -96,18 +96,26 @@ public class AStarPathfinding : MonoBehaviour
     
     private AStarNode GetNeighbour(int neighbourX, int neighbourY, Room room)
     {
-        if(neighbourX < 0 || neighbourX >= room.RoomModel.rightTopPoint.x - room.RoomModel.leftBottomPoint.x ||
-            neighbourY < 0 || neighbourY >= room.RoomModel.rightTopPoint.y - room.RoomModel.leftBottomPoint.y)
+        if (isInsideGrid(neighbourX, neighbourY, room))
         {
+            AStarNode result = grid.GetNode(neighbourX, neighbourY);
+            int additionalGridWeigth = room.DrawnRoom.GridTilesPriorityWeigths[neighbourX, neighbourY];
+            if (additionalGridWeigth == 0)
+                return null;
+            if (!closedList.Contains(result))
+                return result;
             return null;
         }
-        AStarNode result = grid.GetNode(neighbourX, neighbourY);
-        int additionalGridWeigth = room.DrawnRoom.GridTilesPriorityWeigths[neighbourX, neighbourY];
-        if (additionalGridWeigth == 0)
-            return null;
-        if (!closedList.Contains(result))
-            return result;
         return null;
     }
-    
+    private bool isInsideGrid(int x, int y, Room room)
+    {
+        if (x < 0 || x >= room.RoomModel.rightTopPoint.x - room.RoomModel.leftBottomPoint.x ||
+            y < 0 || y >= room.RoomModel.rightTopPoint.y - room.RoomModel.leftBottomPoint.y)
+        {
+            return false;
+        }
+        return true;
+    }
+
 }

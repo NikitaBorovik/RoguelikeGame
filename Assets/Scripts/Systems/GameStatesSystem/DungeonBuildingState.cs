@@ -10,15 +10,20 @@ namespace App.Systems.GameStates
         
         private DungeonGenerator dungeonBuilder;
         private LevelModel levelToBuild;
+
+        public LevelModel LevelToBuild { get => levelToBuild; set => levelToBuild = value; }
         public DungeonBuildingState(GameStatesSystem gameStatesSystem,DungeonGenerator dungeonBuilder,LevelModel level)
         {
             this.gameStatesSystem = gameStatesSystem;
             this.dungeonBuilder = dungeonBuilder;
-            this.levelToBuild = level;
+            this.LevelToBuild = level;
         }
+
+       
+
         public void Enter()
         {
-            if (dungeonBuilder.GenerateDungeon(levelToBuild)) ;
+            if (dungeonBuilder.GenerateDungeon(LevelToBuild)) ;
             
         }
 

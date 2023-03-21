@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileSO : ScriptableObject
+namespace App.World.Items.Attacks
 {
-    public float damage;
-    public float pearcingCount;
-    public float speed;
-    
+    [CreateAssetMenu(fileName = "ProjectileSO", menuName = "Scriptable Objects/Player/Projectile data")]
+    public class ProjectileSO : ScriptableObject
+    {
+        public float damage;
+        public float pearcingCount;
+        public float speed;
+
+    }
 }
+

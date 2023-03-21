@@ -11,6 +11,7 @@ namespace App.World.Creatures.Enemies.States
         private float timeToRecalculatePath = 0.1f;
         private float timeSinceLastPathRecalculation = 0f;
         private Vector3 currentTarget;
+        private float attackDelay;
         public FollowState(BaseEnemy baseEnemy, StateMachine stateMachine) : base(baseEnemy, stateMachine) 
         {
         }
@@ -18,31 +19,50 @@ namespace App.World.Creatures.Enemies.States
         public override void Enter()
         {
             path = baseEnemy.Pathfinding.FindPath(baseEnemy.transform.position, baseEnemy.Target.position, baseEnemy.CurrentRoom);
-            currentTarget = path.Pop();
+            if (path != null && path.Count > 0)
+                currentTarget = path.Pop();
+            else
+                currentTarget = baseEnemy.Target.position;
+            attackDelay = 0;
         }
 
         public override void Update()
         {
+            Debug.Log("Following Update");
+            attackDelay += Time.deltaTime;
             timeSinceLastPathRecalculation += Time.deltaTime;
-            if (timeSinceLastPathRecalculation >= timeToRecalculatePath)
+            if (Vector3.Distance(baseEnemy.transform.position, baseEnemy.Target.position) < baseEnemy.EnemyData.attackRange &&
+                attackDelay >= baseEnemy.EnemyData.timeBetweenAttacks)
             {
-                timeSinceLastPathRecalculation = 0f;
-                path = baseEnemy.Pathfinding.FindPath(baseEnemy.transform.position, baseEnemy.Target.position, baseEnemy.CurrentRoom);
+                stateMachine.ChangeState(baseEnemy.AttackState);
             }
-            if (Vector3.Distance(baseEnemy.transform.position, currentTarget) <= 0.1f)
+            else if (baseEnemy.EnemyData.attackType == "Ranged" && Vector3.Distance(baseEnemy.transform.position, baseEnemy.Target.position) < baseEnemy.EnemyData.attackRange / 2)
             {
-                if (path != null && path.Count > 0 )
-                {
-                    currentTarget = path.Pop();
-                }
-                else
-                {
-                    currentTarget = baseEnemy.Target.position;
-                }
+                baseEnemy.MyRigidbody.velocity = (baseEnemy.transform.position - baseEnemy.Target.position).normalized * baseEnemy.EnemyData.speed;
             }
-            baseEnemy.MyRigidbody.velocity = (currentTarget - baseEnemy.transform.position).normalized * baseEnemy.EnemyData.speed;
+            else if(Vector3.Distance(baseEnemy.transform.position, baseEnemy.Target.position) > baseEnemy.EnemyData.attackRange)
+            {
+                if (Vector3.Distance(baseEnemy.transform.position, currentTarget) <= 1.5f)
+                {
+                    if (timeSinceLastPathRecalculation >= timeToRecalculatePath)
+                    {
+                        timeSinceLastPathRecalculation = 0f;
+                        path = baseEnemy.Pathfinding.FindPath(baseEnemy.transform.position, baseEnemy.Target.position, baseEnemy.CurrentRoom);
+                    }
+                    if (path != null && path.Count > 0)
+                    {
+                        currentTarget = path.Pop();
+                    }
+                    else
+                    {
+                        currentTarget = baseEnemy.Target.position;
+                    }
+                }
+                baseEnemy.MyRigidbody.velocity = (currentTarget - baseEnemy.transform.position).normalized * baseEnemy.EnemyData.speed;
+            }
             SetMoveAnimationParams(baseEnemy.MyRigidbody.velocity.x);
-           
+            
+
         }
         public override void Exit()
         {

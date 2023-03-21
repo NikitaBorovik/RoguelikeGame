@@ -7,9 +7,17 @@ namespace App.World.Items.Attacks
 {
     public class Projectile : MonoBehaviour, IObjectPoolItem
     {
-        
+        #region parameters
+        protected float spread;
+        protected float damage;
+        protected float speed;
+        protected float pearcingCount;
+        protected bool isFlying = false;
+        #endregion
+
+        #region serialized parameters
+        [SerializeField]
         protected ProjectileSO projectileData;
-        protected ObjectPool objectPool;
         [SerializeField]
         protected string poolObjectType;
         [SerializeField]
@@ -17,49 +25,59 @@ namespace App.World.Items.Attacks
         [SerializeField]
         protected Rigidbody2D rb;
         [SerializeField]
-        protected CircleCollider2D circleCollider;
+        protected PolygonCollider2D polygonCollider;
+        #endregion
+
+        #region connected objects
+        protected ObjectPool objectPool;
         protected Player player;
         protected Shoot shoot;
-        protected bool isFlying = false;
         protected TrailRenderer trailRenderer;
+        #endregion
+
         public string PoolObjectType => poolObjectType;
 
-        private void Update()
+        protected virtual void Update()
         {
             if (!isFlying)
             {
                 transform.position = player.ShootPosition.position;
+                Quaternion rotation = Quaternion.Euler(player.ShootPosition.eulerAngles.x, player.ShootPosition.eulerAngles.y, player.ShootPosition.eulerAngles.z /*+ spread*/);
+                transform.rotation = rotation;
             }
         }
-        private void Awake()
+        protected virtual void Awake()
         {
             trailRenderer = GetComponent<TrailRenderer>();
+            damage = projectileData.damage;
+            speed = projectileData.speed;
+            pearcingCount = projectileData.pearcingCount;
+            
         }
         public virtual void OnTriggerEnter2D(Collider2D collision)
         {
             if (!gameObject.activeSelf)
                 return;
-            if (collision.gameObject.layer != LayerMask.NameToLayer("Enemy"))
+            if (collision.gameObject.layer != LayerMask.NameToLayer("EnemyHitbox"))
             {
                 objectPool.ReturnToPool(this);
                 return;
             }
-            HealthStatus targetHealt = collision.GetComponent<HealthStatus>();
+            HealthStatus targetHealt = collision.GetComponentInParent<HealthStatus>();
             if (targetHealt == null)
             {
                 return;
             }
             
-            targetHealt.TakeDamage(80/*projectileData.damage*/);
-            //if (projectileData.pearcingCount > 0)
-            //{
-            //    projectileData.pearcingCount--;
-            //}
-            //else
-            //{
-            //    objectPool.ReturnToPool(this);
-            //}
-            objectPool.ReturnToPool(this);
+            targetHealt.TakeDamage(projectileData.damage);
+            if (pearcingCount > 0)
+            {
+                projectileData.pearcingCount--;
+            }
+            else
+            {
+                objectPool.ReturnToPool(this);
+            }
 
         }
         public virtual void Init(Player player)
@@ -71,29 +89,32 @@ namespace App.World.Items.Attacks
             isFlying = false;
             animator.Play("Base Layer.Spawn");
         }
-        
-        public void StartFlying()
+
+        protected virtual void StartFlying()
         {
+            animator.Play("Base Layer.Rest");
+            player.PAnimator.SetBool("isAttacking", false);
             isFlying = true;
-            circleCollider.enabled = true;
-            Quaternion rotation = Quaternion.Euler(player.ShootPosition.eulerAngles.x, player.ShootPosition.eulerAngles.y, player.ShootPosition.eulerAngles.z /*+ spread*/);
-            transform.rotation = rotation;
-            rb.velocity = transform.right * 10;//projectileData.speed;
+            polygonCollider.enabled = true;
             shoot.CanShoot = true;
             trailRenderer.enabled = true;
-            player.PAnimator.SetBool("isAttacking", false);
+            
+            Quaternion rotation = Quaternion.Euler(player.ShootPosition.eulerAngles.x, player.ShootPosition.eulerAngles.y, player.ShootPosition.eulerAngles.z /*+ spread*/);
+            transform.rotation = rotation;
+            rb.velocity = transform.right * projectileData.speed;
+           
         }
 
         public void GetFromPool(ObjectPool pool)
         {
             objectPool = pool;
             gameObject.SetActive(true);
-            GetComponent<TrailRenderer>()?.Clear();
+           trailRenderer?.Clear();
         }
 
         public void ReturnToPool()
         {
-            circleCollider.enabled = false;
+            polygonCollider.enabled = false;
             gameObject.SetActive(false);
             trailRenderer.enabled = false;
         }

@@ -1293,6 +1293,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 136394513, guid: 4c2cbec98b1b42d458a5d4920f2de694, type: 3}
+      propertyPath: m_Intensity
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 710423396037426274, guid: 4c2cbec98b1b42d458a5d4920f2de694, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1236560343452418391, guid: 4c2cbec98b1b42d458a5d4920f2de694, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 3757463626286407075, guid: 5434470c42c42ed41a98775bb1731e94, type: 3}
     - target: {fileID: 1941430714468335982, guid: 4c2cbec98b1b42d458a5d4920f2de694, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1363,6 +1375,10 @@ PrefabInstance:
       value: Systems
       objectReference: {fileID: 0}
     - target: {fileID: 3110742354979053885, guid: 74ce0ff5f95aac346ba52db60527c5f6, type: 3}
+      propertyPath: portal
+      value: 
+      objectReference: {fileID: 5739901160829442621, guid: 0106e25848ddb4847b835317f93b2559, type: 3}
+    - target: {fileID: 3110742354979053885, guid: 74ce0ff5f95aac346ba52db60527c5f6, type: 3}
       propertyPath: aStarTest
       value: 
       objectReference: {fileID: 437946268}
@@ -1372,12 +1388,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3110742354979053885, guid: 74ce0ff5f95aac346ba52db60527c5f6, type: 3}
       propertyPath: levels.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3110742354979053885, guid: 74ce0ff5f95aac346ba52db60527c5f6, type: 3}
       propertyPath: levels.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 439d86438eb848d458ba6e033f38f4db, type: 2}
+    - target: {fileID: 3110742354979053885, guid: 74ce0ff5f95aac346ba52db60527c5f6, type: 3}
+      propertyPath: levels.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2f5c7f49be2ef82478e813e7ba899fa4, type: 2}
+    - target: {fileID: 3110742354979053885, guid: 74ce0ff5f95aac346ba52db60527c5f6, type: 3}
+      propertyPath: levels.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: c9da2b737702768468e11eddd86ba462, type: 2}
     - target: {fileID: 6165816440291163368, guid: 74ce0ff5f95aac346ba52db60527c5f6, type: 3}
       propertyPath: m_RootOrder
       value: 2

@@ -29,12 +29,12 @@ TagManager:
   - Enemy
   - EnemyProjectile
   - Environment
-  - PlayerWeapon
-  - 
+  - PlayerCollider
+  - PlayerGroundHitbox
   - ThirdCamera
-  - 
-  - 
-  - 
+  - EnemyHitbox
+  - EnemySplashDamage
+  - EnemyMeleeDamage
   - 
   - 
   - 

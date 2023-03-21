@@ -1,14 +1,21 @@
 using App.World.Creatures.Enemies;
+using System;
 using System.Collections;
 using UnityEngine;
 namespace App.World.Creatures.Enemies.States
 {
     public class SpawningState : EnemyBaseState
     {
-        public SpawningState(BaseEnemy baseEnemy, StateMachine stateMachine) : base(baseEnemy, stateMachine) { }
+        private Animator animator;
+        private float spawnTime;
+        
+        public SpawningState(BaseEnemy baseEnemy, StateMachine stateMachine, Animator animator) : base(baseEnemy, stateMachine)
+        {
+            this.animator = animator;
+        }
         public override void Enter()
         {
-            resetAllAnimationParams();
+            spawnTime = animator.GetCurrentAnimatorStateInfo(0).length;
             baseEnemy.StartCoroutine(Spawn());
         }
 
@@ -19,7 +26,7 @@ namespace App.World.Creatures.Enemies.States
 
         private IEnumerator Spawn()
         {
-            yield return new WaitForSeconds(baseEnemy.EnemyData.spawnAnimationDuration);
+            yield return new WaitForSeconds(spawnTime);
             stateMachine.ChangeState(baseEnemy.FollowState);
         }
 

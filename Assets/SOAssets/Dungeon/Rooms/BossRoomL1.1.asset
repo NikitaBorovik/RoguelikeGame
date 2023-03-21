@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795537cef4d4503448398ee0f4ac4567, type: 3}
   m_Name: BossRoomL1.1
   m_EditorClassIdentifier: 
-  id: 04c852c57f598444998f2c9640aa3541
+  id: 1d7404ec3e3a79c4abd4dc36b8436d83
   prefab: {fileID: 3702022006039285852, guid: 6995558e1ff3ba042849fba9bb5f8fe2, type: 3}
   lastPrefab: {fileID: 3702022006039285852, guid: 6995558e1ff3ba042849fba9bb5f8fe2, type: 3}
   roomType: {fileID: 11400000, guid: f9f72f21fccfa184c95b5053dc6c19a5, type: 2}
@@ -53,6 +53,16 @@ MonoBehaviour:
     isAvailable: 0
   enemySpawns:
   - {x: 7, y: 19}
+  - {x: 7, y: 13}
+  - {x: -9, y: 5}
+  - {x: 8, y: 5}
+  - {x: 25, y: 5}
+  - {x: -9, y: 9}
+  - {x: 23, y: 9}
+  - {x: -9, y: 17}
+  - {x: 23, y: 17}
+  - {x: -9, y: 21}
+  - {x: 23, y: 21}
   rewardSpawns:
   - {x: 7, y: 13}
   playerSpawn: {x: 0, y: 0}

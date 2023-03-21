@@ -2,6 +2,7 @@ using App.Systems;
 using App.Systems.Spawning;
 using App.World.Creatures.Enemies.States;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 namespace App.World.Creatures.Enemies
@@ -47,8 +48,9 @@ namespace App.World.Creatures.Enemies
         public SpriteRenderer SpriteRenderer => spriteRenderer;
         public AudioSource AudioSource => audioSource; 
         public Room CurrentRoom => currentRoom;
-        public virtual string PoolObjectType => enemyData.type;
-        
+        public virtual string PoolObjectType => enemyData.poolObjectType;
+
+        public SpawningState SpawningState { get => spawningState; set => spawningState = value; }
 
         public virtual void Awake()
         {
@@ -57,15 +59,17 @@ namespace App.World.Creatures.Enemies
             spriteRenderer = GetComponent<SpriteRenderer>();
             stateMachine = new StateMachine();
             followState = new FollowState(this, stateMachine);
-            spawningState = new SpawningState(this, stateMachine);
+            SpawningState = new SpawningState(this, stateMachine,Animator);
             dieState = new DieState(this, stateMachine);
            // stateMachine.Initialize(spawningState);
         }
 
         void Update()
         {
+            
             if (initialised)
                 stateMachine.CurrentState.Update();
+            Debug.Log("Updated "+ stateMachine.CurrentState);
         }
 
         public virtual void Init(Vector3 position, Transform target, float hpMultiplier, Room currentRoom, INotifyEnemyDied notifieble)
@@ -79,10 +83,10 @@ namespace App.World.Creatures.Enemies
             this.notifieble = notifieble;
             if (stateMachine.CurrentState == null)
             {
-                stateMachine.Initialize(spawningState);
+                stateMachine.Initialize(SpawningState);
             }
             else
-                stateMachine.ChangeState(spawningState);
+                stateMachine.ChangeState(SpawningState);
         }
 
         

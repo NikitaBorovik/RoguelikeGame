@@ -7,6 +7,8 @@ using System.Data.SqlTypes;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
+
 namespace App.World.Creatures.PlayerScripts.Components
 {
     #region Required
@@ -19,12 +21,12 @@ namespace App.World.Creatures.PlayerScripts.Components
     //[RequireComponent(typeof(Stand))]
     //[RequireComponent(typeof(UpgradeManager))]
     #endregion
-    public class Player : MonoBehaviour//, IKillable, IUpgradable
+    public class Player : MonoBehaviour, IKillable// IUpgradable
     {
         #region Components
         private Transform playerTransform;
         private Animator pAnimator;
-        //private Health health;
+        private HealthStatus health;
         //private UpgradeManager upgradeManager;
         [SerializeField]
         private PlayerDataSO playerData;
@@ -100,6 +102,8 @@ namespace App.World.Creatures.PlayerScripts.Components
             playerTransform = GetComponent<Transform>();
             pAnimator = GetComponent<Animator>();
             audioSource = GetComponent<AudioSource>();
+            health = GetComponent<HealthStatus>();
+            health.MaxHealth = 6000;
             movementSpeed = 10;
             isDead = false;
             foreach (AnimationClip clip in pAnimator.runtimeAnimatorController.animationClips)
@@ -110,9 +114,12 @@ namespace App.World.Creatures.PlayerScripts.Components
         }
         public void Die()
         {
-            GetComponent<Movement>().enabled = false;
-            GetComponent<Aim>().enabled = false;
-            if (isDead) return;
+            //GetComponent<Movement>().enabled = false;
+            //GetComponent<Aim>().enabled = false;
+            //if (isDead) return;
+            Debug.Log("Dead");
+            SceneManager.LoadScene("MainSceene");
+
         }
         
         public void DisableAllInputs()
