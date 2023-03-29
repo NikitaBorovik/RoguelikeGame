@@ -104,6 +104,12 @@ namespace App.Systems.Spawning
 
         public void SpawnWave(int waveNumber)
         {
+            if (currentRoom.RoomModel.enemiesWave1.Count == 0)
+            {
+                Debug.Log("No enemies in room");
+                notifieble.NotifyRoomCleared();
+                return;
+            }
             List<Vector2Int> spawns = new List<Vector2Int>(CurrentRoom.RoomModel.enemySpawns);
             Extensions.Shuffle(spawns);
             List<BaseEnemy> enemiesToSpawn;

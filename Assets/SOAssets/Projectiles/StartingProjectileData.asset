@@ -15,3 +15,4 @@ MonoBehaviour:
   damage: 10
   pearcingCount: 0
   speed: 10
+  manacost: 1

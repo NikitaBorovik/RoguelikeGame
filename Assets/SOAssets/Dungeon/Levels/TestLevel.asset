@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581ec0f1bfba1f04a9bde046c1ec8b21, type: 3}
+  m_Name: TestLevel
+  m_EditorClassIdentifier: 
+  levelName: TestLargeLevel
+  roomModels:
+  - {fileID: 11400000, guid: 67e37d85606b9a248824ade99b1179fd, type: 2}
+  - {fileID: 11400000, guid: 6c1bb1341cb2f3243b537d58b8366dcd, type: 2}
+  - {fileID: 11400000, guid: 4404a2a4a2bb85f48a1f17fedd9ab214, type: 2}
+  - {fileID: 11400000, guid: 58486dff7f2c8e04d849067cd4e0eaed, type: 2}
+  - {fileID: 11400000, guid: 8e5f6305a298f5d46b64a8c57da8f876, type: 2}
+  - {fileID: 11400000, guid: c290c3d5efbcca641b03de1b2f3c5ad1, type: 2}
+  - {fileID: 11400000, guid: 856ad4d89bb95384d98e5cea43558f12, type: 2}
+  - {fileID: 11400000, guid: 6713df334eb26cf44b0a16d0927fbd20, type: 2}
+  - {fileID: 11400000, guid: 663ecc953fe128a4dbc2647f27f40ffe, type: 2}
+  - {fileID: 11400000, guid: 4382330035290d549800bf56c25f09c6, type: 2}
+  dungeonStructures:
+  - {fileID: 11400000, guid: 21d7702eced57334f86acfc4e7b469a5, type: 2}

@@ -1,6 +1,4 @@
-using App.World.Creatures.Enemies.States;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace App.World.Creatures.Enemies.States.ConcreteStates

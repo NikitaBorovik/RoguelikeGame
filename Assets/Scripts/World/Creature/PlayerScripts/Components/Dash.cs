@@ -1,8 +1,5 @@
 using App.World.Creatures.PlayerScripts.Components;
 using App.World.Creatures.PlayerScripts.Events;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Dash : MonoBehaviour

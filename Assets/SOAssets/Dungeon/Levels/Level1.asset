@@ -34,5 +34,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3d8ad227016d4a34692fa3f4f1b6be74, type: 2}
   - {fileID: 11400000, guid: 78762a21ca3aac64eae6b9e3b3403e44, type: 2}
   - {fileID: 11400000, guid: 456cc3f393791994f879d4783c156bf4, type: 2}
+  - {fileID: 11400000, guid: 8c5b55c0626718444b5d8ef6523bcd0c, type: 2}
   dungeonStructures:
   - {fileID: 11400000, guid: ca9e36bc51309d34396d2cfe6c4fed10, type: 2}

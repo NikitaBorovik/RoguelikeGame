@@ -107,6 +107,7 @@ MonoBehaviour:
   animator: {fileID: 5227268750582097472}
   rb: {fileID: 3834102721473874977}
   polygonCollider: {fileID: 6210895219887404038}
+  treasureSprite: {fileID: -1923408100, guid: ebbb8925f550ba44a84d5c7d4cbf8b66, type: 3}
 --- !u!114 &4994457368346505146
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -762,6 +762,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: 0, y: 0, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 2
+      m_TileSpriteIndex: 2
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 1, y: 0, z: 0}
     second:
       serializedVersion: 2
@@ -11498,7 +11508,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: ef1909211dc92e340b81b0c51ad888f4, type: 2}
   - m_RefCount: 21
     m_Data: {fileID: 11400000, guid: e4ae78804b4050d4fb27e3c651581c76, type: 2}
-  - m_RefCount: 12
+  - m_RefCount: 13
     m_Data: {fileID: 11400000, guid: 3e84ae81e79cb4442aacba67318ab957, type: 2}
   - m_RefCount: 133
     m_Data: {fileID: 11400000, guid: ff023090335b8a9408be8928bdbd24eb, type: 2}
@@ -11515,7 +11525,7 @@ Tilemap:
     m_Data: {fileID: -1415011484, guid: dec0cbb4812ce76479807da46b5d34e5, type: 3}
   - m_RefCount: 21
     m_Data: {fileID: 1111012070, guid: dec0cbb4812ce76479807da46b5d34e5, type: 3}
-  - m_RefCount: 12
+  - m_RefCount: 13
     m_Data: {fileID: 219311237, guid: dec0cbb4812ce76479807da46b5d34e5, type: 3}
   - m_RefCount: 133
     m_Data: {fileID: -1724931631, guid: dec0cbb4812ce76479807da46b5d34e5, type: 3}
@@ -11528,7 +11538,7 @@ Tilemap:
   - m_RefCount: 6
     m_Data: {fileID: 644062088, guid: dec0cbb4812ce76479807da46b5d34e5, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 1067
+  - m_RefCount: 1068
     m_Data:
       e00: 1
       e01: 0
@@ -11583,7 +11593,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 1145
+  - m_RefCount: 1146
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -31735,6 +31745,7 @@ MonoBehaviour:
   collisionTileVariants:
   - {fileID: 11400000, guid: c021ec8fc90a38444871af13b7b3c0f8, type: 2}
   preferedTile: {fileID: 11400000, guid: 552f8abafc81fdb41a626d3237f5dbef, type: 2}
+  toHideAndReveal: []
   isEntrance: 0
 --- !u!1 &3980424810088285168
 GameObject:

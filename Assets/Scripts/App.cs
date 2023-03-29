@@ -22,7 +22,7 @@ namespace App
 
         void Start()
         {
-            inputSystem.Init(mainCamera, objectsContainer.Player.GetComponent<Player>());
+            inputSystem.Init(mainCamera, objectsContainer.Player.GetComponent<Player>(), objectsContainer.PauseController);
             spawningSystem.Init(objectsContainer.ObjectPool, objectsContainer.Player.GetComponent<Player>());
             gameStatesSystem.Init(objectsContainer.DungeonGenerator,spawningSystem, objectsContainer.Player.GetComponent<Player>());
             spawningSystem.Notifieble = gameStatesSystem;

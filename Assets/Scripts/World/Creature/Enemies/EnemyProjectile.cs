@@ -57,16 +57,13 @@ namespace App.World.Creatures.Enemies
             else
             {
                 HealthStatus collisionHealth = collision.GetComponentInParent<HealthStatus>();
-                Debug.Log(collision.name);
+               
                 if (collisionHealth != null)
                 {
-                    Debug.Log("Enemy projectile hit player2");
                     collisionHealth.TakeDamage(damage);
                     //int index = Random.Range(0, hitSounds.Count);
                     //audioSource.PlayOneShot(hitSounds[index]);
                 }
-                else
-                    Debug.Log("Error: Trying to damage target without Health component");
             }
             objectPool.ReturnToPool(this);
         }

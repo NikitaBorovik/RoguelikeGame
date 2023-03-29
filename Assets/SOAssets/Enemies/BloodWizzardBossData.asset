@@ -20,5 +20,8 @@ MonoBehaviour:
   projectileCount: 0
   damage: 22
   timeBetweenAttacks: 0.4
-  healingDropChance: 0
+  healingDropChance: 1
   attackRange: 9
+  distanceToSeparate: 1.5
+  separateShift: 1.5
+  healthPickupPrefab: {fileID: 3220063241393056012, guid: 30854bf6cb3c2f44abb96317eacaa6e6, type: 3}

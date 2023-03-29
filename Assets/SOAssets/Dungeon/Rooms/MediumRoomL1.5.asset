@@ -60,14 +60,16 @@ MonoBehaviour:
   - {x: 13, y: -15}
   - {x: 5, y: -17}
   - {x: 11, y: 3}
-  rewardSpawns:
-  - {x: -2, y: -7}
-  - {x: 18, y: -7}
-  - {x: 8, y: -10}
   playerSpawn: {x: 0, y: 0}
-  teleporter: {x: 8, y: -7}
   enemiesWave1:
   - {fileID: 4314578069547031956, guid: 3594148e8353de84cb26add3ef817323, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
   enemiesWave2:
-  - {fileID: 4730828233132738427, guid: d5483c720003edb4ebf361f2a4c51d37, type: 3}
+  - {fileID: 5890956001472569608, guid: 47ba31cf816541248ae4a58d47e62772, type: 3}
+  - {fileID: 5890956001472569608, guid: 47ba31cf816541248ae4a58d47e62772, type: 3}
+  - {fileID: 5890956001472569608, guid: 47ba31cf816541248ae4a58d47e62772, type: 3}
+  - {fileID: 5890956001472569608, guid: 47ba31cf816541248ae4a58d47e62772, type: 3}
   enemiesWave3: []

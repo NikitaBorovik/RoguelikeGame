@@ -38,7 +38,6 @@ namespace App.World.Creatures.Enemies.States.ConcreteStates
 
         private IEnumerator Attack()
         {
-            Debug.Log("Attacking");
             yield return new WaitForSeconds(enemy.Animator.GetCurrentAnimatorStateInfo(0).length/2);
             for (int i = 0; i < enemy.EnemyData.projectileCount; i++)
             {

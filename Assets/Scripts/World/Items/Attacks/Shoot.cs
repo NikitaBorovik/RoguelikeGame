@@ -30,9 +30,9 @@ public class Shoot : MonoBehaviour
     
     private void OnShoot(ShootEvent obj)
     {
-        if (canShoot)
+        if (canShoot && player.Mana.CurrentMana >= player.Projectile.ProjectileData.manacost)
         {
-
+            player.Mana.SpendMana(player.Projectile.ProjectileData.manacost);
             GameObject projectile = objectPool.GetObjectFromPool(player.Projectile.PoolObjectType, player.Projectile.gameObject, player.ShootPosition.position).GetGameObject();
             projectile.transform.position = player.ShootPosition.position;
             projectile.GetComponent<Projectile>().Init(player);

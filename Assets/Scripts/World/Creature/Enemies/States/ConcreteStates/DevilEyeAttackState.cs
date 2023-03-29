@@ -45,7 +45,6 @@ namespace App.World.Creatures.Enemies.States.ConcreteStates
                 projectile.transform.position = enemy.ShootPosition.position;
                 Vector3 startingDirection = (enemy.Target.position - enemy.transform.position).normalized;
                 Vector3 direction = Quaternion.AngleAxis(360 / enemy.EnemyData.projectileCount * i, Vector3.forward) * startingDirection;
-                Debug.Log(direction);
                 projectile.GetComponent<EnemyProjectile>().Init(direction, enemy.EnemyData.damage, enemy.EnemyData.projectileSpeed);
             }
             yield return new WaitForSeconds(enemy.Animator.GetCurrentAnimatorStateInfo(0).length / 2);

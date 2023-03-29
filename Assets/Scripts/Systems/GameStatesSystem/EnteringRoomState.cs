@@ -19,8 +19,8 @@ namespace App.Systems.GameStates
 
         public void Enter()
         {
-            spawningSystem.Spawn(CurLevel);
             gameStatesSystem.CurRoom.DrawnRoom.Close();
+            spawningSystem.Spawn(CurLevel);
         }
 
         public void Exit()

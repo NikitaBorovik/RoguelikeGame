@@ -10,6 +10,7 @@ namespace App.World.Items.Attacks
         public float damage;
         public float pearcingCount;
         public float speed;
+        public float manacost;
 
     }
 }

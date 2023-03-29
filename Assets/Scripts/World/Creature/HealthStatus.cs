@@ -1,3 +1,4 @@
+using App.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,10 @@ namespace App.World.Creatures
         private Dictionary<SpriteRenderer, Color> spriteRenderers;
         private List<SpriteRenderer> toDelete;
         private Coroutine blinkRoutine;
+        [SerializeField]
+        private ValueUpdateEvent healthUpdateEvent;
+        [SerializeField]
+        private string healthUpdateEventName;
 
 
         public float CurrentHealth
@@ -30,6 +35,8 @@ namespace App.World.Creatures
                     currentHealth = 0;
                 else
                     currentHealth = value;
+
+                healthUpdateEvent?.CallValueUpdateEvent(prev, currentHealth, MaxHealth, healthUpdateEventName);
 
             }
         }
@@ -101,6 +108,7 @@ namespace App.World.Creatures
 
         private IEnumerator BlinkCoroutine()
         {
+            Debug.Log("Blink");
             if (spriteRenderers == null)
                 yield break;
             foreach (SpriteRenderer spriteRenderer in spriteRenderers.Keys)

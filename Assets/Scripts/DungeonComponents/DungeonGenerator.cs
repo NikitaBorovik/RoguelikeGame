@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+
 [DisallowMultipleComponent]
 public class DungeonGenerator : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class DungeonGenerator : MonoBehaviour
     private void Awake()
     {
         roomNodeTypes = MyResources.Instance.roomNodeTypes;
-        MyResources.Instance.myMaterial.SetFloat("_AlphaValue", 1f);
+     //   MyResources.Instance.myMaterial.SetFloat("_AlphaValue", 1f);
     }
 
     public bool GenerateDungeon(LevelModel curLevel)
@@ -27,7 +28,7 @@ public class DungeonGenerator : MonoBehaviour
         roomModelsList = curLevel.roomModels;
         CreateRoomModelsDictionary();
         int replaceAttempts = 0;
-        while(!buildSuccessfull && replaceAttempts < Settings.maxReplaceAttempts)
+        while(!buildSuccessfull && replaceAttempts < 100000)
         {
             if (curLevel.dungeonStructures.Count > 0)
             {
@@ -36,12 +37,15 @@ public class DungeonGenerator : MonoBehaviour
                 buildSuccessfull = TryToBuildDungeon(dungeonStructureGraph);
                 replaceAttempts++;
             }
+            else
+            {
+                Debug.LogError("No dungeon structures in the level");
+                break;
+            }
               
         }
         if (buildSuccessfull)
-        {
             DrawDungeon();
-        }
         return buildSuccessfull;
     }
 
@@ -80,15 +84,12 @@ public class DungeonGenerator : MonoBehaviour
         RoomNode entrance = dungeonStructureGraph.GetNode(roomNodeTypes.list.Find(x => x.isEntrance));
         if (entrance == null)
         {
-    
             return false;
         }
         roomsToPlace.Enqueue(entrance);
         bool isNotOverlapping = true;
         isNotOverlapping = ProcessGraphRooms(dungeonStructureGraph, roomsToPlace);
-        if (roomsToPlace.Count == 0 && isNotOverlapping)
-            return true;
-        return false;
+        return roomsToPlace.Count == 0 && isNotOverlapping;
     }
 
     private bool ProcessGraphRooms(DungeonStructureGraph dungeonStructureGraph, Queue<RoomNode> roomsToPlace)
@@ -121,7 +122,7 @@ public class DungeonGenerator : MonoBehaviour
             return null;
         Room room = null;
         int tryCount = 0;
-        while (room == null && tryCount < 1)
+        while (room == null && tryCount < 4)
         {
             tryCount++;
             
@@ -140,12 +141,10 @@ public class DungeonGenerator : MonoBehaviour
             if (ChechIfRoomCanBePlaced(parent, room, doorOfParentToConnect))
             {
                 room.IsPlaced = true;
-               // roomDictionary.Add(room.roomId, room);
             }
             else
             {
                 room = null;
-               // return null;
             }
         }
         return room;

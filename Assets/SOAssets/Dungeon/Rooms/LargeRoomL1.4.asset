@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 795537cef4d4503448398ee0f4ac4567, type: 3}
+  m_Name: LargeRoomL1.4
+  m_EditorClassIdentifier: 
+  id: 
+  prefab: {fileID: 3702022006039285852, guid: cde309df29f11c041ade0bf06808b348, type: 3}
+  lastPrefab: {fileID: 0}
+  roomType: {fileID: 11400000, guid: cd90e425b0b36e1448c7bb59dfa40e83, type: 2}
+  leftBottomPoint: {x: -19, y: -6}
+  rightTopPoint: {x: 33, y: 31}
+  doors:
+  - pos: {x: 7, y: 31}
+    orientation: 0
+    prefab: {fileID: 8059238935604172366, guid: 9a5d384fabbe67b4b97fb3ab13468638, type: 3}
+    wallToBuildPosition: {x: 3, y: 31}
+    wallBuildingWidthInTiles: 7
+    wallBuildingHeigthInTiles: 6
+    isConnected: 0
+    isAvailable: 0
+  - pos: {x: 7, y: -6}
+    orientation: 1
+    prefab: {fileID: 860060853846549260, guid: 032d5122cb37954458e14486eda3aaff, type: 3}
+    wallToBuildPosition: {x: 4, y: -1}
+    wallBuildingWidthInTiles: 6
+    wallBuildingHeigthInTiles: 6
+    isConnected: 0
+    isAvailable: 0
+  - pos: {x: -19, y: 13}
+    orientation: 2
+    prefab: {fileID: 3815980458193187534, guid: b9cfaab46fb0e6f4d9a9c4df2100064e, type: 3}
+    wallToBuildPosition: {x: -19, y: -19}
+    wallBuildingWidthInTiles: 6
+    wallBuildingHeigthInTiles: 9
+    isConnected: 0
+    isAvailable: 0
+  - pos: {x: 33, y: 13}
+    orientation: 3
+    prefab: {fileID: 5836893268164278993, guid: 1b625967329449d4795997708fc686e0, type: 3}
+    wallToBuildPosition: {x: 28, y: 19}
+    wallBuildingWidthInTiles: 6
+    wallBuildingHeigthInTiles: 9
+    isConnected: 0
+    isAvailable: 0
+  enemySpawns:
+  - {x: -9, y: 13}
+  - {x: -12, y: 22}
+  - {x: -3, y: 13}
+  - {x: 1, y: 13}
+  - {x: 4, y: 13}
+  - {x: 7, y: 13}
+  - {x: 17, y: 13}
+  - {x: 7, y: 20}
+  - {x: 26, y: 21}
+  - {x: 7, y: 7}
+  - {x: -12, y: 2}
+  - {x: 21, y: 13}
+  - {x: 26, y: 1}
+  - {x: 7, y: 1}
+  playerSpawn: {x: 0, y: 0}
+  enemiesWave1:
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  enemiesWave2:
+  - {fileID: 4314578069547031956, guid: 3594148e8353de84cb26add3ef817323, type: 3}
+  - {fileID: 4314578069547031956, guid: 3594148e8353de84cb26add3ef817323, type: 3}
+  - {fileID: 7191424322614358097, guid: c975c5e53e71ffb4b984d8b86968a786, type: 3}
+  - {fileID: 7191424322614358097, guid: c975c5e53e71ffb4b984d8b86968a786, type: 3}
+  - {fileID: 7191424322614358097, guid: c975c5e53e71ffb4b984d8b86968a786, type: 3}
+  - {fileID: 7191424322614358097, guid: c975c5e53e71ffb4b984d8b86968a786, type: 3}
+  enemiesWave3: []

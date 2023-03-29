@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackType: Ranged
   poolObjectType: DevilEye
-  maxHealth: 100
+  maxHealth: 70
   speed: 6
   projectileSpeed: 10
   projectileCount: 8
   damage: 20
   timeBetweenAttacks: 1.2
-  healingDropChance: 0
+  healingDropChance: 0.3
   attackRange: 10
+  distanceToSeparate: 2
+  separateShift: 1.5
+  healthPickupPrefab: {fileID: 3220063241393056012, guid: 30854bf6cb3c2f44abb96317eacaa6e6, type: 3}

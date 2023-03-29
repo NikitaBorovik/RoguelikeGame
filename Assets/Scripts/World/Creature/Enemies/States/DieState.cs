@@ -10,7 +10,6 @@ namespace App.World.Creatures.Enemies.States
 
         public override void Enter()
         {
-            Debug.Log("I am dead");
             foreach (Collider2D collider in baseEnemy.MyColliders)
                 collider.enabled = false;
             baseEnemy.Animator.SetBool("IsSpawning", false);

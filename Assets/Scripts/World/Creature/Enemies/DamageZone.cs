@@ -23,7 +23,6 @@ namespace App.World.Creatures.Enemies
         
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            Debug.Log("Splash collision");
             HealthStatus collisionHealth = collision.GetComponentInParent<HealthStatus>();
             if (collisionHealth != null)
             {
@@ -32,8 +31,6 @@ namespace App.World.Creatures.Enemies
                     targetsToDamage.Add(collisionHealth);
                 }
             }
-            else
-                Debug.Log("Error: Trying to damage target without Health component");
         }
         private void OnTriggerExit2D(Collider2D collision)
         {

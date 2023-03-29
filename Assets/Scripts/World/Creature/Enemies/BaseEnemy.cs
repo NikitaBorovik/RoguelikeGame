@@ -13,6 +13,7 @@ namespace App.World.Creatures.Enemies
         private Transform target;
         private FollowState followState;
         private SpawningState spawningState;
+        private SeparateState separateState;
         private DieState dieState;
         private Animator animator;
         private SpriteRenderer spriteRenderer;
@@ -51,6 +52,7 @@ namespace App.World.Creatures.Enemies
         public virtual string PoolObjectType => enemyData.poolObjectType;
 
         public SpawningState SpawningState { get => spawningState; set => spawningState = value; }
+        public SeparateState SeparateState { get => separateState; set => separateState = value; }
 
         public virtual void Awake()
         {
@@ -60,6 +62,7 @@ namespace App.World.Creatures.Enemies
             stateMachine = new StateMachine();
             followState = new FollowState(this, stateMachine);
             SpawningState = new SpawningState(this, stateMachine,Animator);
+            SeparateState = new SeparateState(this, stateMachine);
             dieState = new DieState(this, stateMachine);
            // stateMachine.Initialize(spawningState);
         }
@@ -69,7 +72,6 @@ namespace App.World.Creatures.Enemies
             
             if (initialised)
                 stateMachine.CurrentState.Update();
-            Debug.Log("Updated "+ stateMachine.CurrentState);
         }
 
         public virtual void Init(Vector3 position, Transform target, float hpMultiplier, Room currentRoom, INotifyEnemyDied notifieble)
@@ -96,8 +98,19 @@ namespace App.World.Creatures.Enemies
             if (stateMachine.CurrentState != dieState)
             {
                 StopAllCoroutines();
+                DropHealing();
                 stateMachine.ChangeState(dieState);
                 notifieble.NotifyEnemyDied();
+            }
+        }
+
+        private void DropHealing()
+        {
+            if (Random.value <= enemyData.healingDropChance)
+            {
+                GameObject healing = objectPool.GetObjectFromPool(enemyData.healthPickupPrefab.PoolObjectType, enemyData.healthPickupPrefab.gameObject, transform.position).GetGameObject();
+                healing.GetComponent<HealthPickup>().Init(transform.position, objectPool);
+
             }
         }
 

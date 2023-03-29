@@ -2,6 +2,7 @@ using App.World.Creatures.Enemies;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace App.World.Creatures.Enemies.States
 {
@@ -12,8 +13,10 @@ namespace App.World.Creatures.Enemies.States
         private float timeSinceLastPathRecalculation = 0f;
         private Vector3 currentTarget;
         private float attackDelay;
+        private float radiusToCheckSeparate;
         public FollowState(BaseEnemy baseEnemy, StateMachine stateMachine) : base(baseEnemy, stateMachine) 
         {
+            radiusToCheckSeparate = baseEnemy.EnemyData.distanceToSeparate;
         }
 
         public override void Enter()
@@ -28,11 +31,16 @@ namespace App.World.Creatures.Enemies.States
 
         public override void Update()
         {
-            Debug.Log("Following Update");
             attackDelay += Time.deltaTime;
             timeSinceLastPathRecalculation += Time.deltaTime;
-            if (Vector3.Distance(baseEnemy.transform.position, baseEnemy.Target.position) < baseEnemy.EnemyData.attackRange &&
-                attackDelay >= baseEnemy.EnemyData.timeBetweenAttacks)
+            if (ShouldSeparateFromOtherEnemies())
+            {
+                baseEnemy.SeparateState.Velocity = CalculateVelocityToSeparate();
+                stateMachine.ChangeState(baseEnemy.SeparateState);
+            }   
+            else if (Vector3.Distance(baseEnemy.transform.position, baseEnemy.Target.position) < baseEnemy.EnemyData.attackRange &&
+                attackDelay >= baseEnemy.EnemyData.timeBetweenAttacks && !Physics.Raycast(baseEnemy.transform.position, baseEnemy.Target.position - baseEnemy.transform.position,
+                (baseEnemy.Target.position - baseEnemy.transform.position).magnitude, LayerMask.NameToLayer("Wall")))
             {
                 stateMachine.ChangeState(baseEnemy.AttackState);
             }
@@ -67,6 +75,46 @@ namespace App.World.Creatures.Enemies.States
         public override void Exit()
         {
             baseEnemy.MyRigidbody.velocity = Vector2.zero;
+        }
+
+        private bool ShouldSeparateFromOtherEnemies()
+        {
+            var hits = Physics2D.OverlapCircleAll(baseEnemy.transform.position, radiusToCheckSeparate);
+            foreach (var hit in hits)
+            {
+                if (hit.GetComponent<BaseEnemy>() != null && hit.transform != baseEnemy.transform)
+                {
+                    return true;
+                }
+            }
+            return false;
+            
+        }
+        
+        private Vector3 CalculateVelocityToSeparate()
+        {
+            float separateSpeed = baseEnemy.EnemyData.speed / 2f;
+
+            Vector2 sum = Vector2.zero;
+            int count = 0;
+
+            var hits = Physics2D.OverlapCircleAll(baseEnemy.transform.position, radiusToCheckSeparate);
+            foreach (var hit in hits)
+            {
+                if (hit.GetComponent<BaseEnemy>() != null && hit.transform != baseEnemy.transform)
+                {
+                    Vector2 difference = baseEnemy.transform.position - hit.transform.position;
+                    difference = difference.normalized / Mathf.Abs(difference.magnitude);
+                    sum += difference;
+                    count++;
+                }
+            }
+
+            if (count > 0)
+            {
+                sum = sum.normalized * separateSpeed;
+            }
+            return sum;
         }
 
         private void SetMoveAnimationParams(float vx)

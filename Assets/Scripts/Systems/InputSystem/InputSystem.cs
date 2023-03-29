@@ -1,3 +1,4 @@
+using App.UI;
 using App.World.Creatures.PlayerScripts.Components;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace App.Systems.Input
 
         private Camera mainCamera;
         private Player player;
+        private PauseController pauseController;
 
         private void Update()
         {
@@ -17,12 +19,15 @@ namespace App.Systems.Input
             HandleMoveInput();
             HandleShootInput();
             HandleDashInput();
+            HandleObtainInput();
+            HandleMouseWheelInput();
+            HandlePauseInput();
         }
-        public void Init(Camera mainCamera, Player player)
+        public void Init(Camera mainCamera, Player player, PauseController pauseController)
         {
             this.mainCamera = mainCamera;
             this.player = player;
-            
+            this.pauseController = pauseController;
         }
 
         private Vector3 GetMousePositionInWorld()
@@ -89,6 +94,43 @@ namespace App.Systems.Input
                 player.ShootEvent.CallShootEvent();
             }
             
+        }
+
+        private void HandleObtainInput()
+        {
+            if (UnityEngine.Input.GetKeyDown(KeyCode.E))
+            {
+                player.ObtainEvent.CallObtainEvent();
+            }
+        }
+
+        private void HandleMouseWheelInput()
+        {
+            if (UnityEngine.Input.mouseScrollDelta.y > 0)
+            {
+                int index = player.Powers.IndexOf(player.Projectile);
+                player.Projectile = player.Powers[(index + 1) % player.Powers.Count];
+            }
+            else if (UnityEngine.Input.mouseScrollDelta.y < 0)
+            {
+                int index = player.Powers.IndexOf(player.Projectile) - 1;
+                if (index < 0)
+                {
+                    index = player.Powers.Count - 1;
+                }
+                player.Projectile = player.Powers[index];
+            }
+        }
+        private bool HandlePauseInput()
+        {
+            if (!UnityEngine.Input.GetKeyDown(KeyCode.Escape)) return pauseController.Paused;
+
+            if (pauseController.Paused)
+                pauseController.Unpause();
+            else
+                pauseController.Pause();
+
+            return pauseController.Paused;
         }
     }
 }

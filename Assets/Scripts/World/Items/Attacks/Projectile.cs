@@ -8,34 +8,44 @@ namespace App.World.Items.Attacks
     public class Projectile : MonoBehaviour, IObjectPoolItem
     {
         #region parameters
-        protected float spread;
-        protected float damage;
-        protected float speed;
-        protected float pearcingCount;
-        protected bool isFlying = false;
+        private float spread;
+        private float damage;
+        private float speed;
+        private float pearcingCount;
+        private float manacost;
+        private bool isFlying = false;
         #endregion
 
         #region serialized parameters
         [SerializeField]
-        protected ProjectileSO projectileData;
+        private ProjectileSO projectileData;
         [SerializeField]
-        protected string poolObjectType;
+        private string poolObjectType;
         [SerializeField]
-        protected Animator animator;
+        private Animator animator;
         [SerializeField]
-        protected Rigidbody2D rb;
+        private Rigidbody2D rb;
         [SerializeField]
-        protected PolygonCollider2D polygonCollider;
+        private PolygonCollider2D polygonCollider;
+        [SerializeField]
+        private Sprite treasureSprite;
         #endregion
 
         #region connected objects
-        protected ObjectPool objectPool;
-        protected Player player;
-        protected Shoot shoot;
-        protected TrailRenderer trailRenderer;
+        private ObjectPool objectPool;
+        private Player player;
+        private Shoot shoot;
+        private TrailRenderer trailRenderer;
         #endregion
 
         public string PoolObjectType => poolObjectType;
+
+        public Sprite TreasureSprite { get => treasureSprite; set => treasureSprite = value; }
+        public float Damage { get => damage; set => damage = value; }
+        public float Spread { get => spread; set => spread = value; }
+        public float Speed { get => speed; set => speed = value; }
+        public float Manacost { get => manacost; set => manacost = value; }
+        public ProjectileSO ProjectileData { get => projectileData; set => projectileData = value; }
 
         protected virtual void Update()
         {
@@ -49,10 +59,11 @@ namespace App.World.Items.Attacks
         protected virtual void Awake()
         {
             trailRenderer = GetComponent<TrailRenderer>();
-            damage = projectileData.damage;
-            speed = projectileData.speed;
-            pearcingCount = projectileData.pearcingCount;
-            
+            Damage = ProjectileData.damage;
+            Speed = ProjectileData.speed;
+            pearcingCount = ProjectileData.pearcingCount;
+            manacost = ProjectileData.manacost;
+            Debug.Log("Manacost" + manacost);
         }
         public virtual void OnTriggerEnter2D(Collider2D collision)
         {
@@ -69,10 +80,10 @@ namespace App.World.Items.Attacks
                 return;
             }
             
-            targetHealt.TakeDamage(projectileData.damage);
+            targetHealt.TakeDamage(ProjectileData.damage);
             if (pearcingCount > 0)
             {
-                projectileData.pearcingCount--;
+                ProjectileData.pearcingCount--;
             }
             else
             {
@@ -101,7 +112,7 @@ namespace App.World.Items.Attacks
             
             Quaternion rotation = Quaternion.Euler(player.ShootPosition.eulerAngles.x, player.ShootPosition.eulerAngles.y, player.ShootPosition.eulerAngles.z /*+ spread*/);
             transform.rotation = rotation;
-            rb.velocity = transform.right * projectileData.speed;
+            rb.velocity = transform.right * ProjectileData.speed;
            
         }
 

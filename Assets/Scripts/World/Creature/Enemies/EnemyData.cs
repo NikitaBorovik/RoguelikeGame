@@ -15,5 +15,8 @@ namespace App.World.Creatures.Enemies
         public float timeBetweenAttacks;
         public float healingDropChance;
         public float attackRange;
+        public float distanceToSeparate;
+        public float separateShift;
+        public HealthPickup healthPickupPrefab;
     }
 }

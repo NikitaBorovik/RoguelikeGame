@@ -1,4 +1,5 @@
 using App.Systems.GameStates;
+using App.World.Items.Treasures;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,6 +27,8 @@ public class DrawnRoom : MonoBehaviour
     [SerializeField]
     private Tile preferedTile;
     private List<InstanciatedDoor> drawnDoors;
+    [SerializeField]
+    private List<GameObject> toHideAndReveal;
 
 
     TilemapRenderer[] tileRenderers;
@@ -44,6 +47,7 @@ public class DrawnRoom : MonoBehaviour
     public Tilemap Collisions { get => collisions; set => collisions = value; }
     public Tilemap Minimap { get => minimap; set => minimap = value; }
     public Bounds RoomCollider { get => roomCollider; set => roomCollider = value; }
+    
 
     private void Awake()
     {
@@ -60,6 +64,10 @@ public class DrawnRoom : MonoBehaviour
             }
             
         }
+        foreach (var item in toHideAndReveal)
+        {
+            item.SetActive(false);
+        }
         gameStates = FindObjectOfType<GameStatesSystem>();
 
     }
@@ -75,7 +83,11 @@ public class DrawnRoom : MonoBehaviour
             }
             
         }
-        
+        foreach (var item in toHideAndReveal)
+        {
+            item.SetActive(true);
+        }
+
         //gameStates.CurRoom = room;
 
         if (!room.RoomNodeType.isCorridor && !room.RoomNodeType.isEntrance && !isVisited)

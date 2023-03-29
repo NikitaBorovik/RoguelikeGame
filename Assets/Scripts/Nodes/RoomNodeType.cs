@@ -35,6 +35,8 @@ public class RoomNodeType : ScriptableObject
 
     public bool isBoss;
 
+    public bool isTreasure;
+
     public bool isNone;
 
     private void OnValidate()

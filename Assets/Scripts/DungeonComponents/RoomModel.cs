@@ -20,9 +20,7 @@ public class RoomModel : ScriptableObject
     [NonReorderable]
     public List<Door> doors;
     public Vector2Int[] enemySpawns;
-    public Vector2Int[] rewardSpawns;
     public Vector2Int playerSpawn;
-    public Vector2Int teleporter;
     [SerializeField]
     public List<BaseEnemy> enemiesWave1;
     [SerializeField]
@@ -30,20 +28,4 @@ public class RoomModel : ScriptableObject
     [SerializeField]
     public List<BaseEnemy> enemiesWave3;
 
-#if UNITY_EDITOR
-    public void OnValidate()
-    {
-        if(lastPrefab==prefab || id == null || id == "")
-        {
-            id = GUID.Generate().ToString();
-            lastPrefab = prefab;
-            EditorUtility.SetDirty(this);
-        }
-        if(doors == null || doors.Count == 0)
-        {
-            Debug.Log("Doors are not populated!");
-        }
-        
-    }
-#endif
 }

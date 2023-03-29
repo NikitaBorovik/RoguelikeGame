@@ -17,6 +17,15 @@ MonoBehaviour:
   isCorridor: 0
   isTopBottomCorridor: 0
   isRightLeftCorridor: 0
+  isTopLeftCorridor: 0
+  isTopRightCorridor: 0
+  isBottomLeftCorridor: 0
+  isBottomRightCorridor: 0
+  isRightTopCorridor: 0
+  isRightBottomCorridor: 0
+  isLeftTopCorridor: 0
+  isLeftBottomCorridor: 0
   isEntrance: 0
   isBoss: 0
-  isCommon: 0
+  isTreasure: 1
+  isNone: 0

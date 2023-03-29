@@ -10,6 +10,8 @@ namespace App.World.Creatures.PlayerScripts.Components
         public float speed;
         public float maxHealth;
         public float maxMana;
+        public float dashDistance;
+        public float dashTime;
 
     }
 }

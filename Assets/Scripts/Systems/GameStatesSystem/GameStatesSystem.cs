@@ -1,4 +1,5 @@
 using App.Systems.Spawning;
+using App.UI;
 using App.World.Creatures.PlayerScripts.Components;
 using App.World.DungeonComponents;
 using App.World.WorldObjects;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace App.Systems.GameStates
 {
-    public class GameStatesSystem : MonoBehaviour, INotifyRoomChanged , INotifyRoomCleared
+    public class GameStatesSystem : MonoBehaviour, INotifyRoomChanged , INotifyRoomCleared , INotifyGameEnded
     {
         private StateMachine gameStateMachine;
         private DungeonGenerator dungeonBuilder;
@@ -15,6 +16,7 @@ namespace App.Systems.GameStates
         private EnteringRoomState enteringRoomState;
         private SpawningSystem spawningSystem;
         private RoomClearedState roomClearedState;
+        private GameEndedState gameEndedState;
         private Player player;
         private int curLevel = 0;
         [SerializeField]
@@ -22,9 +24,9 @@ namespace App.Systems.GameStates
         [SerializeField]
         private Room curRoom;
         [SerializeField]
-        public AStarTest aStarTest;
-        [SerializeField]
         private Portal portal;
+        [SerializeField]
+        private DeathScreenController deathScreenController;
 
         public Room CurRoom { get => curRoom; set { curRoom = value; } }
 
@@ -39,17 +41,13 @@ namespace App.Systems.GameStates
             dungeonBuildingState = new DungeonBuildingState(this, dungeonBuilder, levels[CurLevel]);
             enteringRoomState = new EnteringRoomState(this, spawningSystem , CurLevel);
             roomClearedState = new RoomClearedState(this);
+            gameEndedState = new GameEndedState(this, deathScreenController);
             this.player = player;
+            player.NotifiebleForGameEnded = this;
             gameStateMachine.Initialize(dungeonBuildingState);
         }
         public void EnteringRoom()
         {
-            if(aStarTest == null)
-            {
-                Debug.Log("Null");
-            }
-            aStarTest.room = curRoom;//
-            aStarTest.grid = curRoom.DrawnRoom.Grid;//
             gameStateMachine.ChangeState(enteringRoomState);
         }
 
@@ -65,7 +63,7 @@ namespace App.Systems.GameStates
             }
             else
             {
-                Debug.Log("Game Cleared");
+                NotifyGameEnded();
             }
         }
 
@@ -90,9 +88,10 @@ namespace App.Systems.GameStates
             gameStateMachine.ChangeState(roomClearedState);
         }
 
-        
-
-        
+        public void NotifyGameEnded()
+        {
+            gameStateMachine.ChangeState(gameEndedState);
+        }
     }
 }
 

@@ -1,6 +1,5 @@
 using App.Systems;
-using System.Collections;
-using System.Collections.Generic;
+using App.UI;
 using UnityEngine;
 
 namespace App.World
@@ -13,9 +12,12 @@ namespace App.World
         private DungeonGenerator dungeonGenerator;
         [SerializeField]
         private ObjectPool objectPool;
+        [SerializeField]
+        private PauseController pauseController;
         public GameObject Player { get => player; }
         public DungeonGenerator DungeonGenerator { get => dungeonGenerator; set => dungeonGenerator = value; }
         public ObjectPool ObjectPool { get => objectPool; set => objectPool = value; }
+        public PauseController PauseController { get => pauseController; set => pauseController = value; }
     }
 }
 
