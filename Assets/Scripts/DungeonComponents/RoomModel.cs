@@ -12,8 +12,6 @@ public class RoomModel : ScriptableObject
     [HideInInspector]
     public string id;
     public GameObject prefab;
-    [HideInInspector]
-    public GameObject lastPrefab;
     public RoomNodeType roomType;
     public Vector2Int leftBottomPoint;
     public Vector2Int rightTopPoint;

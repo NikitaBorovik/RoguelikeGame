@@ -58,6 +58,11 @@ MonoBehaviour:
   - {x: 3, y: 22}
   - {x: -6, y: 19}
   - {x: 12, y: 23}
+  - {x: -3, y: 6}
+  - {x: 11, y: 6}
+  - {x: 0, y: 4}
+  - {x: 7, y: 4}
+  - {x: 3, y: 19}
   playerSpawn: {x: 0, y: 0}
   enemiesWave1:
   - {fileID: 4314578069547031956, guid: 3594148e8353de84cb26add3ef817323, type: 3}

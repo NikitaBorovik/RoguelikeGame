@@ -25,3 +25,4 @@ MonoBehaviour:
   distanceToSeparate: 0.3
   separateShift: 0.7
   healthPickupPrefab: {fileID: 3220063241393056012, guid: 30854bf6cb3c2f44abb96317eacaa6e6, type: 3}
+  attackSound: {fileID: 8300000, guid: 7d2f5fe0ffcaa2448bd3a83f6b44c187, type: 3}

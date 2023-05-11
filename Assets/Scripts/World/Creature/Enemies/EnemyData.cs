@@ -18,5 +18,6 @@ namespace App.World.Creatures.Enemies
         public float distanceToSeparate;
         public float separateShift;
         public HealthPickup healthPickupPrefab;
+        public AudioClip attackSound;
     }
 }

@@ -269,9 +269,10 @@ GameObject:
   - component: {fileID: 6888057871348744322}
   - component: {fileID: 4711546995509669812}
   - component: {fileID: 1472022297482804819}
-  - component: {fileID: -6234363696011733659}
   - component: {fileID: 5890956001472569608}
   - component: {fileID: 5726121290975324788}
+  - component: {fileID: 4521095423866685178}
+  - component: {fileID: 7073222921918843092}
   m_Layer: 14
   m_Name: BloodWizzardBoss
   m_TagString: Untagged
@@ -352,18 +353,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blinkTime: 0.125
---- !u!114 &-6234363696011733659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8004361702979961554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fac3d836716ca940800ffe085f767b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  healthUpdateEvent: {fileID: 0}
+  healthUpdateEventName: 
+  damageSound: {fileID: 0}
 --- !u!114 &5890956001472569608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,9 +368,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4921941e80c08824f8475158673e13ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  astarPathfinding: {fileID: -6234363696011733659}
+  pathfinding: {fileID: 7073222921918843092}
   myRigidbody: {fileID: 6888057871348744322}
-  audioSource: {fileID: 0}
   enemyData: {fileID: 11400000, guid: 5c8346a747f0fc8448b6e8f4e4e3e945, type: 2}
   myColliders: []
   health: {fileID: 1472022297482804819}
@@ -400,3 +391,111 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.2
+--- !u!82 &4521095423866685178
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8004361702979961554}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.05
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &7073222921918843092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8004361702979961554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3f6be39f1723b4185646fb708a06c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

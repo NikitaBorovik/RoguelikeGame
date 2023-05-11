@@ -9,7 +9,6 @@ public class SeparateState : EnemyBaseState
 {
     
     private Vector3 velocity;
-    private BaseEnemy baseEnemy;
     public Vector3 Velocity { get => velocity; set => velocity = value; }
 
     public SeparateState(BaseEnemy baseEnemy, StateMachine stateMachine) : base(baseEnemy, stateMachine)

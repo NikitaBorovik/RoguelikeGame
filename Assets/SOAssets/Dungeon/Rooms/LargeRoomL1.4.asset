@@ -38,7 +38,7 @@ MonoBehaviour:
   - pos: {x: -19, y: 13}
     orientation: 2
     prefab: {fileID: 3815980458193187534, guid: b9cfaab46fb0e6f4d9a9c4df2100064e, type: 3}
-    wallToBuildPosition: {x: -19, y: -19}
+    wallToBuildPosition: {x: -19, y: 19}
     wallBuildingWidthInTiles: 6
     wallBuildingHeigthInTiles: 9
     isConnected: 0

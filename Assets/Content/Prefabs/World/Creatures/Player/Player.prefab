@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5055771026676941931}
   m_Layer: 9
   m_Name: Shadow
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 1792499913386459624}
   m_Layer: 9
   m_Name: ShootPosition
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 3866724181854971794}
   m_Layer: 0
   m_Name: Stuff
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 4323174651635210925}
   m_Layer: 9
   m_Name: Hitbox
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 5540866578249402774}
   m_Layer: 18
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -442,6 +442,7 @@ MonoBehaviour:
   blinkTime: 0.2
   healthUpdateEvent: {fileID: 5540866578249402774}
   healthUpdateEventName: HealthUpdate
+  damageSound: {fileID: 8300000, guid: ede27304c8f7e5b49a6226f217ea8853, type: 3}
 --- !u!114 &7878043739031538611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,14 +487,14 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6507753712811452871}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d97a6370a2737e14089facf0ec7704eb, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.01
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -717,7 +718,7 @@ GameObject:
   - component: {fileID: 207425150423625760}
   m_Layer: 17
   m_Name: Collision Box
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -775,7 +776,7 @@ GameObject:
   - component: {fileID: 6841191082588702516}
   m_Layer: 9
   m_Name: shadow
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -859,7 +860,7 @@ GameObject:
   - component: {fileID: 2983423724157901719}
   m_Layer: 9
   m_Name: Fire
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -943,7 +944,7 @@ GameObject:
   - component: {fileID: 3178734999229404208}
   m_Layer: 0
   m_Name: Sprite
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

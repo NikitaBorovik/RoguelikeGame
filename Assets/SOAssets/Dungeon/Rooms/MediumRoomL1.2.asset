@@ -59,6 +59,9 @@ MonoBehaviour:
   - {x: 8, y: 11}
   - {x: -9, y: 12}
   - {x: -4, y: 12}
+  - {x: 7, y: 10}
+  - {x: 7, y: 10}
+  - {x: 8, y: 7}
   playerSpawn: {x: 0, y: 0}
   enemiesWave1:
   - {fileID: 4314578069547031956, guid: 3594148e8353de84cb26add3ef817323, type: 3}

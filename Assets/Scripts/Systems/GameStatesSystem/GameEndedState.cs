@@ -9,6 +9,7 @@ namespace App.Systems.GameStates
     {
         private GameStatesSystem gameStatesSystem;
         private DeathScreenController deathScreenController;
+        private bool isVictory = false;
 
         public GameEndedState(GameStatesSystem gameStatesSystem, DeathScreenController deathScreenController)
         {
@@ -16,8 +17,18 @@ namespace App.Systems.GameStates
             this.deathScreenController = deathScreenController;
         }
 
+        public bool IsVictory { get => isVictory; set => isVictory = value; }
+
         public void Enter()
         {
+            if (IsVictory)
+            {
+                deathScreenController.Text.SetText("You won! Game over");
+            }
+            else
+            {
+                deathScreenController.Text.SetText("You died! Game over");
+            }
             deathScreenController.Appear();
         }
 

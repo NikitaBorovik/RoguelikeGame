@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface INotifyRoomChanged 
 {
-    void NotifyOnRoomChanged(Room room);
+    void NotifyOnRoomChanged(RoomData room);
 }

@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 795537cef4d4503448398ee0f4ac4567, type: 3}
+  m_Name: LargeRoomL1.1NotForUse
+  m_EditorClassIdentifier: 
+  id: a3e7b326184740e429ebb46c0a8611f4
+  prefab: {fileID: 3702022006039285852, guid: 69ca26000adf3784c81fc954bc94db6d, type: 3}
+  lastPrefab: {fileID: 3702022006039285852, guid: 69ca26000adf3784c81fc954bc94db6d, type: 3}
+  roomType: {fileID: 11400000, guid: cd90e425b0b36e1448c7bb59dfa40e83, type: 2}
+  leftBottomPoint: {x: -23, y: -28}
+  rightTopPoint: {x: 20, y: 22}
+  doors:
+  - pos: {x: -23, y: -18}
+    orientation: 2
+    prefab: {fileID: 3815980458193187534, guid: b9cfaab46fb0e6f4d9a9c4df2100064e, type: 3}
+    wallToBuildPosition: {x: -23, y: -12}
+    wallBuildingWidthInTiles: 6
+    wallBuildingHeigthInTiles: 8
+    isConnected: 0
+    isAvailable: 0
+  - pos: {x: -1, y: 22}
+    orientation: 0
+    prefab: {fileID: 8059238935604172366, guid: 9a5d384fabbe67b4b97fb3ab13468638, type: 3}
+    wallToBuildPosition: {x: -4, y: 22}
+    wallBuildingWidthInTiles: 5
+    wallBuildingHeigthInTiles: 7
+    isConnected: 0
+    isAvailable: 0
+  - pos: {x: 20, y: 9}
+    orientation: 3
+    prefab: {fileID: 5836893268164278993, guid: 1b625967329449d4795997708fc686e0, type: 3}
+    wallToBuildPosition: {x: 15, y: 15}
+    wallBuildingWidthInTiles: 6
+    wallBuildingHeigthInTiles: 8
+    isConnected: 0
+    isAvailable: 0
+  - pos: {x: 11, y: -28}
+    orientation: 1
+    prefab: {fileID: 860060853846549260, guid: 032d5122cb37954458e14486eda3aaff, type: 3}
+    wallToBuildPosition: {x: 8, y: -23}
+    wallBuildingWidthInTiles: 5
+    wallBuildingHeigthInTiles: 6
+    isConnected: 0
+    isAvailable: 0
+  enemySpawns:
+  - {x: -10, y: -15}
+  - {x: 3, y: -15}
+  - {x: -4, y: -15}
+  - {x: -11, y: -1}
+  - {x: 5, y: -6}
+  - {x: -11, y: 13}
+  - {x: -7, y: 13}
+  - {x: 5, y: 14}
+  - {x: 11, y: 14}
+  playerSpawn: {x: 0, y: 0}
+  enemiesWave1:
+  - {fileID: 4314578069547031956, guid: 3594148e8353de84cb26add3ef817323, type: 3}
+  - {fileID: 7191424322614358097, guid: c975c5e53e71ffb4b984d8b86968a786, type: 3}
+  - {fileID: 7191424322614358097, guid: c975c5e53e71ffb4b984d8b86968a786, type: 3}
+  - {fileID: 7191424322614358097, guid: c975c5e53e71ffb4b984d8b86968a786, type: 3}
+  - {fileID: 7191424322614358097, guid: c975c5e53e71ffb4b984d8b86968a786, type: 3}
+  - {fileID: 7191424322614358097, guid: c975c5e53e71ffb4b984d8b86968a786, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  enemiesWave2:
+  - {fileID: 4730828233132738427, guid: d5483c720003edb4ebf361f2a4c51d37, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  - {fileID: 7210792389426964492, guid: 8addbacab01e6164bb05e8c167847d02, type: 3}
+  - {fileID: 5890956001472569608, guid: 47ba31cf816541248ae4a58d47e62772, type: 3}
+  - {fileID: 5890956001472569608, guid: 47ba31cf816541248ae4a58d47e62772, type: 3}
+  enemiesWave3:
+  - {fileID: 5890956001472569608, guid: 47ba31cf816541248ae4a58d47e62772, type: 3}
+  - {fileID: 5890956001472569608, guid: 47ba31cf816541248ae4a58d47e62772, type: 3}
+  - {fileID: 5890956001472569608, guid: 47ba31cf816541248ae4a58d47e62772, type: 3}
+  - {fileID: 4314578069547031956, guid: 3594148e8353de84cb26add3ef817323, type: 3}
+  - {fileID: 7191424322614358097, guid: c975c5e53e71ffb4b984d8b86968a786, type: 3}
+  - {fileID: 7191424322614358097, guid: c975c5e53e71ffb4b984d8b86968a786, type: 3}
+  - {fileID: 7191424322614358097, guid: c975c5e53e71ffb4b984d8b86968a786, type: 3}

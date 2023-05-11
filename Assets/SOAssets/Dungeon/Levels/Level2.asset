@@ -34,5 +34,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3d8ad227016d4a34692fa3f4f1b6be74, type: 2}
   - {fileID: 11400000, guid: 78762a21ca3aac64eae6b9e3b3403e44, type: 2}
   - {fileID: 11400000, guid: 456cc3f393791994f879d4783c156bf4, type: 2}
+  - {fileID: 11400000, guid: 8c5b55c0626718444b5d8ef6523bcd0c, type: 2}
+  - {fileID: 11400000, guid: 6c1bb1341cb2f3243b537d58b8366dcd, type: 2}
+  - {fileID: 11400000, guid: 4404a2a4a2bb85f48a1f17fedd9ab214, type: 2}
   dungeonStructures:
+  - {fileID: 11400000, guid: 0a2fe716ab7bd37448fd4ea5bed2e7f9, type: 2}
   - {fileID: 11400000, guid: a12ec50a151f0464199aa1a47a3e3e5b, type: 2}
+  - {fileID: 11400000, guid: 1f02f4e6cc9417f4497300882921ff7b, type: 2}

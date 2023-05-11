@@ -10,6 +10,7 @@ namespace App.Systems.GameStates
 {
     public class GameStatesSystem : MonoBehaviour, INotifyRoomChanged , INotifyRoomCleared , INotifyGameEnded
     {
+        #region Fields
         private StateMachine gameStateMachine;
         private DungeonGenerator dungeonBuilder;
         private DungeonBuildingState dungeonBuildingState;
@@ -17,38 +18,60 @@ namespace App.Systems.GameStates
         private SpawningSystem spawningSystem;
         private RoomClearedState roomClearedState;
         private GameEndedState gameEndedState;
+        private DungeonExploringState dungeonExploringState;
         private Player player;
         private int curLevel = 0;
         [SerializeField]
         private List<LevelModel> levels;
         [SerializeField]
-        private Room curRoom;
+        private RoomData curRoom;
         [SerializeField]
         private Portal portal;
         [SerializeField]
         private DeathScreenController deathScreenController;
+        [SerializeField]
+        private AudioClip fightingMusic;
+        [SerializeField]
+        private AudioClip restingMusic;
+        [SerializeField]
+        private AudioClip doorOpeningSound;
+        private AudioSource audioSource;
+        [SerializeField]
+        private GameObject loadingScreen;
+        #endregion
 
-        public Room CurRoom { get => curRoom; set { curRoom = value; } }
-
+        #region Properties
+        public RoomData CurRoom { get => curRoom; set { curRoom = value; } }
         public int CurLevel { get => curLevel; }
+        public DungeonExploringState DungeonExploringState { get => dungeonExploringState; set => dungeonExploringState = value; }
+        public GameEndedState GameEndedState { get => gameEndedState; set => gameEndedState = value; }
+        public RoomClearedState RoomClearedState { get => roomClearedState; set => roomClearedState = value; }
+        public SpawningSystem SpawningSystem { get => spawningSystem; set => spawningSystem = value; }
+        public EnteringRoomState EnteringRoomState { get => enteringRoomState; set => enteringRoomState = value; }
+        public DungeonBuildingState DungeonBuildingState { get => dungeonBuildingState; set => dungeonBuildingState = value; }
+        #endregion
 
         public void Init(DungeonGenerator dungeonGenerator, SpawningSystem spawningSystem, Player player)
         {
             dungeonBuilder = dungeonGenerator;
             dungeonBuilder.NotifyRoomChanged = this;
-            this.spawningSystem = spawningSystem;
+            this.SpawningSystem = spawningSystem;
             gameStateMachine = new StateMachine();
-            dungeonBuildingState = new DungeonBuildingState(this, dungeonBuilder, levels[CurLevel]);
-            enteringRoomState = new EnteringRoomState(this, spawningSystem , CurLevel);
-            roomClearedState = new RoomClearedState(this);
-            gameEndedState = new GameEndedState(this, deathScreenController);
+            AudioListener.volume = PlayerPrefs.GetFloat("Volume", 0.1f);
+            audioSource = GetComponent<AudioSource>();
+            DungeonBuildingState = new DungeonBuildingState(this, dungeonBuilder, levels[CurLevel], loadingScreen);
+            EnteringRoomState = new EnteringRoomState(this, spawningSystem, CurLevel, fightingMusic, audioSource);
+            DungeonExploringState = new DungeonExploringState(this, restingMusic, audioSource);
+            RoomClearedState = new RoomClearedState(this);
+            GameEndedState = new GameEndedState(this, deathScreenController);
             this.player = player;
             player.NotifiebleForGameEnded = this;
-            gameStateMachine.Initialize(dungeonBuildingState);
+
+            gameStateMachine.Initialize(DungeonBuildingState);
         }
         public void EnteringRoom()
         {
-            gameStateMachine.ChangeState(enteringRoomState);
+            ChangeGameState(EnteringRoomState);
         }
 
         public void StageCleared()
@@ -56,14 +79,16 @@ namespace App.Systems.GameStates
             curLevel++;
             if (CurLevel < levels.Count)
             {
-                dungeonBuildingState.LevelToBuild = levels[curLevel];
-                enteringRoomState.CurLevel = curLevel;
-                gameStateMachine.ChangeState(dungeonBuildingState);
+
+                DungeonBuildingState.LevelToBuild = levels[curLevel];
+                EnteringRoomState.CurLevel = curLevel;
                 player.transform.position = Vector3.zero;
+                ChangeGameState(DungeonBuildingState);
+                
             }
             else
             {
-                NotifyGameEnded();
+                NotifyGameEnded(true);
             }
         }
 
@@ -71,26 +96,29 @@ namespace App.Systems.GameStates
         {
             if (UnityEngine.Input.GetKeyDown(KeyCode.R))
             {
-                //gameStateMachine.ChangeState(dungeonBuildingState);
                  StageCleared();
-                 player.transform.position = Vector3.zero;
                 
             }
         }
-        public void NotifyOnRoomChanged(Room room)
+        public void NotifyOnRoomChanged(RoomData room)
         {
             curRoom = room;
-            spawningSystem.CurrentRoom = room;
+            SpawningSystem.CurrentRoom = room;
         }
 
         public void NotifyRoomCleared()
         {
-            gameStateMachine.ChangeState(roomClearedState);
+            ChangeGameState(RoomClearedState);
         }
 
-        public void NotifyGameEnded()
+        public void NotifyGameEnded(bool isVictory)
         {
-            gameStateMachine.ChangeState(gameEndedState);
+            GameEndedState.IsVictory = isVictory;
+            ChangeGameState(GameEndedState);
+        }
+        public void ChangeGameState(IState state)
+        {
+            gameStateMachine.ChangeState(state);
         }
     }
 }

@@ -12,6 +12,6 @@ namespace App.World.Creatures.PlayerScripts.Components
         public float maxMana;
         public float dashDistance;
         public float dashTime;
-
+        public float dashCooldown;
     }
 }

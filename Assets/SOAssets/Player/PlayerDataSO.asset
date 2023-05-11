@@ -17,3 +17,4 @@ MonoBehaviour:
   maxMana: 100
   dashDistance: 5
   dashTime: 0.3
+  dashCooldown: 0.5

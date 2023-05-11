@@ -1,4 +1,5 @@
 using App.World.Creatures.Enemies;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -55,7 +56,14 @@ namespace App.World.Creatures.Enemies.States
                     if (timeSinceLastPathRecalculation >= timeToRecalculatePath)
                     {
                         timeSinceLastPathRecalculation = 0f;
-                        path = baseEnemy.Pathfinding.FindPath(baseEnemy.transform.position, baseEnemy.Target.position, baseEnemy.CurrentRoom);
+                        try
+                        {
+                            path = baseEnemy.Pathfinding.FindPath(baseEnemy.transform.position, baseEnemy.Target.position, baseEnemy.CurrentRoom);
+                        }
+                        catch(Exception)
+                        {
+                            path = null;
+                        }
                     }
                     if (path != null && path.Count > 0)
                     {

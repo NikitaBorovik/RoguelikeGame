@@ -146,6 +146,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8137346300218918036, guid: e35d091b4a0d1ed41ab862cfcb59540b, type: 3}
+      propertyPath: levels.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8137346300218918036, guid: e35d091b4a0d1ed41ab862cfcb59540b, type: 3}
+      propertyPath: levels.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2f5c7f49be2ef82478e813e7ba899fa4, type: 2}
+    - target: {fileID: 8137346300218918036, guid: e35d091b4a0d1ed41ab862cfcb59540b, type: 3}
+      propertyPath: levels.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: c9da2b737702768468e11eddd86ba462, type: 2}
     - target: {fileID: 8570109477575191402, guid: e35d091b4a0d1ed41ab862cfcb59540b, type: 3}
       propertyPath: m_Name
       value: GameStatesSystem

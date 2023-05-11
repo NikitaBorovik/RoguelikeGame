@@ -15,3 +15,5 @@ MonoBehaviour:
   damage: 10
   pearcingCount: 0
   speed: 8
+  manacost: 0
+  clip: {fileID: 8300000, guid: f53e524d6776f574c83818e69896eb2b, type: 3}

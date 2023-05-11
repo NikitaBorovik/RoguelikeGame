@@ -1,105 +1,111 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 
 [DisallowMultipleComponent]
 public class DungeonGenerator : MonoBehaviour
 {
-    public Dictionary<string,Room> roomDictionary = new Dictionary<string,Room>();
-    private Dictionary<string, RoomModel> roomModelsDictionary = new Dictionary<string, RoomModel>();
-    private List<RoomModel> roomModelsList = new List<RoomModel>();
+    [SerializeField]
     private RoomNodeTypes roomNodeTypes;
+    public Dictionary<string, RoomData> roomDictionary;
     private bool buildSuccessfull;
     private DungeonStructureGraph dungeonStructureGraph;
+    private Dictionary<string, RoomModel> roomModelsDictionary;
+    private List<RoomModel> roomModelsList;
     private INotifyRoomChanged notifyRoomChanged;
+
     public INotifyRoomChanged NotifyRoomChanged { get => notifyRoomChanged; set => notifyRoomChanged = value; }
+    public RoomNodeTypes RoomNodeTypes { get => roomNodeTypes; set => roomNodeTypes = value; }
 
     private void Awake()
     {
-        roomNodeTypes = MyResources.Instance.roomNodeTypes;
-     //   MyResources.Instance.myMaterial.SetFloat("_AlphaValue", 1f);
+        roomDictionary = new Dictionary<string, RoomData>();
+        roomModelsDictionary = new Dictionary<string, RoomModel>();
+        roomModelsList = new List<RoomModel>();
     }
-
-    public bool GenerateDungeon(LevelModel curLevel)
+    public void CreateDungeonForLevel(LevelModel curLevel)
     {
         buildSuccessfull = false;
-        roomModelsList = curLevel.roomModels;
+
+        roomModelsList = curLevel.RoomModels;
+
         CreateRoomModelsDictionary();
-        int replaceAttempts = 0;
-        while(!buildSuccessfull && replaceAttempts < 100000)
+
+        while (!buildSuccessfull)
         {
-            if (curLevel.dungeonStructures.Count > 0)
+            if (curLevel.DungeonStructures.Count > 0)
             {
                 Clear();
-                dungeonStructureGraph = curLevel.dungeonStructures[Random.Range(0, curLevel.dungeonStructures.Count)];
+                dungeonStructureGraph = curLevel.DungeonStructures[Random.Range(0, curLevel.DungeonStructures.Count)];
                 buildSuccessfull = TryToBuildDungeon(dungeonStructureGraph);
-                replaceAttempts++;
             }
             else
             {
                 Debug.LogError("No dungeon structures in the level");
                 break;
             }
-              
+
         }
         if (buildSuccessfull)
             DrawDungeon();
-        return buildSuccessfull;
+        else
+            Debug.LogError("Failed to build dungeon");
+
     }
 
     private void Clear()
     {
-        if(roomDictionary.Count > 0)
-        {
-            foreach(KeyValuePair<string,Room> pair in roomDictionary)
-            {
-                Room room = pair.Value;
-                if(room.DrawnRoom!=null)
-                    Destroy(room.DrawnRoom.gameObject);
-            }
-            roomDictionary.Clear();
-        }
+        foreach (var room in roomDictionary.Values.Where(room => room.DrawnRoom != null))
+            Destroy(room.DrawnRoom.gameObject);
+        
+        roomDictionary.Clear();
     }
 
     private void DrawDungeon()
     {
-        foreach(KeyValuePair<string,Room> pair in roomDictionary)
+        foreach (KeyValuePair<string, RoomData> pair in roomDictionary)
         {
-            Room room = pair.Value;
-            Vector3 positionOfTheRoom = new Vector3(room.RoomLowerBound.x - room.RoomModel.leftBottomPoint.x,
-                room.RoomLowerBound.y - room.RoomModel.leftBottomPoint.y, 0f);
-            GameObject roomGameObject = Instantiate(room.Prefab,positionOfTheRoom,Quaternion.identity,transform);
-            DrawnRoom drawnRoom = roomGameObject.GetComponentInChildren<DrawnRoom>();
-            drawnRoom.room = room;
-            drawnRoom.DrawRoom(roomGameObject);
-            room.DrawnRoom = drawnRoom;
+
+            Vector3 position = new Vector3(pair.Value.RoomLowerBound.x - pair.Value.RoomModel.leftBottomPoint.x,
+                pair.Value.RoomLowerBound.y - pair.Value.RoomModel.leftBottomPoint.y, 0f);
+            DrawRoomOnCoords(pair.Value, position);
         }
+    }
+
+    private void DrawRoomOnCoords(RoomData room, Vector3 position)
+    {
+        GameObject roomGameObject = Instantiate(room.Prefab, position, Quaternion.identity, transform);
+        DrawnRoom drawnRoom = roomGameObject.GetComponentInChildren<DrawnRoom>();
+        drawnRoom.room = room;
+        drawnRoom.DrawRoom(roomGameObject);
+        room.DrawnRoom = drawnRoom;
     }
 
     private bool TryToBuildDungeon(DungeonStructureGraph dungeonStructureGraph)
     {
+        bool isNotOverlapping = true;
         Queue<RoomNode> roomsToPlace = new Queue<RoomNode>();
-        RoomNode entrance = dungeonStructureGraph.GetNode(roomNodeTypes.list.Find(x => x.isEntrance));
+        RoomNode entrance = dungeonStructureGraph.GetNode(RoomNodeTypes.list.Find(x => x.isEntrance));
         if (entrance == null)
         {
             return false;
         }
         roomsToPlace.Enqueue(entrance);
-        bool isNotOverlapping = true;
-        isNotOverlapping = ProcessGraphRooms(dungeonStructureGraph, roomsToPlace);
+        isNotOverlapping = PlaceAllGraphRooms(dungeonStructureGraph, roomsToPlace);
         return roomsToPlace.Count == 0 && isNotOverlapping;
     }
 
-    private bool ProcessGraphRooms(DungeonStructureGraph dungeonStructureGraph, Queue<RoomNode> roomsToPlace)
+    private bool PlaceAllGraphRooms(DungeonStructureGraph dungeonStructureGraph, Queue<RoomNode> roomsToPlace)
     {
-        while(roomsToPlace.Count > 0)
+        while (roomsToPlace.Count > 0)
         {
             bool noOverlap = true;
             RoomNode roomNode = roomsToPlace.Dequeue();
             List<RoomNode> roomChildren = dungeonStructureGraph.GetChildrenNodes(roomNode);
-            for(int i = 0; i < roomChildren.Count;i++)
+            for (int i = 0; i < roomChildren.Count; i++)
             {
                 roomsToPlace.Enqueue(roomChildren[i]);
             }
@@ -107,8 +113,7 @@ public class DungeonGenerator : MonoBehaviour
                 PlaceEntrance(roomNode);
             else
             {
-                Room parent = roomDictionary[roomNode.parentId];
-                noOverlap = PlaceRoomWithoutOverlaps(roomNode, parent);
+                noOverlap = PlaceRoomWithoutOverlaps(roomNode, roomDictionary[roomNode.parentId]);
             }
             if (!noOverlap)
                 return false;
@@ -116,28 +121,27 @@ public class DungeonGenerator : MonoBehaviour
         return true;
     }
 
-    private Room PlaceCorridor(Room parent)
+    private RoomData PlaceCorridor(RoomData parent)
     {
         if (parent == null)
             return null;
-        Room room = null;
+        RoomData room = null;
         int tryCount = 0;
         while (room == null && tryCount < 4)
         {
             tryCount++;
-            
+
             List<Door> AvailableDoorsOnParentRoom = FindAvailableDoor(parent.Doors);
             if (AvailableDoorsOnParentRoom.Count == 0)
             {
                 continue;
             }
             RoomNode roomNode = ScriptableObject.CreateInstance<RoomNode>();
-            roomNode.Initialise(dungeonStructureGraph, roomNodeTypes.list.Find(x => x.isCorridor));
+            roomNode.Initialise(dungeonStructureGraph, RoomNodeTypes.list.Find(x => x.isCorridor));
             roomNode.roomType.isCorridor = true;
             roomNode.roomType.isNone = false;
             Door doorOfParentToConnect = AvailableDoorsOnParentRoom[Random.Range(0, AvailableDoorsOnParentRoom.Count)];
-            RoomModel roomModel = GetRandomRoomModelWithAppropriateDoor(roomNode, doorOfParentToConnect);
-            room = GenerateRoomUsingModel(roomModel, roomNode);
+            room = GenerateRoomUsingModel(GetRandomRoomModelWithAppropriateDoor(roomNode, doorOfParentToConnect), roomNode);
             if (ChechIfRoomCanBePlaced(parent, room, doorOfParentToConnect))
             {
                 room.IsPlaced = true;
@@ -148,119 +152,122 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
         return room;
-        
+
     }
-    private bool PlaceRoomWithoutOverlaps(RoomNode roomNode, Room parent)
+    private bool PlaceRoomWithoutOverlaps(RoomNode roomNode, RoomData parent)
     {
-        bool isOverlaping = true;
+        
         int tryCount = 0;
-        while (isOverlaping && tryCount < 1)
+        bool isOverlaping = true;
+        parent = PlaceCorridor(parent);
+        while (isOverlaping && tryCount < 3)
         {
-            parent = PlaceCorridor(parent);
-            tryCount++;
+
             if (parent == null)
+            {
+                tryCount++;
                 continue;
-            
-            List<Door> AvailableDoorsOnParentRoom = FindAvailableDoor(parent.Doors);
-            if (AvailableDoorsOnParentRoom.Count == 0)
-            {
-                return false;
             }
-            Door doorOfParentToConnect = AvailableDoorsOnParentRoom[Random.Range(0, AvailableDoorsOnParentRoom.Count)];
-            RoomModel roomModel = GetRandomRoomModelWithAppropriateDoor(roomNode, doorOfParentToConnect);
-            Room roomToPlace = GenerateRoomUsingModel(roomModel, roomNode);
-            if (ChechIfRoomCanBePlaced(parent, roomToPlace, doorOfParentToConnect))
+            List<Door> AvailableDoorsOnParentRoom = FindAvailableDoor(parent.Doors);
+            tryCount++;
+
+
+            if (AvailableDoorsOnParentRoom.Count != 0)
             {
-                isOverlaping = false;
-                roomToPlace.IsPlaced = true;
-                roomDictionary.Add(parent.RoomId, parent);
-                roomDictionary.Add(roomToPlace.RoomId, roomToPlace);
+                Door doorOfParentToConnect = AvailableDoorsOnParentRoom[Random.Range(0, AvailableDoorsOnParentRoom.Count)];
+                RoomData roomToPlace = GenerateRoomUsingModel(GetRandomRoomModelWithAppropriateDoor(roomNode, doorOfParentToConnect), roomNode);
+                if (!ChechIfRoomCanBePlaced(parent, roomToPlace, doorOfParentToConnect))
+                    isOverlaping = true;
+                else
+                {
+                    isOverlaping = false;
+                    roomDictionary.Add(parent.RoomId, parent);
+                    roomDictionary.Add(roomToPlace.RoomId, roomToPlace);
+                    roomToPlace.IsPlaced = true;
+                }
+
             }
             else
-            {
-                isOverlaping = true;
-            }
+                return false;
         }
         return !isOverlaping;
     }
 
-    private bool ChechIfRoomCanBePlaced(Room parent, Room roomToPlace, Door doorOfParentToConnect)
+    private bool ChechIfRoomCanBePlaced(RoomData parent, RoomData roomToPlace, Door doorOfParentToConnect)
     {
         Door roomDoorToConnect = null;
-        if (doorOfParentToConnect.orientation == DoorOrientation.left)
-            roomDoorToConnect = roomToPlace.Doors.Find(x => x.orientation == DoorOrientation.right);
-        if (doorOfParentToConnect.orientation == DoorOrientation.right)
-            roomDoorToConnect = roomToPlace.Doors.Find(x => x.orientation == DoorOrientation.left);
-        if (doorOfParentToConnect.orientation == DoorOrientation.top)
-            roomDoorToConnect = roomToPlace.Doors.Find(x => x.orientation == DoorOrientation.bottom);
-        if (doorOfParentToConnect.orientation == DoorOrientation.bottom)
-            roomDoorToConnect = roomToPlace.Doors.Find(x => x.orientation == DoorOrientation.top);
+        if (doorOfParentToConnect.Orientation == Door.DoorOrientation.left)
+            roomDoorToConnect = roomToPlace.Doors.Find(x => x.Orientation == Door.DoorOrientation.right);
+        if (doorOfParentToConnect.Orientation == Door.DoorOrientation.right)
+            roomDoorToConnect = roomToPlace.Doors.Find(x => x.Orientation == Door.DoorOrientation.left);
+        if (doorOfParentToConnect.Orientation == Door.DoorOrientation.top)
+            roomDoorToConnect = roomToPlace.Doors.Find(x => x.Orientation == Door.DoorOrientation.bottom);
+        if (doorOfParentToConnect.Orientation == Door.DoorOrientation.bottom)
+            roomDoorToConnect = roomToPlace.Doors.Find(x => x.Orientation == Door.DoorOrientation.top);
         if (roomDoorToConnect == null)
         {
-            doorOfParentToConnect.isAvailable = false;
+            doorOfParentToConnect.IsAvailable = false;
             return false;
         }
-        Vector2Int adj = Vector2Int.zero;
-        if (roomDoorToConnect.orientation == DoorOrientation.left)
-        {
-            adj = new Vector2Int(1, 0);
-        }
-        if (roomDoorToConnect.orientation == DoorOrientation.right)
-        {
-            adj = new Vector2Int(-1, 0);
-        }
-        if (roomDoorToConnect.orientation == DoorOrientation.top)
-        {
-            adj = new Vector2Int(0, -1);
-        }
-        if (roomDoorToConnect.orientation == DoorOrientation.bottom)
-        {
-            adj = new Vector2Int(0, 1);
-        }
-        Vector2Int doorOfParentRealPosition = parent.RoomLowerBound - parent.RoomModel.leftBottomPoint + doorOfParentToConnect.pos;
-        roomToPlace.RoomLowerBound = roomToPlace.RoomModel.leftBottomPoint + doorOfParentRealPosition + adj - roomDoorToConnect.pos;
+        Vector2Int addMove = findDoorShift(roomDoorToConnect);
+        Vector2Int doorOfParentRealPosition = parent.RoomLowerBound - parent.RoomModel.leftBottomPoint + doorOfParentToConnect.Pos;
+        roomToPlace.RoomLowerBound = roomToPlace.RoomModel.leftBottomPoint + doorOfParentRealPosition + addMove - roomDoorToConnect.Pos;
         roomToPlace.RoomUpperBound = roomToPlace.RoomLowerBound + roomToPlace.RoomModel.rightTopPoint - roomToPlace.RoomModel.leftBottomPoint;
-        
+
         bool overlapFound = false;
-        foreach(KeyValuePair<string,Room> pair in roomDictionary)
+        foreach (KeyValuePair<string, RoomData> pair in roomDictionary)
         {
-            Room room = pair.Value;
-            if(!room.IsPlaced || room.RoomId == roomToPlace.RoomId)
+            RoomData room = pair.Value;
+            if (!room.IsPlaced || room.RoomId == roomToPlace.RoomId)
                 continue;
             if (RoomsOverlapping(roomToPlace, room))
             {
-             
+
                 overlapFound = true;
                 break;
             }
-                
+
         }
-        if(!overlapFound)
+        if (!overlapFound)
         {
-            doorOfParentToConnect.isConnected = true;
-            doorOfParentToConnect.isAvailable = false;
-            roomDoorToConnect.isConnected = true;
-            roomDoorToConnect.isAvailable = false;
+            doorOfParentToConnect.IsConnected = true;
+            doorOfParentToConnect.IsAvailable = false;
+            roomDoorToConnect.IsConnected = true;
+            roomDoorToConnect.IsAvailable = false;
             return true;
         }
-       // doorOfParentToConnect.isAvailable = false;
         return false;
     }
-
-    private bool RoomsOverlapping(Room firstRoom, Room secondRoom)
+    private Vector2Int findDoorShift(Door roomDoorToConnect)
     {
-        bool isOnXOverlapping = CheckIntervalForOverlaps(firstRoom.RoomLowerBound.x, firstRoom.RoomUpperBound.x, secondRoom.RoomLowerBound.x, secondRoom.RoomUpperBound.x);
-        bool isOnYOverlapping = CheckIntervalForOverlaps(firstRoom.RoomLowerBound.y, firstRoom.RoomUpperBound.y, secondRoom.RoomLowerBound.y, secondRoom.RoomUpperBound.y);
-        
-        return isOnXOverlapping && isOnYOverlapping;
+        if (roomDoorToConnect.Orientation == Door.DoorOrientation.left)
+        {
+            return new Vector2Int(1, 0);
+        }
+        if (roomDoorToConnect.Orientation == Door.DoorOrientation.right)
+        {
+            return new Vector2Int(-1, 0);
+        }
+        if (roomDoorToConnect.Orientation == Door.DoorOrientation.top)
+        {
+            return new Vector2Int(0, -1);
+        }
+        if (roomDoorToConnect.Orientation == Door.DoorOrientation.bottom)
+        {
+            return new Vector2Int(0, 1);
+        }
+        return Vector2Int.zero;
+    }
+    private bool RoomsOverlapping(RoomData firstRoom, RoomData secondRoom)
+    {
+        return CheckIntervalForOverlaps(firstRoom.RoomLowerBound.x, firstRoom.RoomUpperBound.x, secondRoom.RoomLowerBound.x, secondRoom.RoomUpperBound.x) 
+                && CheckIntervalForOverlaps(firstRoom.RoomLowerBound.y, firstRoom.RoomUpperBound.y, secondRoom.RoomLowerBound.y, secondRoom.RoomUpperBound.y);
     }
 
     private bool CheckIntervalForOverlaps(int x11, int x12, int x21, int x22)
     {
         return Mathf.Max(x11, x21) <= Mathf.Min(x12, x22);
     }
-
-    //TODO change method to support more corridor types
     private RoomModel GetRandomRoomModelWithAppropriateDoor(RoomNode roomNode, Door doorOfParentToConnect)
     {
         int randNum;
@@ -271,69 +278,68 @@ public class DungeonGenerator : MonoBehaviour
         }
         else
         {
-            if(doorOfParentToConnect.orientation == DoorOrientation.top)
+            if (doorOfParentToConnect.Orientation == Door.DoorOrientation.top)
             {
                 randNum = Random.Range(0, 3);
                 switch (randNum)
                 {
                     case 0:
-                        roomModel = ChooseRandomModelForType(roomNodeTypes.list.Find(x => x.isTopBottomCorridor));
+                        roomModel = ChooseRandomModelForType(RoomNodeTypes.list.Find(x => x.isTopBottomCorridor));
                         break;
                     case 1:
-                        roomModel = ChooseRandomModelForType(roomNodeTypes.list.Find(x => x.isBottomLeftCorridor));
+                        roomModel = ChooseRandomModelForType(RoomNodeTypes.list.Find(x => x.isBottomLeftCorridor));
                         break;
                     case 2:
-                        roomModel = ChooseRandomModelForType(roomNodeTypes.list.Find(x => x.isBottomRightCorridor));
-                        break;
-                }
-                //roomModel = ChooseRandomModelForType(roomNodeTypes.list.Find(x => x.isTopBottomCorridor));
-            }
-            if (doorOfParentToConnect.orientation == DoorOrientation.bottom)
-            {
-                randNum = Random.Range(0, 3);
-                switch (randNum)
-                {
-                    case 0:
-                        roomModel = ChooseRandomModelForType(roomNodeTypes.list.Find(x => x.isTopBottomCorridor));
-                        break;
-                    case 1:
-                        roomModel = ChooseRandomModelForType(roomNodeTypes.list.Find(x => x.isTopRightCorridor));
-                        break;
-                    case 2:
-                        roomModel = ChooseRandomModelForType(roomNodeTypes.list.Find(x => x.isTopLeftCorridor));
+                        roomModel = ChooseRandomModelForType(RoomNodeTypes.list.Find(x => x.isBottomRightCorridor));
                         break;
                 }
             }
-                
-            if (doorOfParentToConnect.orientation == DoorOrientation.left)
+            if (doorOfParentToConnect.Orientation == Door.DoorOrientation.bottom)
             {
                 randNum = Random.Range(0, 3);
                 switch (randNum)
                 {
                     case 0:
-                        roomModel = ChooseRandomModelForType(roomNodeTypes.list.Find(x => x.isRightLeftCorridor));
+                        roomModel = ChooseRandomModelForType(RoomNodeTypes.list.Find(x => x.isTopBottomCorridor));
                         break;
                     case 1:
-                        roomModel = ChooseRandomModelForType(roomNodeTypes.list.Find(x => x.isBottomRightCorridor));
+                        roomModel = ChooseRandomModelForType(RoomNodeTypes.list.Find(x => x.isTopRightCorridor));
                         break;
                     case 2:
-                        roomModel = ChooseRandomModelForType(roomNodeTypes.list.Find(x => x.isTopRightCorridor));
+                        roomModel = ChooseRandomModelForType(RoomNodeTypes.list.Find(x => x.isTopLeftCorridor));
                         break;
                 }
             }
-            if(doorOfParentToConnect.orientation == DoorOrientation.right)
+
+            if (doorOfParentToConnect.Orientation == Door.DoorOrientation.left)
             {
                 randNum = Random.Range(0, 3);
                 switch (randNum)
                 {
                     case 0:
-                        roomModel = ChooseRandomModelForType(roomNodeTypes.list.Find(x => x.isRightLeftCorridor));
+                        roomModel = ChooseRandomModelForType(RoomNodeTypes.list.Find(x => x.isRightLeftCorridor));
                         break;
                     case 1:
-                        roomModel = ChooseRandomModelForType(roomNodeTypes.list.Find(x => x.isBottomLeftCorridor));
+                        roomModel = ChooseRandomModelForType(RoomNodeTypes.list.Find(x => x.isBottomRightCorridor));
                         break;
                     case 2:
-                        roomModel = ChooseRandomModelForType(roomNodeTypes.list.Find(x => x.isTopLeftCorridor));
+                        roomModel = ChooseRandomModelForType(RoomNodeTypes.list.Find(x => x.isTopRightCorridor));
+                        break;
+                }
+            }
+            if (doorOfParentToConnect.Orientation == Door.DoorOrientation.right)
+            {
+                randNum = Random.Range(0, 3);
+                switch (randNum)
+                {
+                    case 0:
+                        roomModel = ChooseRandomModelForType(RoomNodeTypes.list.Find(x => x.isRightLeftCorridor));
+                        break;
+                    case 1:
+                        roomModel = ChooseRandomModelForType(RoomNodeTypes.list.Find(x => x.isBottomLeftCorridor));
+                        break;
+                    case 2:
+                        roomModel = ChooseRandomModelForType(RoomNodeTypes.list.Find(x => x.isTopLeftCorridor));
                         break;
                 }
             }
@@ -346,7 +352,7 @@ public class DungeonGenerator : MonoBehaviour
         List<Door> result = new List<Door>();
         foreach (Door door in doors)
         {
-            if(door.isAvailable && !door.isConnected)
+            if (door.IsAvailable && !door.IsConnected)
                 result.Add(door);
         }
         return result;
@@ -355,61 +361,36 @@ public class DungeonGenerator : MonoBehaviour
     private void PlaceEntrance(RoomNode roomNode)
     {
         RoomModel roomModel = ChooseRandomModelForType(roomNode.roomType);
-        Room finalRoom = GenerateRoomUsingModel(roomModel, roomNode);
+        RoomData finalRoom = GenerateRoomUsingModel(roomModel, roomNode);
         finalRoom.IsPlaced = true;
-        List<Door> doors = finalRoom.Doors;
+        // List<Door> doors = finalRoom.Doors;
         roomDictionary.Add(finalRoom.RoomId, finalRoom);
     }
 
-    private Room GenerateRoomUsingModel(RoomModel roomModel, RoomNode roomNode)
+    private RoomData GenerateRoomUsingModel(RoomModel roomModel, RoomNode roomNode)
     {
-        Room room = new Room(roomNode.id, roomModel.id, roomModel.prefab, roomModel.roomType, roomModel.leftBottomPoint, roomModel.rightTopPoint, roomModel.leftBottomPoint, roomModel.rightTopPoint, roomModel, NotifyRoomChanged);
+        RoomData room = new RoomData(roomNode.id, roomModel.id, roomModel.prefab, roomModel.roomType, roomModel.leftBottomPoint, roomModel.rightTopPoint, roomModel.leftBottomPoint, roomModel.rightTopPoint, roomModel, NotifyRoomChanged);
         room.ChildrenRooms = roomNode.children;
-        room.Doors = CopyListOfDoors(roomModel.doors);
-        if(roomNode.parentId == null)
+        room.Doors = roomModel.doors.Select(door => new Door(door.Pos, door.Orientation, door.Prefab, door.WallToBuildPosition, door.WallBuildingWidthInTiles, door.WallBuildingHeigthInTiles)).ToList();
+        if (roomNode.parentId == null)
         {
             room.ParentId = "";
-            room.IsPrev = true;
         }
         else
             room.ParentId = roomNode.parentId;
         return room;
     }
 
-    private List<Door> CopyListOfDoors(List<Door> doors)
-    {
-        List<Door> result = new List<Door>();
-        foreach (Door door in doors)
-        {
-            Door doorToAdd = new Door(door.pos,door.orientation,door.prefab,door.wallToBuildPosition,door.wallBuildingWidthInTiles,door.wallBuildingHeigthInTiles);
-            result.Add(doorToAdd);
-        }
-        return result;
-    }
-    
-
     private RoomModel ChooseRandomModelForType(RoomNodeType roomType)
     {
-        List<RoomModel> roomModelsOfType = new List<RoomModel>();
-        foreach(RoomModel roomModel in roomModelsList)
-        {
-            if(roomModel.roomType == roomType)
-                roomModelsOfType.Add(roomModel);
-        }
-        if(roomModelsOfType.Count == 0)
-        {    
-            return null;
-        }
-        return roomModelsOfType[Random.Range(0,roomModelsOfType.Count)];
+        var roomModelsOfType = roomModelsList.Where(room => room.roomType == roomType).ToList();
+
+        return roomModelsOfType.Count > 0 ? roomModelsOfType[Random.Range(0, roomModelsOfType.Count)] : null;
     }
 
     private void CreateRoomModelsDictionary()
     {
-        roomModelsDictionary.Clear();
-        for(int i =0;i<roomModelsList.Count;i++)
-        {
-            if (!roomModelsDictionary.ContainsKey(roomModelsList[i].id))
-                roomModelsDictionary.Add(roomModelsList[i].id, roomModelsList[i]);
-        }
+        roomModelsDictionary = roomModelsList.GroupBy(room => room.id).ToDictionary(g => g.Key, g => g.First());
     }
+    
 }

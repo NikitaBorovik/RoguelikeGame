@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface INotifyGameEnded 
 {
-    public void NotifyGameEnded();
+    public void NotifyGameEnded(bool isVictory);
 }

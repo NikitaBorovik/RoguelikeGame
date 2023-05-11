@@ -6,23 +6,18 @@ using System;
 
 public class RoomNode : ScriptableObject
 {
-    //[HideInInspector]
     public string id;
-    //[HideInInspector]
     public string parentId;
-    //[HideInInspector]
     public List<string> children = new List<string>();
     [HideInInspector]
     public DungeonStructureGraph dungeonStructureGraph;
     public RoomNodeType roomType;
-    [HideInInspector]
     public RoomNodeTypes roomNodeTypes;
     [HideInInspector]
     public bool isActive = false;
     [HideInInspector]
     public bool isDragging = false;
 
-#if UNITY_EDITOR
     [HideInInspector] public Rect rect;
 
     public void Initialise(Rect rect, DungeonStructureGraph graph, RoomNodeType roomNodeType)
@@ -42,6 +37,7 @@ public class RoomNode : ScriptableObject
         this.roomType = roomNodeType;
         roomNodeTypes = MyResources.Instance.roomNodeTypes;
     }
+#if UNITY_EDITOR
     public void Draw(GUIStyle style)
     {
         GUILayout.BeginArea(rect, style);
@@ -60,11 +56,11 @@ public class RoomNode : ScriptableObject
             {
                 if (parentId != null)
                 {
-                    dungeonStructureGraph.GetNode(parentId).RemoveChild(id);
+                    dungeonStructureGraph.FindNodeById(parentId).RemoveChild(id);
                 }
                 foreach (String childId in children)
                 {
-                    dungeonStructureGraph.GetNode(childId).RemoveParent();
+                    dungeonStructureGraph.FindNodeById(childId).RemoveParent();
                 }
                 RemoveParent();
                 RemoveChildren();
@@ -133,48 +129,14 @@ public class RoomNode : ScriptableObject
         EditorUtility.SetDirty(this);
         GUI.changed = true;
     }
+#endif
     public bool AddChild(string id)
     {
-        if (ValidateChildRoom(id))
-        {
-            children.Add(id);
-            return true;
-        }
-        return false;
+       children.Add(id);
+       return true;
     }
 
-    private bool ValidateChildRoom(string id)
-    {
-        //bool bossConnected = false;
-        //foreach (RoomNode room in dungeonStructureGraph.roomNodes)
-        //{
-        //    if (room.roomType.isBoss && room.parentId != null)
-        //    {
-        //        bossConnected = true;
-        //    }
-        //}
-        //if(dungeonStructureGraph.GetNode(id).roomType.isNone)
-        //    return false;
-        //if (children.Contains(id)|| this.id == id)
-        //    return false;
-        //if (dungeonStructureGraph.GetNode(id).roomType.isBoss && bossConnected)
-        //    return false;
-        //if (parentId == id)
-        //    return false;
-        //if(dungeonStructureGraph.GetNode(id).roomType.isCorridor && this.roomType.isCorridor)
-        //    return false;
-        //if (!dungeonStructureGraph.GetNode(id).roomType.isCorridor && !this.roomType.isCorridor)
-        //    return false;
-        //if (dungeonStructureGraph.GetNode(id).roomType.isCorridor && children.Count == Settings.maxChildrenCorridors)
-        //    return false;
-        //if (dungeonStructureGraph.GetNode(id).roomType.isEntrance)
-        //    return false;
-        //if (dungeonStructureGraph.GetNode(id).parentId != null)
-        //    return false;
-        //if(dungeonStructureGraph.GetNode(id).roomType.isCorridor && dungeonStructureGraph.GetNode(id).children.Count > 0)
-        //    return false;
-        return true;
-    }
+    
 
     public bool AddParent(string id)
     {
@@ -196,6 +158,5 @@ public class RoomNode : ScriptableObject
             children.Remove(id);
         }
     }
-#endif
 
 }

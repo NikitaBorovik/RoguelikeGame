@@ -19,7 +19,7 @@ public class AStarNode : IComparable<AStarNode>
     public int FCost { get => GCost + HCost; }
     public AStarNode Parent { get => parent; set => parent = value; }
 
-    
+
 
     public AStarNode(int x, int y)
     {
@@ -34,7 +34,7 @@ public class AStarNode : IComparable<AStarNode>
         int comp = FCost.CompareTo(other.FCost);
         if (comp == 0)
             comp = HCost.CompareTo(other.HCost);
-       
+
         return comp;
     }
 }

@@ -1,6 +1,7 @@
 using App.UI;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace App.UI
@@ -13,8 +14,13 @@ namespace App.UI
         private GameObject fader;
         [SerializeField]
         private GameObject deathBoard;
+        [SerializeField]
+        private TextMeshProUGUI text;
         private Animator boardAnimator;
         private Animator faderAnimator;
+
+        public TextMeshProUGUI Text { get => text; set => text = value; }
+
         private void Awake()
         {
             boardAnimator = deathBoard.GetComponent<Animator>();

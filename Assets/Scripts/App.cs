@@ -12,7 +12,7 @@ namespace App
         [SerializeField]
         private ObjectContainer objectsContainer;
         [SerializeField]
-        private InputSystem inputSystem;
+        private PlayerControlsSystem inputSystem;
         [SerializeField]
         private Camera mainCamera;
         [SerializeField]

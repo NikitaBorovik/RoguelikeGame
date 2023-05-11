@@ -23,7 +23,7 @@ namespace App.World.Creatures.Enemies
             attackState = new MeleeSplashAttackState(this, stateMachine);
         }
 
-        public override void Init(Vector3 position, Transform target, float hpMultiplier, Room currentRoom, INotifyEnemyDied notifieble)
+        public override void Init(Vector3 position, Transform target, float hpMultiplier, RoomData currentRoom, INotifyEnemyDied notifieble)
         {
             base.Init(position, FindObjectOfType<Player>().transform, hpMultiplier, currentRoom, notifieble);
             attack.Init(enemyData.damage);

@@ -15,22 +15,47 @@ namespace App.World.Items.Treasures
 
         [SerializeField]
         private Transform treasurePoint;
+        
+        [SerializeField]
+        private GameObject textHintArea;
 
-        private BaseTreasure treasure;
+        [SerializeField]
+        private bool withWeapon;
+        private GameObject treasureGO;
+
+        private void Update()
+        {
+            if(!treasureGO.activeSelf)
+                textHintArea.SetActive(false);
+        }
+
         private void Awake()
         {
             ObjectPool objectPool = FindObjectOfType<ObjectPool>();
-            bool treasureType = Random.Range(1, 1) == 0;
-            if (treasureType)
+            if (withWeapon)
             {
-                GameObject treasureGO = objectPool.GetObjectFromPool(magicPowerTreasure.PoolObjectType, magicPowerTreasure.gameObject, transform.position,transform).GetGameObject();
+                treasureGO = objectPool.GetObjectFromPool(magicPowerTreasure.PoolObjectType, magicPowerTreasure.gameObject, transform.position,transform).GetGameObject();
                 treasureGO.transform.position = treasurePoint.position;
-               // treasure = treasureGO.GetComponent<BaseTreasure>();
             }
             else
             {
-                GameObject treasureGO = objectPool.GetObjectFromPool(itemTreasure.PoolObjectType, itemTreasure.gameObject, transform.position, transform).GetGameObject();
+                treasureGO = objectPool.GetObjectFromPool(itemTreasure.PoolObjectType, itemTreasure.gameObject, transform.position, transform).GetGameObject();
                 treasureGO.transform.position = treasurePoint.position;
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Player"))
+            {
+                textHintArea.SetActive(true);
+            }
+        }
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Player"))
+            {
+                textHintArea.SetActive(false);
             }
         }
     }

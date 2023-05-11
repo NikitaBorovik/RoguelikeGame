@@ -11,14 +11,14 @@ namespace App.Systems.Spawning
     public class SpawningSystem : MonoBehaviour, INotifyEnemyDied
     {
         private ObjectPool objectPool;
-        private Room currentRoom;
+        private RoomData currentRoom;
         private Player player;
         private int enemiesAliveCount;
         private INotifyRoomCleared notifieble;
         private int currentWaveNumber = 1;
         private BossRoom bossRoom;
 
-        public Room CurrentRoom { get => currentRoom; set => currentRoom = value; }
+        public RoomData CurrentRoom { get => currentRoom; set => currentRoom = value; }
         public INotifyRoomCleared Notifieble { get => notifieble; set => notifieble = value; }
 
         public void Init(ObjectPool objectPool, Player player)
@@ -78,6 +78,7 @@ namespace App.Systems.Spawning
                 HandleEnemiesDied();
                 return;
             }
+            int count = 0;
             for (int i = 0; i < bossesToSpawn.Count; i++)
             {
                 if (bossesToSpawn[i] == null)
@@ -86,6 +87,7 @@ namespace App.Systems.Spawning
                     return;
                 }
                 Vector2 pos = currentRoom.DrawnRoom.Grid.CellToWorld((Vector3Int)spawns[i % spawns.Count]);
+                count++;
                 BaseEnemy enemy = objectPool.GetObjectFromPool(bossesToSpawn[i].PoolObjectType, bossesToSpawn[i].gameObject, pos).GetGameObject().GetComponent<BaseEnemy>();
                 enemy.Init(pos, player.transform, 1, currentRoom, this);
             }
@@ -96,7 +98,7 @@ namespace App.Systems.Spawning
                     Debug.Log("Error, trying to create enemy, but gameobject doesn't contain BaseEnemy script");
                     return;
                 }
-                Vector2 pos = currentRoom.DrawnRoom.Grid.CellToWorld((Vector3Int)spawns[i % spawns.Count]);
+                Vector2 pos = currentRoom.DrawnRoom.Grid.CellToWorld((Vector3Int)spawns[(i+count) % spawns.Count]);
                 BaseEnemy enemy = objectPool.GetObjectFromPool(minionsToSpawn[i].PoolObjectType, minionsToSpawn[i].gameObject, pos).GetGameObject().GetComponent<BaseEnemy>();
                 enemy.Init(pos, player.transform, 1, currentRoom, this);
             }

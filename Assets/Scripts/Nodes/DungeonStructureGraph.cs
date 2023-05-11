@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "DungeonStructureGraph", menuName = "Scriptable Objects/Dungeon Structure/ DungeonStructureGraph")]
@@ -12,7 +13,6 @@ public class DungeonStructureGraph : ScriptableObject
     [HideInInspector]
     public Dictionary<string,RoomNode> roomNodeDictionary = new Dictionary<string, RoomNode>();
 
-#if UNITY_EDITOR
     [HideInInspector]
     public RoomNode startingNode = null;
     [HideInInspector]
@@ -22,20 +22,11 @@ public class DungeonStructureGraph : ScriptableObject
 
     public void Awake()
     {
-        LoadDictionaryOfNodes();
+        roomNodeDictionary = roomNodes.ToDictionary(node => node.id, node => node);
     }
     public void OnValidate()
     {
-        LoadDictionaryOfNodes();
-    }
-
-    private void LoadDictionaryOfNodes()
-    {
-        roomNodeDictionary.Clear();
-        foreach (RoomNode node in roomNodes)
-        {
-            roomNodeDictionary[node.id] = node;
-        }
+        roomNodeDictionary = roomNodes.ToDictionary(node => node.id, node => node);
     }
     public void StartDrawingLine(RoomNode room,Vector2 coords)
     {
@@ -43,40 +34,20 @@ public class DungeonStructureGraph : ScriptableObject
         lineCoordinates = coords;
     }
 
-    public RoomNode GetNode(string id)
+    public RoomNode FindNodeById(string id)
     {
-        if(roomNodeDictionary.TryGetValue(id,out RoomNode room))
-            return room;
-        return null;
+        return roomNodeDictionary.ContainsKey(id) ? roomNodeDictionary[id] : null;
     }   
     public RoomNode GetNode(RoomNodeType type)
     {
-        //for (int i = 0; i < roomNodes.Count; i++)
-        //{
-        //    if(roomNodes[i] == type)
-        //    {
-        //        Debug.Log(roomNodes[i].ToString());
-        //        return roomNodes[i];
-        //    }
-                
-        //}
-        foreach(KeyValuePair<string,RoomNode> pair in roomNodeDictionary)
-        {
-            if(pair.Value.roomType == type)
-            {
-                return pair.Value;
-            }
-        }
-        return null;
+        return roomNodeDictionary.Values.FirstOrDefault(node => node.roomType == type);
     }
     public List<RoomNode> GetChildrenNodes(RoomNode parent)
     {
-        List<RoomNode> childrenList = new List<RoomNode>();
-        for(int i = 0;i < parent.children.Count;i++)
-        {
-            childrenList.Add(GetNode(parent.children[i]));
-        }
-        return childrenList;
+        if (parent?.children == null)
+            return new List<RoomNode>();
+
+        return parent.children.Select(childId => FindNodeById(childId)).ToList();
     }
-#endif
+
 }

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ca8a827999c3ee41835bbc3fca13392, type: 3}
   m_Name: RockProjectile
   m_EditorClassIdentifier: 
-  damage: 20
-  pearcingCount: -5
+  damage: 40
+  pearcingCount: 5
   speed: 6
+  manacost: 10
+  clip: {fileID: 8300000, guid: f53e524d6776f574c83818e69896eb2b, type: 3}

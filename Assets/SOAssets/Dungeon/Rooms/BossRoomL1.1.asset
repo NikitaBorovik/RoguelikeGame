@@ -52,10 +52,8 @@ MonoBehaviour:
     isConnected: 0
     isAvailable: 0
   enemySpawns:
-  - {x: 7, y: 19}
   - {x: 7, y: 13}
   - {x: -9, y: 5}
-  - {x: 8, y: 5}
   - {x: 25, y: 5}
   - {x: -9, y: 9}
   - {x: 23, y: 9}
@@ -63,10 +61,8 @@ MonoBehaviour:
   - {x: 23, y: 17}
   - {x: -9, y: 21}
   - {x: 23, y: 21}
-  rewardSpawns:
-  - {x: 7, y: 13}
+  - {x: 8, y: 20}
   playerSpawn: {x: 0, y: 0}
-  teleporter: {x: 0, y: 0}
   enemiesWave1: []
   enemiesWave2: []
   enemiesWave3: []

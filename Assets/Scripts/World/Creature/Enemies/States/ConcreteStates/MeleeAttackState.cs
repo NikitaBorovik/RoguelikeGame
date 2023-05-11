@@ -18,8 +18,6 @@ namespace App.World.Creatures.Enemies.States.ConcreteStates
         {
             baseEnemy.Animator.SetBool("IsAttacking", true);
             baseEnemy.MyRigidbody.mass *= 1000;
-            //int index = Random.Range(0, baseEnemy.EnemyData.attackSounds.Count);
-            // baseEnemy.AudioSource.PlayOneShot(baseEnemy.EnemyData.attackSounds[index]);
             enemy.StartCoroutine(Attack());
         }
 
@@ -36,11 +34,11 @@ namespace App.World.Creatures.Enemies.States.ConcreteStates
 
         private IEnumerator Attack()
         {
-            Debug.Log("Attacking");
             yield return new WaitForSeconds(enemy.Animator.GetCurrentAnimatorStateInfo(0).length);
             Vector3 direction = enemy.Target.position - enemy.transform.position;
             enemy.Attack.transform.right = direction;
             enemy.Attack.DamageTargets();
+            baseEnemy.AudioSource.PlayOneShot(baseEnemy.EnemyData.attackSound);
             stateMachine.ChangeState(baseEnemy.FollowState);
         }
 

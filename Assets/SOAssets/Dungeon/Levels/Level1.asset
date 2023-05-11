@@ -37,3 +37,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8c5b55c0626718444b5d8ef6523bcd0c, type: 2}
   dungeonStructures:
   - {fileID: 11400000, guid: ca9e36bc51309d34396d2cfe6c4fed10, type: 2}
+  - {fileID: 11400000, guid: 73fd01b61a84dbb48a6e91819be01d6e, type: 2}
+  - {fileID: 11400000, guid: 7b9fdade9f7722e4baff0f5f9afe671d, type: 2}

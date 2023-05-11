@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ca8a827999c3ee41835bbc3fca13392, type: 3}
   m_Name: IceProjectile
   m_EditorClassIdentifier: 
-  damage: 100
+  damage: 4
   pearcingCount: 0
   speed: 15
+  manacost: 0.2
+  clip: {fileID: 8300000, guid: 215cf8d4e094a5f42a2e66d1e3793916, type: 3}

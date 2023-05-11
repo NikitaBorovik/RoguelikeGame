@@ -19,12 +19,11 @@ namespace App.World.Creatures.Enemies
         private SpriteRenderer spriteRenderer;
         
         
-        private Room currentRoom;
+        private RoomData currentRoom;
         [SerializeField]
-        private AStarPathfinding astarPathfinding;
+        private CreaturesPathfinding pathfinding;
         [SerializeField]
         private Rigidbody2D myRigidbody;
-        [SerializeField]
         private AudioSource audioSource;
         [SerializeField]
         protected EnemyData enemyData;
@@ -39,7 +38,7 @@ namespace App.World.Creatures.Enemies
         protected ObjectPool objectPool;
 
         public Transform Target => target;
-        public AStarPathfinding Pathfinding => astarPathfinding;
+        public CreaturesPathfinding Pathfinding => pathfinding;
         public Rigidbody2D MyRigidbody => myRigidbody;
         public EnemyData EnemyData => enemyData;
         public FollowState FollowState => followState;
@@ -48,7 +47,7 @@ namespace App.World.Creatures.Enemies
         public List<Collider2D> MyColliders => myColliders;
         public SpriteRenderer SpriteRenderer => spriteRenderer;
         public AudioSource AudioSource => audioSource; 
-        public Room CurrentRoom => currentRoom;
+        public RoomData CurrentRoom => currentRoom;
         public virtual string PoolObjectType => enemyData.poolObjectType;
 
         public SpawningState SpawningState { get => spawningState; set => spawningState = value; }
@@ -64,7 +63,8 @@ namespace App.World.Creatures.Enemies
             SpawningState = new SpawningState(this, stateMachine,Animator);
             SeparateState = new SeparateState(this, stateMachine);
             dieState = new DieState(this, stateMachine);
-           // stateMachine.Initialize(spawningState);
+            audioSource = GetComponent<AudioSource>();
+            // stateMachine.Initialize(spawningState);
         }
 
         void Update()
@@ -74,7 +74,7 @@ namespace App.World.Creatures.Enemies
                 stateMachine.CurrentState.Update();
         }
 
-        public virtual void Init(Vector3 position, Transform target, float hpMultiplier, Room currentRoom, INotifyEnemyDied notifieble)
+        public virtual void Init(Vector3 position, Transform target, float hpMultiplier, RoomData currentRoom, INotifyEnemyDied notifieble)
         {
             this.target = target;
             transform.position = position;

@@ -10,31 +10,37 @@ namespace App.Systems.GameStates
         
         private DungeonGenerator dungeonBuilder;
         private LevelModel levelToBuild;
+        private GameObject loadingScreen;
 
         public LevelModel LevelToBuild { get => levelToBuild; set => levelToBuild = value; }
-        public DungeonBuildingState(GameStatesSystem gameStatesSystem,DungeonGenerator dungeonBuilder,LevelModel level)
+        public DungeonBuildingState(GameStatesSystem gameStatesSystem,DungeonGenerator dungeonBuilder,LevelModel level, GameObject loadingScreen)
         {
             this.gameStatesSystem = gameStatesSystem;
             this.dungeonBuilder = dungeonBuilder;
             this.LevelToBuild = level;
+            this.loadingScreen = loadingScreen;
         }
-
-       
 
         public void Enter()
         {
-            if (dungeonBuilder.GenerateDungeon(LevelToBuild)) ;
-            
+            loadingScreen.SetActive(true);
+            dungeonBuilder.CreateDungeonForLevel(LevelToBuild);
+            gameStatesSystem.ChangeGameState(gameStatesSystem.DungeonExploringState); 
         }
 
         public void Exit()
         {
-            
+            gameStatesSystem.StartCoroutine(Wait());
         }
 
         public void Update()
         {
             
+        }
+        private IEnumerator Wait()
+        {
+            yield return new WaitForSeconds(0.5f);
+            loadingScreen.SetActive(false);
         }
     }
 }

@@ -39,11 +39,4 @@ public class RoomNodeType : ScriptableObject
 
     public bool isNone;
 
-    private void OnValidate()
-    {
-        if(string.IsNullOrEmpty(typeName))
-        {
-            Debug.Log(nameof(typeName) + " must contain a value in object " + this.name.ToString());
-        }
-    }
 }

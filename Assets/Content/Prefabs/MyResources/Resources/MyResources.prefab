@@ -41,8 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7382156280185665313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e6e3d890ffe41a4c857c7184e38b699, type: 3}
+  m_Script: {fileID: 11500000, guid: 59466f69722d4db409e68eb3c736bebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   roomNodeTypes: {fileID: 11400000, guid: fb5ed7eab3e060c45af020e8b391f9cd, type: 2}
-  myMaterial: {fileID: 2100000, guid: 8f0156365a58b544aa9be257c908adcd, type: 2}

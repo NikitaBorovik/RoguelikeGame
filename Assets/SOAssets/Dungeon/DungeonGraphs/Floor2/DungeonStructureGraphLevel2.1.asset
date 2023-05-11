@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5245436017324089282
+--- !u!114 &-7589101519566391664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12,18 +12,99 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7dceee386149964ea57ff06e16d579c, type: 3}
   m_Name: RoomNode
   m_EditorClassIdentifier: 
-  id: 92062aa9-cccb-47e1-9571-6b498e65bf33
-  parentId: 6757c1fe-133c-4841-8cfe-ba0b765ca5ce
-  children: []
+  id: faceb972-5a31-45a0-a29b-58652cf185f3
+  parentId: faf6f1cb-fed7-4ec9-8382-854158facef3
+  children:
+  - 64171dc7-fc89-4ed2-aea0-7f55516fe904
   dungeonStructureGraph: {fileID: 11400000}
-  roomType: {fileID: 11400000, guid: f9f72f21fccfa184c95b5053dc6c19a5, type: 2}
+  roomType: {fileID: 11400000, guid: cd90e425b0b36e1448c7bb59dfa40e83, type: 2}
   roomNodeTypes: {fileID: 11400000, guid: fb5ed7eab3e060c45af020e8b391f9cd, type: 2}
-  isActive: 1
-  isDragging: 0
+  isActive: 0
+  isDragging: 1
   rect:
     serializedVersion: 2
-    x: 1537
-    y: 372
+    x: 940
+    y: 870
+    width: 180
+    height: 90
+--- !u!114 &-7553495308450944551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7dceee386149964ea57ff06e16d579c, type: 3}
+  m_Name: RoomNode
+  m_EditorClassIdentifier: 
+  id: 70eadbb8-9915-44b3-8c41-3a17f245d365
+  parentId: 3076b01d-eaad-4ce6-8892-3514c8e65e67
+  children:
+  - d28181a1-ff18-46e3-9eb3-8f748e30edc8
+  dungeonStructureGraph: {fileID: 11400000}
+  roomType: {fileID: 11400000, guid: 5c440ad00f7d77e428cafbe9bda09f87, type: 2}
+  roomNodeTypes: {fileID: 11400000, guid: fb5ed7eab3e060c45af020e8b391f9cd, type: 2}
+  isActive: 0
+  isDragging: 1
+  rect:
+    serializedVersion: 2
+    x: 1220
+    y: 502
+    width: 180
+    height: 90
+--- !u!114 &-1994800567579153115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7dceee386149964ea57ff06e16d579c, type: 3}
+  m_Name: RoomNode
+  m_EditorClassIdentifier: 
+  id: 64171dc7-fc89-4ed2-aea0-7f55516fe904
+  parentId: faceb972-5a31-45a0-a29b-58652cf185f3
+  children: []
+  dungeonStructureGraph: {fileID: 11400000}
+  roomType: {fileID: 11400000, guid: 9a1338cd3b7dfc848b1af6af7030d5f8, type: 2}
+  roomNodeTypes: {fileID: 11400000, guid: fb5ed7eab3e060c45af020e8b391f9cd, type: 2}
+  isActive: 0
+  isDragging: 1
+  rect:
+    serializedVersion: 2
+    x: 1209
+    y: 876
+    width: 180
+    height: 90
+--- !u!114 &-1970145325076475667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7dceee386149964ea57ff06e16d579c, type: 3}
+  m_Name: RoomNode
+  m_EditorClassIdentifier: 
+  id: faf6f1cb-fed7-4ec9-8382-854158facef3
+  parentId: 3076b01d-eaad-4ce6-8892-3514c8e65e67
+  children:
+  - faceb972-5a31-45a0-a29b-58652cf185f3
+  dungeonStructureGraph: {fileID: 11400000}
+  roomType: {fileID: 11400000, guid: 9a1338cd3b7dfc848b1af6af7030d5f8, type: 2}
+  roomNodeTypes: {fileID: 11400000, guid: fb5ed7eab3e060c45af020e8b391f9cd, type: 2}
+  isActive: 0
+  isDragging: 1
+  rect:
+    serializedVersion: 2
+    x: 938
+    y: 695
     width: 180
     height: 90
 --- !u!114 &11400000
@@ -40,11 +121,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomNodeTypes: {fileID: 0}
   roomNodes:
-  - {fileID: -5245436017324089282}
   - {fileID: 4753814789783631747}
+  - {fileID: 6421422559084148436}
+  - {fileID: 406669829601516537}
+  - {fileID: 5275504097698315317}
+  - {fileID: -1970145325076475667}
+  - {fileID: 8881477888236897346}
+  - {fileID: -7553495308450944551}
+  - {fileID: -7589101519566391664}
+  - {fileID: 6657580486628251499}
+  - {fileID: 5569131518649970242}
+  - {fileID: 8164126716563247907}
+  - {fileID: -1994800567579153115}
   startingNode: {fileID: 0}
   end: {fileID: 0}
   lineCoordinates: {x: 0, y: 0}
+--- !u!114 &406669829601516537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7dceee386149964ea57ff06e16d579c, type: 3}
+  m_Name: RoomNode
+  m_EditorClassIdentifier: 
+  id: 8e2807ec-a76c-4f40-95f2-cdb00efbcbda
+  parentId: 99940238-56ce-46cf-bad9-ea198715c09b
+  children:
+  - 99d277d3-1b37-4c48-8113-998e00e3ce71
+  dungeonStructureGraph: {fileID: 11400000}
+  roomType: {fileID: 11400000, guid: 9a1338cd3b7dfc848b1af6af7030d5f8, type: 2}
+  roomNodeTypes: {fileID: 11400000, guid: fb5ed7eab3e060c45af020e8b391f9cd, type: 2}
+  isActive: 0
+  isDragging: 1
+  rect:
+    serializedVersion: 2
+    x: 935
+    y: 285
+    width: 180
+    height: 90
 --- !u!114 &4753814789783631747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,15 +178,177 @@ MonoBehaviour:
   id: 6757c1fe-133c-4841-8cfe-ba0b765ca5ce
   parentId: 
   children:
-  - 92062aa9-cccb-47e1-9571-6b498e65bf33
+  - 99940238-56ce-46cf-bad9-ea198715c09b
   dungeonStructureGraph: {fileID: 11400000}
   roomType: {fileID: 11400000, guid: af681d0591304294fb08fe6be59ab9db, type: 2}
   roomNodeTypes: {fileID: 11400000, guid: fb5ed7eab3e060c45af020e8b391f9cd, type: 2}
   isActive: 0
-  isDragging: 0
+  isDragging: 1
   rect:
     serializedVersion: 2
-    x: 1125
-    y: 359
+    x: 313
+    y: 482
+    width: 180
+    height: 90
+--- !u!114 &5275504097698315317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7dceee386149964ea57ff06e16d579c, type: 3}
+  m_Name: RoomNode
+  m_EditorClassIdentifier: 
+  id: 3076b01d-eaad-4ce6-8892-3514c8e65e67
+  parentId: 99940238-56ce-46cf-bad9-ea198715c09b
+  children:
+  - faf6f1cb-fed7-4ec9-8382-854158facef3
+  - 70eadbb8-9915-44b3-8c41-3a17f245d365
+  dungeonStructureGraph: {fileID: 11400000}
+  roomType: {fileID: 11400000, guid: 5c440ad00f7d77e428cafbe9bda09f87, type: 2}
+  roomNodeTypes: {fileID: 11400000, guid: fb5ed7eab3e060c45af020e8b391f9cd, type: 2}
+  isActive: 0
+  isDragging: 1
+  rect:
+    serializedVersion: 2
+    x: 932
+    y: 500
+    width: 180
+    height: 90
+--- !u!114 &5569131518649970242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7dceee386149964ea57ff06e16d579c, type: 3}
+  m_Name: RoomNode
+  m_EditorClassIdentifier: 
+  id: baeed111-ea22-4b7f-9a23-3d6f11a53940
+  parentId: d28181a1-ff18-46e3-9eb3-8f748e30edc8
+  children: []
+  dungeonStructureGraph: {fileID: 11400000}
+  roomType: {fileID: 11400000, guid: f9f72f21fccfa184c95b5053dc6c19a5, type: 2}
+  roomNodeTypes: {fileID: 11400000, guid: fb5ed7eab3e060c45af020e8b391f9cd, type: 2}
+  isActive: 0
+  isDragging: 1
+  rect:
+    serializedVersion: 2
+    x: 1857
+    y: 509
+    width: 180
+    height: 90
+--- !u!114 &6421422559084148436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7dceee386149964ea57ff06e16d579c, type: 3}
+  m_Name: RoomNode
+  m_EditorClassIdentifier: 
+  id: 99940238-56ce-46cf-bad9-ea198715c09b
+  parentId: 6757c1fe-133c-4841-8cfe-ba0b765ca5ce
+  children:
+  - 8e2807ec-a76c-4f40-95f2-cdb00efbcbda
+  - 3076b01d-eaad-4ce6-8892-3514c8e65e67
+  dungeonStructureGraph: {fileID: 11400000}
+  roomType: {fileID: 11400000, guid: 9a1338cd3b7dfc848b1af6af7030d5f8, type: 2}
+  roomNodeTypes: {fileID: 11400000, guid: fb5ed7eab3e060c45af020e8b391f9cd, type: 2}
+  isActive: 0
+  isDragging: 1
+  rect:
+    serializedVersion: 2
+    x: 633
+    y: 486
+    width: 180
+    height: 90
+--- !u!114 &6657580486628251499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7dceee386149964ea57ff06e16d579c, type: 3}
+  m_Name: RoomNode
+  m_EditorClassIdentifier: 
+  id: d28181a1-ff18-46e3-9eb3-8f748e30edc8
+  parentId: 70eadbb8-9915-44b3-8c41-3a17f245d365
+  children:
+  - baeed111-ea22-4b7f-9a23-3d6f11a53940
+  dungeonStructureGraph: {fileID: 11400000}
+  roomType: {fileID: 11400000, guid: 9a1338cd3b7dfc848b1af6af7030d5f8, type: 2}
+  roomNodeTypes: {fileID: 11400000, guid: fb5ed7eab3e060c45af020e8b391f9cd, type: 2}
+  isActive: 0
+  isDragging: 1
+  rect:
+    serializedVersion: 2
+    x: 1548
+    y: 505
+    width: 180
+    height: 90
+--- !u!114 &8164126716563247907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7dceee386149964ea57ff06e16d579c, type: 3}
+  m_Name: RoomNode
+  m_EditorClassIdentifier: 
+  id: 628970c0-822d-47d4-8979-7d12de201c71
+  parentId: 99d277d3-1b37-4c48-8113-998e00e3ce71
+  children: []
+  dungeonStructureGraph: {fileID: 11400000}
+  roomType: {fileID: 11400000, guid: cd90e425b0b36e1448c7bb59dfa40e83, type: 2}
+  roomNodeTypes: {fileID: 11400000, guid: fb5ed7eab3e060c45af020e8b391f9cd, type: 2}
+  isActive: 0
+  isDragging: 1
+  rect:
+    serializedVersion: 2
+    x: 1257
+    y: 93
+    width: 180
+    height: 90
+--- !u!114 &8881477888236897346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7dceee386149964ea57ff06e16d579c, type: 3}
+  m_Name: RoomNode
+  m_EditorClassIdentifier: 
+  id: 99d277d3-1b37-4c48-8113-998e00e3ce71
+  parentId: 8e2807ec-a76c-4f40-95f2-cdb00efbcbda
+  children:
+  - 628970c0-822d-47d4-8979-7d12de201c71
+  dungeonStructureGraph: {fileID: 11400000}
+  roomType: {fileID: 11400000, guid: 692ca2c437e871847aee1fd07603172a, type: 2}
+  roomNodeTypes: {fileID: 11400000, guid: fb5ed7eab3e060c45af020e8b391f9cd, type: 2}
+  isActive: 0
+  isDragging: 1
+  rect:
+    serializedVersion: 2
+    x: 938
+    y: 101
     width: 180
     height: 90

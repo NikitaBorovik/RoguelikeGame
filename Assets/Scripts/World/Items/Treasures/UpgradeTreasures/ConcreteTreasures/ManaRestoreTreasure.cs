@@ -15,11 +15,6 @@ namespace App.World.Items.Treasures.UpgradeTreasures.ConcreteTreasures
         private float additionalMana;
         #endregion
 
-        #region Non-serialized Fields
-        private float timeCounter = 0.0f;
-        private const float period = 1.0f;
-        #endregion
-
         #region Overriden methods
         protected override void Upgrade(Player upgradable) 
         {

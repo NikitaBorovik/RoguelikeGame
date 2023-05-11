@@ -36,6 +36,8 @@ namespace App.World.Items.Attacks
         private Player player;
         private Shoot shoot;
         private TrailRenderer trailRenderer;
+        private AudioSource audioSource;
+        private AudioClip clip;
         #endregion
 
         public string PoolObjectType => poolObjectType;
@@ -63,7 +65,7 @@ namespace App.World.Items.Attacks
             Speed = ProjectileData.speed;
             pearcingCount = ProjectileData.pearcingCount;
             manacost = ProjectileData.manacost;
-            Debug.Log("Manacost" + manacost);
+            clip = ProjectileData.clip;
         }
         public virtual void OnTriggerEnter2D(Collider2D collision)
         {
@@ -95,6 +97,7 @@ namespace App.World.Items.Attacks
         {
             GetComponent<TimeToLive>().Init();
             this.player = player;
+            audioSource = player.GetComponent<AudioSource>();
             shoot = player.GetComponent<Shoot>();
             shoot.CanShoot = false;
             isFlying = false;
@@ -113,7 +116,8 @@ namespace App.World.Items.Attacks
             Quaternion rotation = Quaternion.Euler(player.ShootPosition.eulerAngles.x, player.ShootPosition.eulerAngles.y, player.ShootPosition.eulerAngles.z /*+ spread*/);
             transform.rotation = rotation;
             rb.velocity = transform.right * ProjectileData.speed;
-           
+            if (audioSource != null)
+                audioSource.PlayOneShot(clip);
         }
 
         public void GetFromPool(ObjectPool pool)

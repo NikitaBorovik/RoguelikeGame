@@ -71,7 +71,6 @@ namespace App.World.Creatures.PlayerScripts.Components
         private float dashTime;
         private float dashCooldown ;
         private float dashCooldownTimer;
-        private bool isDead;
         #endregion
 
         #region Properties
@@ -130,8 +129,8 @@ namespace App.World.Creatures.PlayerScripts.Components
             movementSpeed = playerData.speed;
             dashDistance = playerData.dashDistance;
             dashTime = playerData.dashTime;
+            dashCooldown = playerData.dashCooldown;
             mana.MaxMana = playerData.maxMana;
-            isDead = false;
             foreach (AnimationClip clip in pAnimator.runtimeAnimatorController.animationClips)
             {
                 if (clip.name == "DashLeft")
@@ -142,7 +141,7 @@ namespace App.World.Creatures.PlayerScripts.Components
         {
             GetComponent<Movement>().enabled = false;
             GetComponent<Aim>().enabled = false;
-            NotifiebleForGameEnded.NotifyGameEnded();
+            NotifiebleForGameEnded.NotifyGameEnded(false);
 
         }
         

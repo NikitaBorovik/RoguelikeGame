@@ -7,7 +7,6 @@ TagManager:
   - floor
   - wall
   - decoration1
-  - decoration2
   - front
   - collisions
   - minimap
@@ -36,7 +35,7 @@ TagManager:
   - EnemySplashDamage
   - EnemyMeleeDamage
   - PickupWallCollider
-  - 
+  - RoomEnabler
   - 
   - 
   - 

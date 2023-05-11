@@ -16,8 +16,6 @@ namespace App.World.Creatures.Enemies.States.ConcreteStates
         {
             baseEnemy.Animator.SetBool("IsAttacking", true);
             baseEnemy.MyRigidbody.mass *= 1000;
-            //int index = Random.Range(0, baseEnemy.EnemyData.attackSounds.Count);
-            // baseEnemy.AudioSource.PlayOneShot(baseEnemy.EnemyData.attackSounds[index]);
             enemy.StartCoroutine(Attack());
         }
 
@@ -37,6 +35,7 @@ namespace App.World.Creatures.Enemies.States.ConcreteStates
             Debug.Log("Attacking splash");
             enemy.DangerZone.SetActive(true);
             yield return new WaitForSeconds(enemy.Animator.GetCurrentAnimatorStateInfo(0).length);
+            baseEnemy.AudioSource.PlayOneShot(baseEnemy.EnemyData.attackSound);
             enemy.Attack.DamageTargets();
             enemy.DangerZone.SetActive(false);
             stateMachine.ChangeState(baseEnemy.FollowState);

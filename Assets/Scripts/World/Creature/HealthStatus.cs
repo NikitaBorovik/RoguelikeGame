@@ -20,7 +20,9 @@ namespace App.World.Creatures
         private ValueUpdateEvent healthUpdateEvent;
         [SerializeField]
         private string healthUpdateEventName;
-
+        private AudioSource audioSource;
+        [SerializeField]
+        private AudioClip damageSound;
 
         public float CurrentHealth
         {
@@ -71,6 +73,7 @@ namespace App.World.Creatures
             CurrentHealth = MaxHealth;
             spriteRenderers = new Dictionary<SpriteRenderer, Color>();
             toDelete = new List<SpriteRenderer>();
+            audioSource = GetComponent<AudioSource>();
             foreach (SpriteRenderer spriteRenderer in GetComponentsInChildren<SpriteRenderer>())
             {
                 spriteRenderers.Add(spriteRenderer, spriteRenderer.color);
@@ -82,6 +85,8 @@ namespace App.World.Creatures
         {
             CurrentHealth -= damage;
             Blink();
+            if (audioSource != null && damageSound != null)
+                audioSource.PlayOneShot(damageSound);
             if (CurrentHealth <= 0)
             {
                 IKillable baseScript = GetComponent<IKillable>();
@@ -108,7 +113,6 @@ namespace App.World.Creatures
 
         private IEnumerator BlinkCoroutine()
         {
-            Debug.Log("Blink");
             if (spriteRenderers == null)
                 yield break;
             foreach (SpriteRenderer spriteRenderer in spriteRenderers.Keys)

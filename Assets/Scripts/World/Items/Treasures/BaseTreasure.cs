@@ -38,9 +38,6 @@ namespace App.World.Items.Treasures
 
         protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
-            Debug.Log("Collision null? " + (collision == null));
-            Debug.Log("Player null? " + (player == null));
-            Debug.Log("Events null? " + (player.ObtainEvent == null));
             player.ObtainEvent.OnObtain += this.Obtain;
         }
         protected virtual void OnTriggerExit2D(Collider2D collision)

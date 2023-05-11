@@ -11,7 +11,7 @@ namespace App.World.Items.Attacks
         public float pearcingCount;
         public float speed;
         public float manacost;
-
+        public AudioClip clip;
     }
 }
 

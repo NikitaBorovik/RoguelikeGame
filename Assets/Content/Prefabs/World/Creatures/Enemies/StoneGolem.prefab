@@ -385,9 +385,10 @@ GameObject:
   - component: {fileID: 6888057871348744322}
   - component: {fileID: 4711546995509669812}
   - component: {fileID: 1472022297482804819}
-  - component: {fileID: -6234363696011733659}
   - component: {fileID: 5726121290975324788}
   - component: {fileID: 4730828233132738427}
+  - component: {fileID: 3297845588605769051}
+  - component: {fileID: 1058903880109243723}
   m_Layer: 14
   m_Name: StoneGolem
   m_TagString: Untagged
@@ -471,18 +472,7 @@ MonoBehaviour:
   blinkTime: 0.125
   healthUpdateEvent: {fileID: 0}
   healthUpdateEventName: 
---- !u!114 &-6234363696011733659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8004361702979961554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fac3d836716ca940800ffe085f767b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  damageSound: {fileID: 0}
 --- !u!58 &5726121290975324788
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -511,11 +501,118 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425129e49036e54381e6c2b70456b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  astarPathfinding: {fileID: -6234363696011733659}
+  pathfinding: {fileID: 1058903880109243723}
   myRigidbody: {fileID: 6888057871348744322}
-  audioSource: {fileID: 0}
   enemyData: {fileID: 11400000, guid: 771b682a49c85064c9a28b940c25a8c5, type: 2}
   myColliders: []
   health: {fileID: 1472022297482804819}
   attack: {fileID: 8925979528543865505}
   dangerZone: {fileID: 5774047709807984386}
+--- !u!82 &3297845588605769051
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8004361702979961554}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.05
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1058903880109243723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8004361702979961554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3f6be39f1723b4185646fb708a06c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -19,8 +19,6 @@ namespace App.World.Creatures.Enemies.States.ConcreteStates
         {
             baseEnemy.Animator.SetBool("IsAttacking", true);
             baseEnemy.MyRigidbody.mass *= 1000;
-            //int index = Random.Range(0, baseEnemy.EnemyData.attackSounds.Count);
-            // baseEnemy.AudioSource.PlayOneShot(baseEnemy.EnemyData.attackSounds[index]);
             enemy.StartCoroutine(Attack());
         }
 
@@ -46,6 +44,7 @@ namespace App.World.Creatures.Enemies.States.ConcreteStates
                 Vector3 startingDirection = (enemy.Target.position - enemy.transform.position).normalized;
                 Vector3 direction = Quaternion.AngleAxis(360 / enemy.EnemyData.projectileCount * i, Vector3.forward) * startingDirection;
                 projectile.GetComponent<EnemyProjectile>().Init(direction, enemy.EnemyData.damage, enemy.EnemyData.projectileSpeed);
+                baseEnemy.AudioSource.PlayOneShot(baseEnemy.EnemyData.attackSound);
             }
             yield return new WaitForSeconds(enemy.Animator.GetCurrentAnimatorStateInfo(0).length / 2);
             stateMachine.ChangeState(baseEnemy.FollowState);
