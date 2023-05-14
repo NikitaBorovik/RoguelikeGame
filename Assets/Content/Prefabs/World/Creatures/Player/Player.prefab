@@ -358,7 +358,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6507753712811452871}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c2a9489fc2f1014b8aceaa877b40b6d, type: 3}
+  m_Script: {fileID: 11500000, guid: e26d0f9ef4c32df4d93f71e7329a5899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shootPositionTransform: {fileID: 1792499913386459624}
@@ -372,7 +372,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6507753712811452871}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9472e129c08a46e4fa347ff29c77bcd4, type: 3}
+  m_Script: {fileID: 11500000, guid: f08fc532268f87b4fa1054485dc15039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6866527037781653267

@@ -9,7 +9,7 @@ using UnityEngine;
 public class DungeonGenerator : MonoBehaviour
 {
     [SerializeField]
-    private RoomNodeTypes roomNodeTypes;
+    private AvailableNodeTypesForRoom roomNodeTypes;
     public Dictionary<string, RoomData> roomDictionary;
     private bool buildSuccessfull;
     private DungeonStructureGraph dungeonStructureGraph;
@@ -18,7 +18,7 @@ public class DungeonGenerator : MonoBehaviour
     private INotifyRoomChanged notifyRoomChanged;
 
     public INotifyRoomChanged NotifyRoomChanged { get => notifyRoomChanged; set => notifyRoomChanged = value; }
-    public RoomNodeTypes RoomNodeTypes { get => roomNodeTypes; set => roomNodeTypes = value; }
+    public AvailableNodeTypesForRoom RoomNodeTypes { get => roomNodeTypes; set => roomNodeTypes = value; }
 
     private void Awake()
     {
@@ -87,8 +87,8 @@ public class DungeonGenerator : MonoBehaviour
     private bool TryToBuildDungeon(DungeonStructureGraph dungeonStructureGraph)
     {
         bool isNotOverlapping = true;
-        Queue<RoomNode> roomsToPlace = new Queue<RoomNode>();
-        RoomNode entrance = dungeonStructureGraph.GetNode(RoomNodeTypes.list.Find(x => x.isEntrance));
+        Queue<DungeonGraphNode> roomsToPlace = new Queue<DungeonGraphNode>();
+        DungeonGraphNode entrance = dungeonStructureGraph.GetNode(RoomNodeTypes.list.Find(x => x.isEntrance));
         if (entrance == null)
         {
             return false;
@@ -98,13 +98,13 @@ public class DungeonGenerator : MonoBehaviour
         return roomsToPlace.Count == 0 && isNotOverlapping;
     }
 
-    private bool PlaceAllGraphRooms(DungeonStructureGraph dungeonStructureGraph, Queue<RoomNode> roomsToPlace)
+    private bool PlaceAllGraphRooms(DungeonStructureGraph dungeonStructureGraph, Queue<DungeonGraphNode> roomsToPlace)
     {
         while (roomsToPlace.Count > 0)
         {
             bool noOverlap = true;
-            RoomNode roomNode = roomsToPlace.Dequeue();
-            List<RoomNode> roomChildren = dungeonStructureGraph.GetChildrenNodes(roomNode);
+            DungeonGraphNode roomNode = roomsToPlace.Dequeue();
+            List<DungeonGraphNode> roomChildren = dungeonStructureGraph.GetChildrenNodes(roomNode);
             for (int i = 0; i < roomChildren.Count; i++)
             {
                 roomsToPlace.Enqueue(roomChildren[i]);
@@ -136,7 +136,7 @@ public class DungeonGenerator : MonoBehaviour
             {
                 continue;
             }
-            RoomNode roomNode = ScriptableObject.CreateInstance<RoomNode>();
+            DungeonGraphNode roomNode = ScriptableObject.CreateInstance<DungeonGraphNode>();
             roomNode.Initialise(dungeonStructureGraph, RoomNodeTypes.list.Find(x => x.isCorridor));
             roomNode.roomType.isCorridor = true;
             roomNode.roomType.isNone = false;
@@ -154,7 +154,7 @@ public class DungeonGenerator : MonoBehaviour
         return room;
 
     }
-    private bool PlaceRoomWithoutOverlaps(RoomNode roomNode, RoomData parent)
+    private bool PlaceRoomWithoutOverlaps(DungeonGraphNode roomNode, RoomData parent)
     {
         
         int tryCount = 0;
@@ -268,7 +268,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         return Mathf.Max(x11, x21) <= Mathf.Min(x12, x22);
     }
-    private RoomModel GetRandomRoomModelWithAppropriateDoor(RoomNode roomNode, Door doorOfParentToConnect)
+    private RoomModel GetRandomRoomModelWithAppropriateDoor(DungeonGraphNode roomNode, Door doorOfParentToConnect)
     {
         int randNum;
         RoomModel roomModel = null;
@@ -358,7 +358,7 @@ public class DungeonGenerator : MonoBehaviour
         return result;
     }
 
-    private void PlaceEntrance(RoomNode roomNode)
+    private void PlaceEntrance(DungeonGraphNode roomNode)
     {
         RoomModel roomModel = ChooseRandomModelForType(roomNode.roomType);
         RoomData finalRoom = GenerateRoomUsingModel(roomModel, roomNode);
@@ -367,7 +367,7 @@ public class DungeonGenerator : MonoBehaviour
         roomDictionary.Add(finalRoom.RoomId, finalRoom);
     }
 
-    private RoomData GenerateRoomUsingModel(RoomModel roomModel, RoomNode roomNode)
+    private RoomData GenerateRoomUsingModel(RoomModel roomModel, DungeonGraphNode roomNode)
     {
         RoomData room = new RoomData(roomNode.id, roomModel.id, roomModel.prefab, roomModel.roomType, roomModel.leftBottomPoint, roomModel.rightTopPoint, roomModel.leftBottomPoint, roomModel.rightTopPoint, roomModel, NotifyRoomChanged);
         room.ChildrenRooms = roomNode.children;
@@ -381,7 +381,7 @@ public class DungeonGenerator : MonoBehaviour
         return room;
     }
 
-    private RoomModel ChooseRandomModelForType(RoomNodeType roomType)
+    private RoomModel ChooseRandomModelForType(NodeTypeForRoom roomType)
     {
         var roomModelsOfType = roomModelsList.Where(room => room.roomType == roomType).ToList();
 

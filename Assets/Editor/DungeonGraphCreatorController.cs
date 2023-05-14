@@ -6,26 +6,28 @@ using System.Collections.Generic;
 
 public class DungeonGraphCreatorController : EditorWindow
 {
-    private GUIStyle nodeStyle;
-    private GUIStyle nodeStyleSelected;
+
     private int paddingSize = 25;
     private int borderSize = 15;
     private float width = 180f;
     private float height = 90f;
-    private static DungeonStructureGraph currentGraph;
-    private RoomNodeTypes roomTypes;
-    private RoomNode curRoom = null;
-    private const float lineWidth = 3f;
-    private Vector2 gridOffset;
-    private Vector2 graphDelta;
     private const float bigGridSize = 100f;
     private const float smallGridSize = 25f;
+    private const float lineWidth = 3f;
+    private GUIStyle nodeStyle;
+    private GUIStyle nodeStyleSelected;
+    private static DungeonStructureGraph currentGraph;
+    private AvailableNodeTypesForRoom roomTypes;
+    private DungeonGraphNode curRoom = null;
+    private Vector2 gridOffset;
+    private Vector2 graphDelta;
+    
 
     [MenuItem("Dungeon Graph Creator", menuItem = "Window/Dungeon/Dungeon Graph Creator")]
 
     private static void OpenTheWindow()
     {
-        GetWindow<DungeonGraphCreatorController>("Room Node Graph Creator");
+        GetWindow<DungeonGraphCreatorController>("Room Graph Creator");
     }
 
 
@@ -42,16 +44,16 @@ public class DungeonGraphCreatorController : EditorWindow
 
     private void OnGUI()
     {
-        if (GUI.changed)
-            Repaint();
         if (currentGraph == null)
             return;
+        if (GUI.changed)
+            Repaint();
         DrawGrid(smallGridSize, 0.25f, Color.white);
         DrawGrid(bigGridSize, 0.35f, Color.white);
         DrawLine();
         ProcessEvents(Event.current);
         DrawConnectedLines();
-        DrawRoomNodes();
+        DrawGraphNodes();
     }
 
     private void DrawGrid(float gridS, float opacity, Color color)
@@ -69,7 +71,7 @@ public class DungeonGraphCreatorController : EditorWindow
 
     private void DrawConnectedLines()
     {
-        foreach (RoomNode room in currentGraph.roomNodes)
+        foreach (DungeonGraphNode room in currentGraph.roomNodes)
         {
             if (room.children.Count > 0)
             {
@@ -86,7 +88,7 @@ public class DungeonGraphCreatorController : EditorWindow
     }
 
 
-    private void ConnectLine(RoomNode startNode, RoomNode endNode)
+    private void ConnectLine(DungeonGraphNode startNode, DungeonGraphNode endNode)
     {
         Vector3 start = startNode.rect.center;
         Vector3 end = endNode.rect.center;
@@ -119,18 +121,18 @@ public class DungeonGraphCreatorController : EditorWindow
         }
 
     }
-    private void DrawRoomNodes()
+    private void DrawGraphNodes()
     {
-        foreach (RoomNode roomNode in currentGraph.roomNodes)
+        foreach (DungeonGraphNode roomNode in currentGraph.roomNodes)
         {
             if (!roomNode.isActive)
-                roomNode.Draw(nodeStyle);
+                roomNode.DrawNode(nodeStyle);
             else
-                roomNode.Draw(nodeStyleSelected);
+                roomNode.DrawNode(nodeStyleSelected);
         }
         GUI.changed = true;
     }
-    private RoomNode GetRoomUnderTheMouse(Event current)
+    private DungeonGraphNode GetRoomUnderTheMouse(Event current)
     {
         for (int i = 0; i < currentGraph.roomNodes.Count; i++)
         {
@@ -141,7 +143,7 @@ public class DungeonGraphCreatorController : EditorWindow
     }
     private void RemoveLinksFromActive()
     {
-        foreach (RoomNode room in currentGraph.roomNodes)
+        foreach (DungeonGraphNode room in currentGraph.roomNodes)
         {
             if (room.isActive)
             {
@@ -161,7 +163,7 @@ public class DungeonGraphCreatorController : EditorWindow
     }
     public void RemoveLinksFromActiveById(string id)
     {
-        RoomNode room = currentGraph.FindNodeById(id);
+        DungeonGraphNode room = currentGraph.FindNodeById(id);
         if (room.isActive)
         {
             if (room.parentId != null)
@@ -179,8 +181,8 @@ public class DungeonGraphCreatorController : EditorWindow
     }
     private void DeleteSelectedNodes()
     {
-        Queue<RoomNode> deletionQueue = new Queue<RoomNode>();
-        foreach (RoomNode room in currentGraph.roomNodes)
+        Queue<DungeonGraphNode> deletionQueue = new Queue<DungeonGraphNode>();
+        foreach (DungeonGraphNode room in currentGraph.roomNodes)
         {
             if (room.isActive && !room.roomType.isEntrance)
             {
@@ -190,7 +192,7 @@ public class DungeonGraphCreatorController : EditorWindow
         }
         while (deletionQueue.Count > 0)
         {
-            RoomNode toDel = deletionQueue.Dequeue();
+            DungeonGraphNode toDel = deletionQueue.Dequeue();
             currentGraph.roomNodeDictionary.Remove(toDel.id);
             currentGraph.roomNodes.Remove(toDel);
             DestroyImmediate(toDel, true);
@@ -225,7 +227,7 @@ public class DungeonGraphCreatorController : EditorWindow
         }
 
     }
-    private void ProcessNodeEvents(RoomNode curNode, Event current)
+    private void ProcessNodeEvents(DungeonGraphNode curNode, Event current)
     {
         curNode.Proceed(current);
     }
@@ -239,7 +241,7 @@ public class DungeonGraphCreatorController : EditorWindow
             case 0:
                 currentGraph.lineCoordinates = Vector2.zero;
                 currentGraph.startingNode = null;
-                foreach (RoomNode room in currentGraph.roomNodes)
+                foreach (DungeonGraphNode room in currentGraph.roomNodes)
                 {
                     if (room.isActive)
                     {
@@ -260,13 +262,11 @@ public class DungeonGraphCreatorController : EditorWindow
             case 1:
                 if (currentGraph.startingNode != null)
                 {
-                    RoomNode roomNode = GetRoomUnderTheMouse(current);
-                    if (roomNode != null)
+                    DungeonGraphNode roomNode = GetRoomUnderTheMouse(current);
+                    if (roomNode != null && currentGraph.startingNode.AddChild(roomNode.id))
                     {
-                        if (currentGraph.startingNode.AddChild(roomNode.id))
-                            roomNode.AddParent(currentGraph.startingNode.id);
+                        roomNode.AddParent(currentGraph.startingNode.id);
                     }
-
                     currentGraph.lineCoordinates = Vector2.zero;
                     currentGraph.startingNode = null;
                     GUI.changed = true;
@@ -303,18 +303,19 @@ public class DungeonGraphCreatorController : EditorWindow
     private void ShowContextMenu(Vector2 mousePosition)
     {
         GenericMenu menu = new GenericMenu();
-        menu.AddItem(new GUIContent("Add Room Node"), false, CreateRoomNode, mousePosition);
+        menu.AddItem(new GUIContent("Add node"), false, CreateRoomNode, mousePosition);
         menu.AddSeparator("");
-        menu.AddItem(new GUIContent("Select All Node"), false, SelectAllNodes);
+        menu.AddItem(new GUIContent("Select all"), false, SelectAllNodes);
         menu.AddSeparator("");
-        menu.AddItem(new GUIContent("Remove Selected Node Links"), false, RemoveLinksFromActive);
-        menu.AddItem(new GUIContent("Remove Selected Node"), false, DeleteSelectedNodes);
+        menu.AddItem(new GUIContent("Remove links for selection"), false, RemoveLinksFromActive);
+        menu.AddSeparator("");
+        menu.AddItem(new GUIContent("Remove selected"), false, DeleteSelectedNodes);
         menu.ShowAsContext();
     }
 
     private void SelectAllNodes()
     {
-        foreach (RoomNode room in currentGraph.roomNodes)
+        foreach (DungeonGraphNode room in currentGraph.roomNodes)
         {
             room.isActive = true;
         }
@@ -324,7 +325,7 @@ public class DungeonGraphCreatorController : EditorWindow
     private void CreateRoomNode(object positionObject)
     {
         Vector2 position = (Vector2)positionObject;
-        RoomNode roomNode = ScriptableObject.CreateInstance<RoomNode>();
+        DungeonGraphNode roomNode = ScriptableObject.CreateInstance<DungeonGraphNode>();
         currentGraph.roomNodes.Add(roomNode);
         roomNode.Initialise(new Rect(position, new Vector2(width, height)), currentGraph, roomTypes.list.Find(x => x.isNone));
         AssetDatabase.AddObjectToAsset(roomNode, currentGraph);
@@ -333,7 +334,7 @@ public class DungeonGraphCreatorController : EditorWindow
         if (currentGraph.roomNodes.Count == 1)
         {
             position = (Vector2)positionObject;
-            roomNode = ScriptableObject.CreateInstance<RoomNode>();
+            roomNode = ScriptableObject.CreateInstance<DungeonGraphNode>();
             currentGraph.roomNodes.Add(roomNode);
             roomNode.Initialise(new Rect(position, new Vector2(width, height)), currentGraph, roomTypes.list.Find(x => x.isEntrance));
             AssetDatabase.AddObjectToAsset(roomNode, currentGraph);
@@ -346,7 +347,7 @@ public class DungeonGraphCreatorController : EditorWindow
 
     private void OnEnable()
     {
-        roomTypes = MyResources.Instance.roomNodeTypes;
+        roomTypes = MyResources.GetInstance().roomNodeTypes;
         MakeNodesStyle();
         MakeSelectedNodeStyle();
         Selection.selectionChanged += ChangedSelection;
@@ -354,17 +355,17 @@ public class DungeonGraphCreatorController : EditorWindow
     private void MakeNodesStyle()
     {
         nodeStyle = new GUIStyle();
+        nodeStyle.border = new RectOffset(borderSize, borderSize, borderSize, borderSize);
         nodeStyle.normal.background = EditorGUIUtility.Load("node1") as Texture2D;
         nodeStyle.padding = new RectOffset(paddingSize, paddingSize, paddingSize, paddingSize);
-        nodeStyle.border = new RectOffset(borderSize, borderSize, borderSize, borderSize);
         nodeStyle.normal.textColor = Color.white;
     }
     private void MakeSelectedNodeStyle()
     {
         nodeStyleSelected = new GUIStyle();
+        nodeStyleSelected.border = new RectOffset(borderSize, borderSize, borderSize, borderSize);
         nodeStyleSelected.normal.background = EditorGUIUtility.Load("node1 on") as Texture2D;
         nodeStyleSelected.padding = new RectOffset(paddingSize, paddingSize, paddingSize, paddingSize);
-        nodeStyleSelected.border = new RectOffset(borderSize, borderSize, borderSize, borderSize);
         nodeStyleSelected.normal.textColor = Color.white;
     }
     private void OnDisable()

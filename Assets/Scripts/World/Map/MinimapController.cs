@@ -1,7 +1,7 @@
 using Cinemachine;
 using UnityEngine;
 
-public class Minimap : MonoBehaviour
+public class MinimapController : MonoBehaviour
 {
     [SerializeField] 
     private GameObject icon;

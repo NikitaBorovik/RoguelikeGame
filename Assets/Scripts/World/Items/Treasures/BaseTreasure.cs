@@ -20,12 +20,6 @@ namespace App.World.Items.Treasures
 
         public virtual string PoolObjectType => throw new System.NotImplementedException();
 
-        protected virtual void Awake()
-        {
-
-            // audioSource = GetComponent<AudioSource>();
-        }
-
         protected virtual void Start()
         {
             container = FindObjectOfType<ObjectContainer>();

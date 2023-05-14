@@ -450,7 +450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4822242094496746749, guid: 19ab5129cb8822a44b0f789051f995ee, type: 3}
       propertyPath: m_Name
-      value: PlayerControlsSystem
+      value: PlayerInputsSystem
       objectReference: {fileID: 0}
     - target: {fileID: 6077978394733369019, guid: 19ab5129cb8822a44b0f789051f995ee, type: 3}
       propertyPath: m_Name

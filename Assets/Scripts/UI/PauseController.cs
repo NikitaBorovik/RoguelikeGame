@@ -30,16 +30,6 @@ namespace App.UI
             fader.SetActive(false);
         }
 
-        //private void OnEnable()
-        //{
-        //    onDeathScreenAppeared.OnDeathScreenAppeared += StopGameEvent;
-        //}
-
-        //private void OnDisable()
-        //{
-        //    onDeathScreenAppeared.OnDeathScreenAppeared -= StopGameEvent;
-        //}
-
         public void Pause()
         {
             if (!paused)

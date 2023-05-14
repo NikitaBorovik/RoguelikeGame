@@ -1,43 +1,44 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
+
 
 public class CreaturesPathfinding : MonoBehaviour
 {
     private NodesGrid grid;
-    private PriorityQueue<AStarNode> openList;
-    private HashSet<AStarNode> closedList;
+    private PriorityQueue<PathfindingNode> openList;
+    private HashSet<PathfindingNode> closedList;
 
     private void Awake()
     {
-        openList = new PriorityQueue<AStarNode>();
-        closedList = new HashSet<AStarNode>();
+        openList = new PriorityQueue<PathfindingNode>();
+        closedList = new HashSet<PathfindingNode>();
     }
     
-    public Stack<Vector3> FindPath(Vector3 startPos, Vector3 targetPos, RoomData room)
+    public Stack<Vector3> FindPath(Vector3 startPos, Vector3 targetPos, RoomData data)
     {
-        var cellStartPos = room.DrawnRoom.Grid.WorldToCell(startPos);
-        var cellTargetPos = room.DrawnRoom.Grid.WorldToCell(targetPos);
-        cellStartPos -= (Vector3Int)room.RoomModel.leftBottomPoint;
-        cellTargetPos -= (Vector3Int)room.RoomModel.leftBottomPoint;
+        var cellStartPos = data.DrawnRoom.Grid.WorldToCell(startPos);
+        var cellTargetPos = data.DrawnRoom.Grid.WorldToCell(targetPos);
+        cellStartPos = cellStartPos - (Vector3Int)data.RoomModel.leftBottomPoint;
+        cellTargetPos = cellTargetPos - (Vector3Int)data.RoomModel.leftBottomPoint;
 
-        grid = new NodesGrid((room.RoomModel.rightTopPoint.x - room.RoomModel.leftBottomPoint.x + 1), (room.RoomModel.rightTopPoint.y - room.RoomModel.leftBottomPoint.y + 1));
-        AStarNode startNode = grid.GetNode(Mathf.RoundToInt(cellStartPos.x), Mathf.RoundToInt(cellStartPos.y));
-        AStarNode targetNode = grid.GetNode(Mathf.RoundToInt(cellTargetPos.x), Mathf.RoundToInt(cellTargetPos.y));
+        int width = data.RoomModel.rightTopPoint.x + 1  - data.RoomModel.leftBottomPoint.x;
+        int heigth = data.RoomModel.rightTopPoint.y + 1 - data.RoomModel.leftBottomPoint.y;
+
+        grid = new NodesGrid(width, heigth);
+        PathfindingNode start = grid.GetNode(Mathf.RoundToInt(cellStartPos.x), Mathf.RoundToInt(cellStartPos.y));
+        PathfindingNode end = grid.GetNode(Mathf.RoundToInt(cellTargetPos.x), Mathf.RoundToInt(cellTargetPos.y));
 
         openList.Clear();
         closedList.Clear();
 
-        openList.Enqueue(startNode);
+        openList.Enqueue(start);
 
         while (openList.Count > 0)
         {
-            AStarNode currentNode = openList.Dequeue();
-            if (currentNode == targetNode)
+            PathfindingNode currentNode = openList.Dequeue();
+            if (currentNode == end)
             {
-                return GetPath(startNode, targetNode,room);
+                return GetPath(start, end,data);
             }
             closedList.Add(currentNode);
 
@@ -45,19 +46,18 @@ public class CreaturesPathfinding : MonoBehaviour
             {
                 for(int j = -1; j <= 1; j++)
                 {
-                    AStarNode neighbour = GetNeighbour(currentNode.X + i, currentNode.Y + j,room);
+                    PathfindingNode neighbour = GetNeighbour(currentNode.X + i, currentNode.Y + j,data);
                     if(neighbour != null)
                     {
-                        int additionalGridWeigth = room.DrawnRoom.GridTilesPriorityWeigths[neighbour.X, neighbour.Y];
-                        int recalculatedGCost = GetDistBetweenNodes(currentNode, neighbour) + currentNode.GCost + additionalGridWeigth;
-                        if (!openList.Contains(neighbour) || recalculatedGCost < neighbour.GCost)
+                        int additionalGridWeigth = data.DrawnRoom.GridTilesPriorityWeigths[neighbour.X, neighbour.Y];
+                        int recalculatedGCost = GetDistBetweenNodes(currentNode, neighbour) + currentNode.G + additionalGridWeigth;
+                        if (!openList.Contains(neighbour) || recalculatedGCost < neighbour.G)
                         {
-                            neighbour.GCost = recalculatedGCost;
-                            neighbour.HCost = GetDistBetweenNodes(neighbour, targetNode);
+                            neighbour.H = GetDistBetweenNodes(neighbour, end);
+                            neighbour.G = recalculatedGCost;
                             neighbour.Parent = currentNode;
                             if (!openList.Contains(neighbour))
                                 openList.Enqueue(neighbour);
-                         //   Debug.Log(neighbour.FCost);
                         }
                         
                     }
@@ -69,23 +69,21 @@ public class CreaturesPathfinding : MonoBehaviour
         return null;
     }
 
-    private Stack<Vector3> GetPath(AStarNode startNode, AStarNode endNode, RoomData room)
+    private Stack<Vector3> GetPath(PathfindingNode startNode, PathfindingNode endNode, RoomData data)
     {
+        PathfindingNode currentNode = endNode;
         Stack<Vector3> path = new Stack<Vector3>();
-        AStarNode currentNode = endNode;
-        Vector3 midPos = room.DrawnRoom.Grid.cellSize / 2f;
-        midPos.z = 0;
         while (currentNode != startNode)
         {
-            Vector3 worldPosCell = room.DrawnRoom.Grid.CellToWorld(new Vector3Int(currentNode.X + room.RoomModel.leftBottomPoint.x, currentNode.Y + room.RoomModel.leftBottomPoint.y, 0));
-            worldPosCell += midPos;
-            path.Push(worldPosCell);
+            Vector3 worldPosCell = data.DrawnRoom.Grid.CellToWorld(new Vector3Int(currentNode.X + data.RoomModel.leftBottomPoint.x, currentNode.Y + data.RoomModel.leftBottomPoint.y, 0));
+            worldPosCell += data.DrawnRoom.Grid.cellSize / 2f;
             currentNode = currentNode.Parent;
+            path.Push(worldPosCell);
         }
         return path;
     }
 
-    private int GetDistBetweenNodes(AStarNode firstNode, AStarNode secondNode)
+    private int GetDistBetweenNodes(PathfindingNode firstNode, PathfindingNode secondNode)
     {
         int diffX = firstNode.X - secondNode.X;
         int diffY = firstNode.Y - secondNode.Y;
@@ -95,21 +93,21 @@ public class CreaturesPathfinding : MonoBehaviour
 
         if (xAxisLen > yAxisLen)
         {
-            return 2 * yAxisLen + 1 * (xAxisLen - yAxisLen);
+            return 2 * yAxisLen + (xAxisLen - yAxisLen);
         }
         else
         {
-            return 2 * xAxisLen + 1 * (yAxisLen - xAxisLen);
+            return 2 * xAxisLen + (yAxisLen - xAxisLen);
         }
         
     }
     
-    private AStarNode GetNeighbour(int neighbourX, int neighbourY, RoomData room)
+    private PathfindingNode GetNeighbour(int neighbourX, int neighbourY, RoomData data)
     {
-        if (isInsideGrid(neighbourX, neighbourY, room))
+        if (isInsideGrid(neighbourX, neighbourY, data))
         {
-            AStarNode result = grid.GetNode(neighbourX, neighbourY);
-            int additionalGridWeigth = room.DrawnRoom.GridTilesPriorityWeigths[neighbourX, neighbourY];
+            PathfindingNode result = grid.GetNode(neighbourX, neighbourY);
+            int additionalGridWeigth = data.DrawnRoom.GridTilesPriorityWeigths[neighbourX, neighbourY];
             if (additionalGridWeigth == 0)
                 return null;
             if (!closedList.Contains(result))
@@ -118,10 +116,10 @@ public class CreaturesPathfinding : MonoBehaviour
         }
         return null;
     }
-    private bool isInsideGrid(int x, int y, RoomData room)
+    private bool isInsideGrid(int x, int y, RoomData data)
     {
-        if (x < 0 || x >= room.RoomModel.rightTopPoint.x - room.RoomModel.leftBottomPoint.x ||
-            y < 0 || y >= room.RoomModel.rightTopPoint.y - room.RoomModel.leftBottomPoint.y)
+        if (x < 0 || x >= data.RoomModel.rightTopPoint.x - data.RoomModel.leftBottomPoint.x ||
+            y < 0 || y >= data.RoomModel.rightTopPoint.y - data.RoomModel.leftBottomPoint.y)
         {
             return false;
         }
@@ -129,9 +127,9 @@ public class CreaturesPathfinding : MonoBehaviour
     }
     private class NodesGrid
     {
-        private int width;
-        private int height;
-        public AStarNode[,] grid;
+        public PathfindingNode[,] grid;
+        private readonly int width;
+        private readonly int height;
 
         public NodesGrid(int width, int height)
         {
@@ -140,25 +138,22 @@ public class CreaturesPathfinding : MonoBehaviour
             grid = InitializeGrid(width, height);
         }
 
-        private AStarNode[,] InitializeGrid(int width, int height)
+        private PathfindingNode[,] InitializeGrid(int width, int height)
         {
-            AStarNode[,] grid = new AStarNode[width, height];
-            for (int x = 0; x < width; x++)
+            PathfindingNode[,] grid = new PathfindingNode[width, height];
+            for (int i = 0; i < width; i++)
             {
-                for (int y = 0; y < height; y++)
+                for (int j = 0; j < height; j++)
                 {
-                    grid[x, y] = new AStarNode(x, y);
+                    grid[i, j] = new PathfindingNode(i, j);
                 }
             }
             return grid;
         }
 
-        public AStarNode GetNode(int x, int y)
+        public PathfindingNode GetNode(int x, int y)
         {
-            if (x < width && y < height)
-                return grid[x, y];
-            else
-                return null;
+            return (x < width && y < height) ? grid[x, y] : null;
         }
     }
 }

@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
+using System.Linq;
 
-public class RoomNode : ScriptableObject
+public class DungeonGraphNode : ScriptableObject
 {
     public string id;
     public string parentId;
     public List<string> children = new List<string>();
     [HideInInspector]
     public DungeonStructureGraph dungeonStructureGraph;
-    public RoomNodeType roomType;
-    public RoomNodeTypes roomNodeTypes;
+    public NodeTypeForRoom roomType;
+    public AvailableNodeTypesForRoom roomNodeTypes;
     [HideInInspector]
     public bool isActive = false;
     [HideInInspector]
@@ -20,25 +21,25 @@ public class RoomNode : ScriptableObject
 
     [HideInInspector] public Rect rect;
 
-    public void Initialise(Rect rect, DungeonStructureGraph graph, RoomNodeType roomNodeType)
+    public void Initialise(Rect rect, DungeonStructureGraph graph, NodeTypeForRoom roomNodeType)
     {
         this.rect = rect;
-        this.id = Guid.NewGuid().ToString();
-        this.name = "RoomNode";
-        this.dungeonStructureGraph = graph;
-        this.roomType = roomNodeType;
-        roomNodeTypes = MyResources.Instance.roomNodeTypes;
+        id = Guid.NewGuid().ToString();
+        name = "RoomNode";
+        dungeonStructureGraph = graph;
+        roomType = roomNodeType;
+        roomNodeTypes = MyResources.GetInstance().roomNodeTypes;
     }
-    public void Initialise(DungeonStructureGraph graph, RoomNodeType roomNodeType)
+    public void Initialise(DungeonStructureGraph graph, NodeTypeForRoom roomNodeType)
     {
-        this.id = Guid.NewGuid().ToString();
-        this.name = "RoomNode";
-        this.dungeonStructureGraph = graph;
-        this.roomType = roomNodeType;
-        roomNodeTypes = MyResources.Instance.roomNodeTypes;
+        id = Guid.NewGuid().ToString();
+        name = "RoomNode";
+        dungeonStructureGraph = graph;
+        roomType = roomNodeType;
+        roomNodeTypes = MyResources.GetInstance().roomNodeTypes;
     }
 #if UNITY_EDITOR
-    public void Draw(GUIStyle style)
+    public void DrawNode(GUIStyle style)
     {
         GUILayout.BeginArea(rect, style);
         EditorGUI.BeginChangeCheck();
@@ -49,7 +50,7 @@ public class RoomNode : ScriptableObject
         else
         {
         int selected = roomNodeTypes.list.FindIndex(x => x == roomType);
-        int selection = EditorGUILayout.Popup("", selected, GetRoomTypesToDisplay());
+        int selection = EditorGUILayout.Popup("", selected, DisplayTypes());
         roomType = roomNodeTypes.list[selection];
         if(roomNodeTypes.list[selected].isCorridor && !roomNodeTypes.list[selection].isCorridor || !roomNodeTypes.list[selected].isCorridor && roomNodeTypes.list[selection].isCorridor
                 || !roomNodeTypes.list[selected].isBoss && roomNodeTypes.list[selection].isBoss)
@@ -71,33 +72,19 @@ public class RoomNode : ScriptableObject
         GUILayout.EndArea();
     }
 
-    public string[] GetRoomTypesToDisplay()
+    public string[] DisplayTypes()
     {
-        string[] result = new string[roomNodeTypes.list.Count];
-        for (int i = 0; i < roomNodeTypes.list.Count; i++)
-        {
-            if (roomNodeTypes.list[i].displayInCreator)
-            {
-                result[i] = roomNodeTypes.list[i].typeName;
-            }
-        }
-        return result;
+        return roomNodeTypes.list.Select(type => type.displayInCreator ? type.typeName : null).ToArray();
     }
 
     public void Proceed(Event current)
     {
         if (current.type == EventType.MouseDown)
-        {
             OnMouseDown(current);
-        }
-        else if (current.type == EventType.MouseUp)
-        {
-            OnMouseUp(current);
-        }
         else if (current.type == EventType.MouseDrag)
-        {
             OnMouseDrag(current);
-        }
+        else if (current.type == EventType.MouseUp)
+            OnMouseUp(current);
     }
     public void OnMouseDown(Event current)
     {

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace App.Systems.Input
 {
-    public class PlayerControlsSystem : MonoBehaviour
+    public class PlayerInputsSystem : MonoBehaviour
     {
 
         private Camera mainCamera;
@@ -15,7 +15,7 @@ namespace App.Systems.Input
 
         private void Update()
         {
-            HandleAimInput();
+            HandleAimToMouseInput();
             HandleMoveInput();
             HandleShootInput();
             HandleDashInput();
@@ -40,19 +40,12 @@ namespace App.Systems.Input
         private float GetDirectionAngle()
         {
             Vector3 lookDirection;
-            //if ((GetMousePositionInWorld() - player.WeaponAnchor.position).magnitude < (player.ShootPosition.position - player.WeaponAnchor.position).magnitude * 2.2)
-            //{
-            //    lookDirection = GetMousePositionInWorld() - player.WeaponAnchor.position;
-            //}
-            //else
-            //{
-                lookDirection = GetMousePositionInWorld() - player.ShootPosition.position;
-            //}
+            lookDirection = GetMousePositionInWorld() - player.ShootPosition.position;
             float rads = Mathf.Atan2(lookDirection.y, lookDirection.x);
             float direction = rads * Mathf.Rad2Deg;
             return direction;
         }
-        private void HandleAimInput()
+        private void HandleAimToMouseInput()
         {
             float aimAngle = GetDirectionAngle();
             float cursorPos = UnityEngine.Input.mousePosition.x;
@@ -61,9 +54,9 @@ namespace App.Systems.Input
         }
         private void HandleMoveInput()
         {
-            float horizontalMove = UnityEngine.Input.GetAxis("Horizontal");
-            float verticalMove = UnityEngine.Input.GetAxis("Vertical");
-            Vector2 movingDirection = new Vector2(horizontalMove, verticalMove).normalized;
+            float horizontalAxis = UnityEngine.Input.GetAxis("Horizontal");
+            float verticalAxis = UnityEngine.Input.GetAxis("Vertical");
+            Vector2 movingDirection = new Vector2(horizontalAxis, verticalAxis).normalized;
 
             if (movingDirection == Vector2.zero)
             {

@@ -6,9 +6,11 @@ namespace App.World.Creatures.PlayerScripts.Events
     {
         public event Action<MovementEvent, MovementEventArgs> OnMove;
 
+        
+
         public void CallMovementEvent(Vector2 direction, float speed)
         {
-            MovementEventArgs args = new MovementEventArgs() { direction = direction, speed = speed };
+            MovementEventArgs args = new MovementEventArgs() { speed = speed, direction = direction };
             OnMove?.Invoke(this, args);
         }
     }

@@ -12,7 +12,7 @@ public class RoomModel : ScriptableObject
     [HideInInspector]
     public string id;
     public GameObject prefab;
-    public RoomNodeType roomType;
+    public NodeTypeForRoom roomType;
     public Vector2Int leftBottomPoint;
     public Vector2Int rightTopPoint;
     [NonReorderable]

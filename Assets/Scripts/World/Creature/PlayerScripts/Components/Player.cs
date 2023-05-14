@@ -44,7 +44,7 @@ namespace App.World.Creatures.PlayerScripts.Components
 
         #region Events
         [SerializeField]
-        private AimEvent aimEvent;
+        private AimToMouseEvent aimEvent;
         [SerializeField]
         private StandEvent standEvent;
         [SerializeField]
@@ -77,7 +77,7 @@ namespace App.World.Creatures.PlayerScripts.Components
         public Transform ShootPosition { get => shootPosition; set => shootPosition = value; }
         public Animator PAnimator { get => pAnimator; }
         public Transform PlayerTransform { get => playerTransform; }
-        public AimEvent AimEvent { get => aimEvent; }
+        public AimToMouseEvent AimEvent { get => aimEvent; }
         public StandEvent StandEvent { get => standEvent; }
         public MovementEvent MovementEvent { get => movementEvent; }
         public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
@@ -140,7 +140,7 @@ namespace App.World.Creatures.PlayerScripts.Components
         public void Die()
         {
             GetComponent<Movement>().enabled = false;
-            GetComponent<Aim>().enabled = false;
+            GetComponent<AimToMouse>().enabled = false;
             NotifiebleForGameEnded.NotifyGameEnded(false);
 
         }
@@ -149,7 +149,7 @@ namespace App.World.Creatures.PlayerScripts.Components
         {
             GetComponent<Movement>().enabled = false;
             GetComponent<Stand>().enabled = false;
-            GetComponent<Aim>().enabled = false;
+            GetComponent<AimToMouse>().enabled = false;
             GetComponent<Shoot>().enabled = false;
             GetComponent<Dash>().enabled = false;
         }
@@ -157,7 +157,7 @@ namespace App.World.Creatures.PlayerScripts.Components
         {
             GetComponent<Movement>().enabled = true;
             GetComponent<Stand>().enabled = true;
-            GetComponent<Aim>().enabled = true;
+            GetComponent<AimToMouse>().enabled = true;
             GetComponent<Shoot>().enabled = true;
             GetComponent<Dash>().enabled = true;
         }

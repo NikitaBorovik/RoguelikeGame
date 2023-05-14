@@ -7,14 +7,11 @@ namespace App.World.Creatures.PlayerScripts.Components
     {
         private Player player;
 
-        private void Awake()
-        {
-            player = GetComponent<Player>();
-        }
         private void OnEnable()
         {
+            player = GetComponent<Player>();
             player.StandEvent.OnStand += AnimateOnStand;
-            player.AimEvent.OnAim += AnimateOnAim;
+            player.AimEvent.OnAimToMouse += AnimateOnLookAtDirection;
             player.MovementEvent.OnMove += AnimateOnMove;
             player.ShootEvent.OnShoot += AnimateOnShoot;
             if (player.DashEvent == null)
@@ -28,49 +25,42 @@ namespace App.World.Creatures.PlayerScripts.Components
             }
         }
 
-        private void Update()
-        {
-          //  if (player.PAnimator.GetBool("isDashing"))
-           // Debug.Log("Working");
-        }
-
         private void OnDisable()
         {
             player.StandEvent.OnStand -= AnimateOnStand;
-            player.AimEvent.OnAim -= AnimateOnAim;
+            player.AimEvent.OnAimToMouse -= AnimateOnLookAtDirection;
             player.MovementEvent.OnMove -= AnimateOnMove;
             player.DashEvent.OnDash -= AnimateOnDash;
             player.ShootEvent.OnShoot -= AnimateOnShoot;
         }
         private void AnimateOnShoot(ShootEvent obj)
         {
-            SetShootAnimationParams();
+            AddShootAnimationParams();
         }
 
         
         private void AnimateOnStand(StandEvent ev)
         {
-            SetStandAnimationParams();
+            AddStandAnimationParams();
         }
-        private void AnimateOnAim(AimEvent ev,AimEventArgs args)
+        private void AnimateOnLookAtDirection(AimToMouseEvent ev,AimToMouseEventArgs args)
         {
-            SetAimAnimationParams(args.playerPos, args.mousePos);
+            AddLookAtDirectionAnimationParams(args.playerPos, args.mousePos);
         }
         private void AnimateOnMove(MovementEvent ev, MovementEventArgs args)
         {
-            SetMovementAnimationParams();
+            AddMovementAnimationParams();
         }
         private void AnimateOnDash(DashEvent ev, DashEventArgs args)
         {
-            SetDashAnimationParams();
+            AddDashAnimationParams();
         }
-        public void SetStandAnimationParams()
+        public void AddStandAnimationParams()
         {
             player.PAnimator.SetBool("isIdle", true);
-           // player.PAnimator.SetBool("isDashing", false);
             player.PAnimator.SetBool("isMoving", false);
         }
-        public void SetAimAnimationParams(float playerPos, float cursorPos)
+        public void AddLookAtDirectionAnimationParams(float playerPos, float cursorPos)
         {
             if (cursorPos >= playerPos)
             {
@@ -83,17 +73,16 @@ namespace App.World.Creatures.PlayerScripts.Components
                 player.PAnimator.SetBool("aimLeft", true);
             }
         }
-        public void SetMovementAnimationParams()
+        public void AddMovementAnimationParams()
         {
             player.PAnimator.SetBool("isIdle", false);
-          //  player.PAnimator.SetBool("isDashing", false);
             player.PAnimator.SetBool("isMoving", true);
         }
-        public void SetDashAnimationParams()
+        public void AddDashAnimationParams()
         {
             player.PAnimator.SetBool("isDashing",true);
         }
-        private void SetShootAnimationParams()
+        private void AddShootAnimationParams()
         {
             player.PAnimator.SetBool("isAttacking", true);
         }

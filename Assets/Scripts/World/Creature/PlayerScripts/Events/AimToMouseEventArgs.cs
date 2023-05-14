@@ -1,7 +1,7 @@
 using System;
 namespace App.World.Creatures.PlayerScripts.Events 
 {
-    public class AimEventArgs : EventArgs
+    public class AimToMouseEventArgs : EventArgs
     {
         public float angle;
         public float playerPos;

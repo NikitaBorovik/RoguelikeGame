@@ -9,7 +9,7 @@ public class RoomData
     private string roomModelId;
     private RoomModel roomModel;
     private GameObject prefab;
-    private RoomNodeType roomNodeType;
+    private NodeTypeForRoom roomNodeType;
     private Vector2Int roomLowerBound;
     private Vector2Int roomUpperBound;
     private List<string> childrenRooms;
@@ -26,7 +26,7 @@ public class RoomData
         Doors = new List<Door>();
         Enemies = new List<BaseEnemy>();
     }
-    public RoomData(string roomId, string roomModelId, GameObject prefab, RoomNodeType roomNodeType, Vector2Int roomLowerBound, Vector2Int roomUpperBound,
+    public RoomData(string roomId, string roomModelId, GameObject prefab, NodeTypeForRoom roomNodeType, Vector2Int roomLowerBound, Vector2Int roomUpperBound,
         Vector2Int roomModelLowerBound, Vector2Int roomModelUpperBound, RoomModel roomModel, INotifyRoomChanged notifieble)
     {
         this.RoomId = roomId;
@@ -48,7 +48,7 @@ public class RoomData
     public string RoomId { get => roomId; set => roomId = value; }
     public string RoomModelId { get => roomModelId; set => roomModelId = value; }
     public GameObject Prefab { get => prefab; set => prefab = value; }
-    public RoomNodeType RoomNodeType { get => roomNodeType; set => roomNodeType = value; }
+    public NodeTypeForRoom RoomNodeType { get => roomNodeType; set => roomNodeType = value; }
     public List<string> ChildrenRooms { get => childrenRooms; set => childrenRooms = value; }
     public bool IsPlaced { get => isPlaced; set => isPlaced = value; }
     public RoomModel RoomModel { get => roomModel; set => roomModel = value; }
